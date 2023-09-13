@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        /**
+         * MySQL 8.0 limits index keys to 1000 characters.
+         * Spatie Permissions publishes a migration
+         * which combines multiple columns in single index.
+         *
+         * With utf8mb4 the 4-bytes-per-character requirement of mb4
+         * means the max length of the columns in
+         * the hybrid index can only be 125 characters.
+         */
+        Schema::defaultStringLength(125);
     }
 }
