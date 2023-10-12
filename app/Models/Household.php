@@ -18,4 +18,9 @@ class Household extends RecordModel
     {
         return $this->belongsTo(Barangay::class);
     }
+
+    public function members()
+    {
+        return $this->hasMany(Resident::class);
+    }
 }
