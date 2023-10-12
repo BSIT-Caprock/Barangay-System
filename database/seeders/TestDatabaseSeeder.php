@@ -2,13 +2,20 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+/**
+ * This seeder is used for the test database.
+ * Model factories are used to generate fake data.
+ */
+class TestDatabaseSeeder extends Seeder
 {
+    // prevent models from dispatching events
+    // use WithoutModelEvents;
+
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
@@ -20,6 +27,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             BarangaySeeder::class,
+            HouseholdSeeder::class,
+            ResidentSeeder::class,
         ]);
     }
 }
