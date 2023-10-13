@@ -50,13 +50,30 @@ return new class extends Migration
         });
 
         /**
+         * list of streets
+         */
+        Schema::create('streets', function (Blueprint $table) {
+            $table->id();
+            $table->string('street');
+        });
+
+        /**
+         * list of zones per barangay
+         */
+        Schema::create('zones', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('barangay_id')->constrained();
+            $table->string('zone');
+        });
+
+        /**
          * list of residence addresses
          */
         Schema::create('residence_addresses', function (Blueprint $table) {
             $table->id();
             $table->string('house_number');
-            $table->string('street');
-            $table->string('area');
+            $table->foreignId('street_id')->nullable()->constrained();
+            $table->foreignId('zone_id')->nullable()->constrained();
         });
 
         /**
@@ -78,6 +95,8 @@ return new class extends Migration
             $table->foreignId('citizenship_id')->nullable()->constrained();
             $table->foreignId('occupation_id')->nullable()->constrained();
             $table->foreignId('residence_address_id')->nullable()->constrained();
+            $table->string('left_fingerprint')->nullable();
+            $table->string('right_fingerprint')->nullable();
             $table->timestamps();
         });
     }
