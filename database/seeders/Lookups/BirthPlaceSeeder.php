@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Lookups\Seeders;
+namespace Database\Seeders\Lookups;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
