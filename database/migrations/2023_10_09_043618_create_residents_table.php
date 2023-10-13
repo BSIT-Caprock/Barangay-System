@@ -78,6 +78,8 @@ return new class extends Migration
             $table->foreignId('citizenship_id')->nullable()->constrained();
             $table->foreignId('occupation_id')->nullable()->constrained();
             $table->foreignId('residence_address_id')->nullable()->constrained();
+            $table->string('left_fingerprint')->nullable();
+            $table->string('right_fingerprint')->nullable();
             $table->timestamps();
         });
     }
