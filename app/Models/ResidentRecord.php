@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\CivilStatus;
 use App\Enums\Gender;
 use App\Models\Abstract\RecordModel;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class ResidentRecord extends RecordModel
 {
@@ -39,5 +40,14 @@ class ResidentRecord extends RecordModel
     public function household()
     {
         return $this->belongsTo(Household::class);
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => (
+                $attributes['last_name'] + ', ' + $attributes['first_name']
+            ),
+        );
     }
 }
