@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('households', function (Blueprint $table) {
+        Schema::create('household_records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('key_id')->constrained('household_keys');
             $table->foreignId('barangay_id')->constrained('barangays');
@@ -30,7 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('households');
+        Schema::dropIfExists('household_records');
         Schema::dropIfExists('household_keys');
     }
 };
