@@ -14,7 +14,7 @@ class BarangayRecord extends RecordModel
         'barangay',
     ];
 
-    protected static $keyModel = BarangayKey::class;
+    protected static $keyModel = Barangay::class;
 
     public function households()
     {
