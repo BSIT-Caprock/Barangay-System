@@ -22,6 +22,11 @@ abstract class KeyModel extends Model
         return $this->records()->one()->ofMany();
     }
 
+    public function newRecord($data)
+    {
+        $this->records()->create($data);
+    }
+
     public function scopeUnused(Builder $query)
     {
         return $query->has('records', '=', 0);
