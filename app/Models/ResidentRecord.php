@@ -50,4 +50,13 @@ class ResidentRecord extends RecordModel
             ),
         );
     }
+
+    protected function address(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value) => (
+                'TODO: use `ResidenceAddress` model'
+            ),
+        );
+    }
 }
