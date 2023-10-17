@@ -12,7 +12,7 @@ class HouseholdRecord extends RecordModel
         'number',
     ];
 
-    protected static $keyModel = HouseholdKey::class;
+    protected static $keyModel = Household::class;
 
     public function barangay()
     {
