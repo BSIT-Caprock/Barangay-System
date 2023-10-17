@@ -23,6 +23,6 @@ class Barangay extends RecordModel
 
     public function residents()
     {
-        return $this->hasManyThrough(Resident::class, Household::class);
+        return $this->hasManyThrough(ResidentRecord::class, Household::class);
     }
 }

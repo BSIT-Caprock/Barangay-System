@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ResidentKey>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Resident>
  */
 class ResidentKeyFactory extends Factory
 {
