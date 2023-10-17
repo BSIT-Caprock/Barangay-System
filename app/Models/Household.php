@@ -16,7 +16,7 @@ class Household extends RecordModel
 
     public function barangay()
     {
-        return $this->belongsTo(Barangay::class);
+        return $this->belongsTo(BarangayRecord::class);
     }
 
     public function members()

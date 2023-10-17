@@ -34,7 +34,7 @@ class ResidentRecord extends RecordModel
 
     public function barangay()
     {
-        return $this->hasOneThrough(Barangay::class, Household::class);
+        return $this->hasOneThrough(BarangayRecord::class, Household::class);
     }
 
     public function household()

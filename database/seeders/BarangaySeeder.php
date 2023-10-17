@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Barangay;
+use App\Models\BarangayRecord;
 use Illuminate\Database\Seeder;
 
 class BarangaySeeder extends Seeder
@@ -59,7 +59,7 @@ class BarangaySeeder extends Seeder
     public function run(): void
     {
         foreach (self::$barangays as $barangay) {
-            Barangay::createWithNewKey([
+            BarangayRecord::createWithNewKey([
                 'region' => self::$region,
                 'province' => self::$province,
                 'city_or_municipality' => self::$municipality,
