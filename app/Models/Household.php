@@ -21,6 +21,6 @@ class Household extends RecordModel
 
     public function members()
     {
-        return $this->hasMany(Resident::class);
+        return $this->hasMany(ResidentRecord::class);
     }
 }

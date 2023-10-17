@@ -4,12 +4,11 @@ namespace Database\Factories;
 
 use App\Enums\CivilStatus;
 use App\Enums\Gender;
-use App\Models\Household;
-use App\Models\ResidentKey;
+use App\Models\Resident;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Resident>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ResidentRecord>
  */
 class ResidentFactory extends Factory
 {
@@ -31,7 +30,7 @@ class ResidentFactory extends Factory
         ][$g];
 
         return [
-            'key_id' => ResidentKey::factory(),
+            'key_id' => Resident::factory(),
             'household_id' => 1,
             'last_name' => fake()->lastName(),
             'first_name' => fake()->firstName($g),

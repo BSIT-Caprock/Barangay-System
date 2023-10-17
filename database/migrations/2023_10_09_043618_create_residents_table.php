@@ -80,7 +80,7 @@ return new class extends Migration
          * We might need to optimize the foreign key joins 
          * or eliminate them using denormalization.
          */
-        Schema::create('residents', function (Blueprint $table) {
+        Schema::create('resident_records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('key_id')->constrained('resident_keys');
             $table->foreignId('household_id')->constrained('households')->nullable()->constrained();
@@ -106,7 +106,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('residents');
+        Schema::dropIfExists('resident_records');
         Schema::dropIfExists('residence_addresses');
         Schema::dropIfExists('occupations');
         Schema::dropIfExists('citizenships');
