@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Abstract\RecordModel;
 
-class Barangay extends RecordModel
+class BarangayRecord extends RecordModel
 {
     protected $fillable = [
         'key_id',

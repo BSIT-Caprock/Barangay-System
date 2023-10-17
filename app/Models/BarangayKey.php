@@ -6,5 +6,5 @@ use App\Models\Abstract\KeyModel;
 
 class BarangayKey extends KeyModel
 {
-    protected static $recordModel = Barangay::class;
+    protected static $recordModel = BarangayRecord::class;
 }
