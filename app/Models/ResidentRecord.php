@@ -46,7 +46,7 @@ class ResidentRecord extends RecordModel
     {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => (
-                $attributes['last_name'] + ', ' + $attributes['first_name']
+                $attributes['last_name'].', '.$attributes['first_name']
             ),
         );
     }
@@ -60,7 +60,8 @@ class ResidentRecord extends RecordModel
         );
     }
 
-    protected function age() : Attribute {
+    protected function age(): Attribute
+    {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => (
                 123 // dummy age
