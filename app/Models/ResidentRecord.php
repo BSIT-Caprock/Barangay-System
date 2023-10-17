@@ -59,4 +59,12 @@ class ResidentRecord extends RecordModel
             ),
         );
     }
+
+    protected function age() : Attribute {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => (
+                123 // dummy age
+            ),
+        );
+    }
 }
