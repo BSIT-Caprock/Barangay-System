@@ -6,7 +6,7 @@ use App\Models\HouseholdKey;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Household>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\HouseholdRecord>
  */
 class HouseholdFactory extends Factory
 {

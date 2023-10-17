@@ -6,5 +6,5 @@ use App\Models\Abstract\KeyModel;
 
 class HouseholdKey extends KeyModel
 {
-    protected static $recordModel = Household::class;
+    protected static $recordModel = HouseholdRecord::class;
 }
