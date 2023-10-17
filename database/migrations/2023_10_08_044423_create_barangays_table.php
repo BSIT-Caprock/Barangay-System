@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('barangays', function (Blueprint $table) {
+        Schema::create('barangay_records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('key_id')->constrained('barangay_keys')->cascadeOnDelete();
             $table->string('region');
@@ -32,7 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('barangays');
+        Schema::dropIfExists('barangay_records');
         Schema::dropIfExists('barangay_keys');
     }
 };
