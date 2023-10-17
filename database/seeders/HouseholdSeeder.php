@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Household;
+use App\Models\HouseholdRecord;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +13,6 @@ class HouseholdSeeder extends Seeder
      */
     public function run(): void
     {
-        Household::factory(10)->create();
+        HouseholdRecord::factory(10)->create();
     }
 }

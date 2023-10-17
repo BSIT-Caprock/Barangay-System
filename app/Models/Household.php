@@ -2,25 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Abstract\RecordModel;
+use App\Models\Abstract\KeyModel;
 
-class Household extends RecordModel
+class Household extends KeyModel
 {
-    protected $fillable = [
-        'key_id',
-        'barangay_id',
-        'number',
-    ];
+    protected $table = 'household_keys';
 
-    protected static $keyModel = HouseholdKey::class;
-
-    public function barangay()
-    {
-        return $this->belongsTo(BarangayRecord::class);
-    }
-
-    public function members()
-    {
-        return $this->hasMany(ResidentRecord::class);
-    }
+    protected static $recordModel = HouseholdRecord::class;
 }
