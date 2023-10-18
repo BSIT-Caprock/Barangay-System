@@ -16,7 +16,7 @@ class ResidentRecord extends RecordModel
 {
     protected $fillable = [
         'key_id',
-        'household_id',
+        'household_record_id',
         'last_name',
         'first_name',
         'middle_name',
