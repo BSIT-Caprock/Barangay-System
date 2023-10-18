@@ -2,6 +2,7 @@
 
 namespace App\Models\Lookups;
 
+use App\Models\ResidentRecord;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
