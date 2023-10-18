@@ -19,7 +19,7 @@ return new class extends Migration
         Schema::create('household_records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('key_id')->constrained('household_keys');
-            $table->foreignId('barangay_id')->constrained('barangays');
+            $table->foreignId('barangay_record_id')->constrained();
             $table->string('number');
             $table->timestamps();
         });
