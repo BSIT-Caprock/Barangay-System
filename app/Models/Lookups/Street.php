@@ -5,11 +5,16 @@ namespace App\Models\Lookups;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Suffix extends Model
+class Street extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'suffix',
+        'street',
     ];
+
+    public function residence_addresses()
+    {
+        return $this->hasMany(ResidenceAddress::class);
+    }
 }

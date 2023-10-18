@@ -6,14 +6,25 @@ use App\Models\ResidentRecord;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BirthPlace extends Model
+class ResidenceAddress extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'city_or_municipality',
-        'province',
+        'house_number',
+        'street_id',
+        'zone_id',
     ];
+
+    public function street()
+    {
+        return $this->belongsTo(Street::class);
+    }
+
+    public function zone()
+    {
+        return $this->belongsTo(Zone::class);
+    }
 
     public function resident_records()
     {

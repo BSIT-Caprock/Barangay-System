@@ -6,17 +6,16 @@ use App\Models\ResidentRecord;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BirthPlace extends Model
+class Occupation extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'city_or_municipality',
-        'province',
+        'occupation',
     ];
 
     public function resident_records()
     {
-        return $this->hasMany(ResidentRecord::class);
+            return $this->hasMany(ResidentRecord::class);
     }
 }

@@ -62,7 +62,7 @@ return new class extends Migration
          */
         Schema::create('zones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barangay_id')->constrained();
+            $table->foreignId('barangay_record_id')->constrained();
             $table->string('zone');
         });
 
