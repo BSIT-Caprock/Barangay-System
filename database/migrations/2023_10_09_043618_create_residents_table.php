@@ -83,7 +83,7 @@ return new class extends Migration
         Schema::create('resident_records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('key_id')->constrained('resident_keys');
-            $table->foreignId('household_id')->constrained('households')->nullable()->constrained();
+            $table->foreignId('household_record_id')->nullable()->constrained(); 
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
