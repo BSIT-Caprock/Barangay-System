@@ -56,6 +56,11 @@ class ResidentRecord extends RecordModel
         return $this->belongsTo(Citizenship::class);
     }
 
+    public function residence_address()
+    {
+        return $this->belongsTo(ResidenceAddress::class);
+    }
+
     protected function fullName(): Attribute
     {
         return Attribute::make(

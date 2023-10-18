@@ -24,4 +24,9 @@ class ResidenceAddress extends Model
     {
         return $this->belongsTo(Zone::class);
     }
+
+    public function resident_records()
+    {
+        return $this->hasMany(ResidentRecord::class);
+    }
 }
