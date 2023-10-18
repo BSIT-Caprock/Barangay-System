@@ -12,4 +12,9 @@ class Street extends Model
     protected $fillable = [
         'street',
     ];
+
+    public function residence_addresses()
+    {
+        return $this->hasMany(ResidenceAddress::class);
+    }
 }
