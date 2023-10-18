@@ -9,6 +9,7 @@ use App\Models\Lookups\BirthPlace;
 use App\Models\Lookups\Citizenship;
 use App\Models\Lookups\Occupation;
 use App\Models\Lookups\ResidenceAddress;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class ResidentRecord extends RecordModel
@@ -87,9 +88,7 @@ class ResidentRecord extends RecordModel
     protected function age(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => (
-                123 // dummy age
-            ),
+            get: fn (mixed $value, array $attributes) => Carbon::parse($this->attributes['birth_date'])->age,
         );
     }
 }
