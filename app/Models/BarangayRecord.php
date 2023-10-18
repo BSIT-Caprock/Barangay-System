@@ -25,4 +25,9 @@ class BarangayRecord extends RecordModel
     {
         return $this->hasManyThrough(ResidentRecord::class, HouseholdRecord::class);
     }
+
+    public function personnel_records()
+    {
+        return $this->hasMany(PersonnelRecord::class);
+    }
 }
