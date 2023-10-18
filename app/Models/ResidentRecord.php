@@ -56,6 +56,11 @@ class ResidentRecord extends RecordModel
         return $this->belongsTo(Citizenship::class);
     }
 
+    public function occupation()
+    {
+        return $this->belongsTo(Occupation::class);
+    }
+
     public function residence_address()
     {
         return $this->belongsTo(ResidenceAddress::class);
