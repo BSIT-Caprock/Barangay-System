@@ -5,6 +5,10 @@ namespace App\Models;
 use App\Enums\CivilStatus;
 use App\Enums\Gender;
 use App\Models\Abstract\RecordModel;
+use App\Models\Lookups\BirthPlace;
+use App\Models\Lookups\Citizenship;
+use App\Models\Lookups\Occupation;
+use App\Models\Lookups\ResidenceAddress;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class ResidentRecord extends RecordModel
@@ -40,6 +44,11 @@ class ResidentRecord extends RecordModel
     public function household()
     {
         return $this->belongsTo(HouseholdRecord::class);
+    }
+
+    public function birth_place()
+    {
+        return $this->belongsTo(BirthPlace::class);
     }
 
     protected function fullName(): Attribute
