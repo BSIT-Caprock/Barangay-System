@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
-            $table->string('suffix')->nullable();
+            $table->string('suffix_id')->nullable()->constrained();
             $table->string('position')->nullable();
             $table->timestamps();
         });

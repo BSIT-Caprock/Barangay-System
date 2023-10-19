@@ -88,7 +88,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
-            $table->string('suffix')->nullable();
+            $table->string('suffix_id')->nullable()->constrained();
             $table->foreignId('birth_place_id')->nullable()->constrained();
             $table->date('birth_date')->nullable();
             $table->string('gender')->nullable(); // F, M
