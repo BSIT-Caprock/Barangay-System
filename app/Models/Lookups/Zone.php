@@ -10,6 +10,8 @@ class Zone extends Model
 {
     use HasFactory;
 
+    protected $table = 'zones';
+
     protected $fillable = [
         'barangay_id',
         'zone',

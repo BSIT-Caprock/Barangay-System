@@ -11,6 +11,8 @@ class ResidenceAddress extends Model
 {
     use HasFactory;
 
+    protected $table = 'residence_addresses';
+
     protected $fillable = [
         'house_number',
         'street_id',

@@ -10,6 +10,8 @@ class Suffix extends Model
 {
     use HasFactory;
 
+    protected $table = 'suffixes';
+
     protected $fillable = [
         'suffix',
     ];

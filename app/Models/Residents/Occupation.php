@@ -9,6 +9,8 @@ class Occupation extends Model
 {
     use HasFactory;
 
+    protected $table = 'occupations';
+
     protected $fillable = [
         'occupation',
     ];

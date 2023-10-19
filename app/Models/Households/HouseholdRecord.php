@@ -6,6 +6,8 @@ use App\Models\Abstract\RecordModel;
 
 class HouseholdRecord extends RecordModel
 {
+    protected $table = 'household_records';
+    
     protected $fillable = [
         'key_id',
         'barangay_id',

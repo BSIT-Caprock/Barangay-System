@@ -9,6 +9,8 @@ class BirthPlace extends Model
 {
     use HasFactory;
 
+    protected $table = 'birth_places';
+
     protected $fillable = [
         'city_or_municipality',
         'province',

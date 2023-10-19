@@ -6,6 +6,8 @@ use App\Models\Abstract\RecordModel;
 
 class BarangayRecord extends RecordModel
 {
+    protected $table = 'barangay_records';
+    
     protected $fillable = [
         'key_id',
         'region',

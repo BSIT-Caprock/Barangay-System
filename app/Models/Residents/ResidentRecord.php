@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class ResidentRecord extends RecordModel
 {
+    protected $table = 'resident_records';
+    
     protected $fillable = [
         'key_id',
         'household_record_id',

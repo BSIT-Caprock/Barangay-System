@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PersonnelRecord extends RecordModel
 {
+    protected $table = 'personnel_records';
+    
     protected $fillable = [
         'barangay_record_id',
         'last_name',
