@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models\Lookups;
+namespace App\Models\Residents;
 
-use App\Models\ResidentRecord;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

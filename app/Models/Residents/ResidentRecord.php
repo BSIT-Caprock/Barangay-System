@@ -1,14 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Residents;
 
 use App\Enums\CivilStatus;
 use App\Enums\Gender;
 use App\Models\Abstract\RecordModel;
-use App\Models\Lookups\BirthPlace;
-use App\Models\Lookups\Citizenship;
-use App\Models\Lookups\Occupation;
-use App\Models\Lookups\ResidenceAddress;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
