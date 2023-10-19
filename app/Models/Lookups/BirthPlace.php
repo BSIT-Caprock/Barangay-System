@@ -13,6 +13,7 @@ class BirthPlace extends Model
     protected $fillable = [
         'city_or_municipality',
         'province',
+        'country',
     ];
 
     public function resident_records()
