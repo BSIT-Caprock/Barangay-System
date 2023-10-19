@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Personnel;
 
 use App\Models\Abstract\RecordModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
