@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Barangays;
 
 use App\Models\Abstract\RecordModel;
 

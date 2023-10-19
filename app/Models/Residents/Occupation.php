@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models\Lookups;
+namespace App\Models\Residents;
 
-use App\Models\ResidentRecord;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +15,6 @@ class Occupation extends Model
 
     public function resident_records()
     {
-            return $this->hasMany(ResidentRecord::class);
+        return $this->hasMany(ResidentRecord::class);
     }
 }

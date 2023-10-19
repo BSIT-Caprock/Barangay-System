@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models\Lookups;
+namespace App\Models\Residents;
 
-use App\Models\ResidentRecord;
+use App\Models\Lookups\Street;
+use App\Models\Lookups\Zone;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
