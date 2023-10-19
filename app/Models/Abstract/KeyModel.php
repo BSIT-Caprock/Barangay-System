@@ -26,4 +26,11 @@ abstract class KeyModel extends Model
     {
         return $query->has('records', '=', 0);
     }
+
+    public static function createRecord(array $attributes = [])
+    {
+        $model = self::create();
+        $model->records()->create($attributes);
+        return $model;
+    }
 }
