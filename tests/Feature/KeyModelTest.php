@@ -75,6 +75,7 @@ class KeyModelTest extends TestCase
     public function test_createRecord()
     {
         $key = TestKey::createRecord();
+        $this->assertInstanceOf(TestKey::class, $key);
         $this->assertEquals(1, $key->records->count());
     }
 }
