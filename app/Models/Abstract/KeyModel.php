@@ -29,10 +29,10 @@ abstract class KeyModel extends Model
 
     public static function createRecord(array $attributes = [])
     {
-        $model = new static();
+        $model = static::create();
         $record = new static::$recordModel($attributes);
-        $model->records()->associate($record);
-        $model->save();
+        $model->records()->save($record);
+        $model->refresh();
         
         return $model;
     }
