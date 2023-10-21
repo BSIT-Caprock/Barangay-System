@@ -12,9 +12,11 @@ abstract class KeyModel extends Model
 
     protected static $recordModel;
 
+    protected static $keyId = 'key_id';
+
     public function records()
     {
-        return $this->hasMany(static::$recordModel, 'key_id');
+        return $this->hasMany(static::$recordModel, static::$keyId);
     }
 
     public function latest_record()

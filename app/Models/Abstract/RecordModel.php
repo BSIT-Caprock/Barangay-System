@@ -11,8 +11,10 @@ abstract class RecordModel extends Model
 
     protected static $keyModel;
 
+    protected static $keyId = 'key_id';
+
     public function record_key()
     {
-        return $this->belongsTo(static::$keyModel, 'key_id');
+        return $this->belongsTo(static::$keyModel, static::$keyId);
     }
 }
