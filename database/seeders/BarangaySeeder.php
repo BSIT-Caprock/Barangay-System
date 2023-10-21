@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\BarangayRecord;
+use App\Models\Barangays\BarangayRecord;
 use Illuminate\Database\Seeder;
 
 class BarangaySeeder extends Seeder

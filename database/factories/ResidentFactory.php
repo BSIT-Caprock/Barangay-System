@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\CivilStatus;
 use App\Enums\Gender;
-use App\Models\Resident;
+use App\Models\Residents\Resident;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

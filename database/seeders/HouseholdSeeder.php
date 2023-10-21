@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\HouseholdRecord;
+use App\Models\Households\HouseholdRecord;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
