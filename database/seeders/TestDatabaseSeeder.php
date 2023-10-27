@@ -26,9 +26,20 @@ class TestDatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            BarangaySeeder::class,
-            HouseholdSeeder::class,
-            ResidentSeeder::class,
+            Locations\PlaceSeeder::class,
+            Locations\BarangaySeeder::class,
+            Locations\ZoneSeeder::class,
+            Locations\StreetSeeder::class,
+            Locations\HouseSeeder::class,
+
+            Lists\CitizenshipSeeder::class,
+            Lists\OccupationSeeder::class,
+            Lists\SuffixSeeder::class,
+
+            Residents\HouseholdSeeder::class,
+            Residents\ResidentSeeder::class,
+            
+            Personnel\PersonnelSeeder::class,
         ]);
     }
 }
