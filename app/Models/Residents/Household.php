@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Households;
+namespace App\Models\Residents;
 
 use App\Models\Abstract\KeyModel;
 
