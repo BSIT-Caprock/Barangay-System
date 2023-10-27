@@ -21,20 +21,20 @@ class HouseSeeder extends Seeder
             ->firstOrFail();
 
         $zone = Zone::where([
-            ['barangay_id', $barangay->id],
-            ['zone', 'Zone I'],
-        ]);
+                ['barangay_id', $barangay->id],
+                ['zone', 'Zone I'],
+            ])->firstOrFail();
 
         $street = Street::where([
-            ['barangay_id', $barangay->id],
-            ['street', 'Abanilla St.'],
-        ]);
+                ['barangay_id', $barangay->id],
+                ['street', 'Abanilla St.'],
+            ])->firstOrFail();
 
         $numbers = [
-            '100-A',
-            '101-B',
-            '102-C',
-        ];
+                '100-A',
+                '101-B',
+                '102-C',
+            ];
 
         foreach ($numbers as $number) {
             House::create([
