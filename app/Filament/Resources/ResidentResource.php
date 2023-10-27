@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ResidentResource\Pages;
 use App\Filament\Resources\ResidentResource\RelationManagers;
-use App\Models\Resident;
+use App\Models\Residents\Resident;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -148,9 +148,6 @@ class ResidentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('latest_record.full_name')->label('Name'),
-                Tables\Columns\TextColumn::make('latest_record.address')->label('Address'),
-                Tables\Columns\TextColumn::make('latest_record.age')->label('Age'),
                 Tables\Columns\TextColumn::make('region')
                     ->label('Region')
                     ->sortable()
@@ -269,6 +266,7 @@ class ResidentResource extends Resource
             ]);
     }
     
+
     public static function getRelations(): array
     {
         return [
