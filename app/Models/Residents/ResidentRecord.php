@@ -5,16 +5,23 @@ namespace App\Models\Residents;
 use App\Enums\CivilStatus;
 use App\Enums\Gender;
 use App\Models\Abstract\RecordModel;
+use App\Models\Lists\Citizenship;
+use App\Models\Lists\Occupation;
+use App\Models\Locations\BarangayRecord;
+use App\Models\Locations\House;
+use App\Models\Locations\Place;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class ResidentRecord extends RecordModel
 {
     protected $table = 'resident_records';
+
+    protected static $keyModel = Resident::class;
     
     protected $fillable = [
         'key_id',
-        'household_record_id',
+        'household_id',
         'last_name',
         'first_name',
         'middle_name',
@@ -25,7 +32,7 @@ class ResidentRecord extends RecordModel
         'civil_status',
         'citizenship_id',
         'occupation_id',
-        'residence_address_id',
+        'residence_id',
     ];
 
     protected $casts = [
@@ -33,21 +40,19 @@ class ResidentRecord extends RecordModel
         'civil_status' => CivilStatus::class,
     ];
 
-    protected static $keyModel = Resident::class;
-
     public function barangay()
     {
-        return $this->hasOneThrough(BarangayRecord::class, HouseholdRecord::class);
+        return $this->hasOneThrough(BarangayRecord::class, HouseholdRecord::class, 'barangay_id', 'household_id');
     }
 
     public function household()
     {
-        return $this->belongsTo(HouseholdRecord::class);
+        return $this->belongsTo(HouseholdRecord::class, 'household_id');
     }
 
     public function birth_place()
     {
-        return $this->belongsTo(BirthPlace::class);
+        return $this->belongsTo(Place::class, 'birth_place_id');
     }
 
     public function citizenship()
@@ -62,7 +67,7 @@ class ResidentRecord extends RecordModel
 
     public function residence_address()
     {
-        return $this->belongsTo(ResidenceAddress::class);
+        return $this->belongsTo(House::class, 'residence_id');
     }
 
     protected function fullName(): Attribute
@@ -78,7 +83,7 @@ class ResidentRecord extends RecordModel
     {
         return Attribute::make(
             get: fn (mixed $value) => (
-                'TODO: use `ResidenceAddress` model'
+                'TODO: use `House` model'
             ),
         );
     }

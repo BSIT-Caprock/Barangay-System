@@ -11,18 +11,19 @@ class PersonnelRecord extends RecordModel
     protected $table = 'personnel_records';
     
     protected $fillable = [
-        'barangay_record_id',
+        'key_id',
+        'barangay_id',
         'last_name',
         'first_name',
         'middle_name',
-        'suffix',
+        'suffix_id',
         'position',
     ];
 
     protected static $keyModel = Personnel::class;
 
-    public function barangay_record()
+    public function barangay()
     {
-        return $this->belongsTo(BarangayRecord::class);
+        return $this->belongsTo(BarangayRecord::class, 'barangay_id');
     }
 }
