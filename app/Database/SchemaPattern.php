@@ -2,6 +2,7 @@
 
 namespace App\Database;
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class SchemaPattern extends Schema

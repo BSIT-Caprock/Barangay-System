@@ -1,8 +1,8 @@
 <?php
 
-use App\Database\Blueprint;
 use App\Database\SchemaPattern;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 return new class extends Migration
 {
@@ -21,13 +21,13 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
-            $table->foreignId('suffix_id')->nullable();
+            $table->foreignId('suffix_id')->nullable()->constrained();
             $table->foreignId('birth_place_id')->nullable()->constrained('places');
             $table->date('birth_date')->nullable();
             $table->string('gender')->nullable(); // F, M
             $table->string('civil_status')->nullable(); // S, M, W, SE
-            $table->foreignId('citizenship_id')->nullable();
-            $table->foreignId('occupation_id')->nullable();
+            $table->foreignId('citizenship_id')->nullable()->constrained();
+            $table->foreignId('occupation_id')->nullable()->constrained();
             $table->foreignId('residence_id')->nullable()->constrained('houses');
             $table->string('left_fingerprint')->nullable();
             $table->string('right_fingerprint')->nullable();
