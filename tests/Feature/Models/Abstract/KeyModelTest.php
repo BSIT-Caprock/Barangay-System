@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Models\Abstract;
 
 use App\Models\Abstract\KeyModel;
 use App\Models\Abstract\RecordModel;
