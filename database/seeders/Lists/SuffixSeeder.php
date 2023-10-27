@@ -22,6 +22,6 @@ class SuffixSeeder extends Seeder
             ['suffix' => 'IV'],
             ['suffix' => 'V'],
         ];
-        DB::table('suffixes')->insert($suffixes);
+        DB::table('suffixes')->insertOrIgnore($suffixes);
     }
 }
