@@ -1,19 +1,34 @@
 <?php
 
-namespace Tests\Feature;
+use App\Database\MultiRecord\Record;
+use App\Filament\Resources\ResidentResource\Pages\ListResidents;
+use App\Models\Locations\Barangay;
+use App\Models\Locations\BarangayRecord;
+use Filament\Pages\Auth\Login;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use function Pest\Livewire\livewire;
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
-    {
-        $response = $this->get('/');
+it('renders successfully', function () {
+    $response = $this->get('/login');
+    $response->assertSuccessful();
+    $response->assertSeeLivewire(Login::class);
+});
 
-        $response->assertStatus(200);
-    }
-}
+test('livewire has method', function () {
+    $lw = livewire(ListResidents::class);
+    // $hasMethod = method_exists($lw, 'assertCanSeeTableRecords');
+    // expect($hasMethod)->toBe(true);
+    livewire(ListResidents::class)->assertCanSeeTableRecords();
+});
+
+
+test('123', function () {
+    $cls = Barangay::class;
+    $record = new BarangayRecord;
+    dump($cls::getRecordModel());
+    dump($cls::getForeignId());
+    dump($record->getFillable());
+    dump($record->entity()->getRelated());
+});
+
+test('test hello');
