@@ -29,6 +29,9 @@ abstract class KeyModel extends Model
         return $query->has('records', '=', 0);
     }
 
+    /**
+     * create a new key with a new record
+     */
     public static function createRecord(array $attributes = [])
     {
         $model = static::create();
