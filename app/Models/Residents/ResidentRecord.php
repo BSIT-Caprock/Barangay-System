@@ -18,7 +18,7 @@ class ResidentRecord extends RecordModel
     protected $table = 'resident_records';
 
     protected static $keyModel = Resident::class;
-    
+
     protected $fillable = [
         'key_id',
         'household_id',
@@ -65,7 +65,7 @@ class ResidentRecord extends RecordModel
         return $this->belongsTo(Occupation::class);
     }
 
-    public function residence_address()
+    public function address()
     {
         return $this->belongsTo(House::class, 'residence_id');
     }
@@ -73,25 +73,14 @@ class ResidentRecord extends RecordModel
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => (
-                $attributes['last_name'].', '.$attributes['first_name']
-            ),
-        );
-    }
-
-    protected function address(): Attribute
-    {
-        return Attribute::make(
-            get: fn (mixed $value) => (
-                'TODO: use `House` model'
-            ),
+            get: fn (mixed $value) => $this->last_name . ', ' . $this->first_name . ' ' . $this->middle_name,
         );
     }
 
     protected function age(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => Carbon::parse($this->attributes['birth_date'])->age,
+            get: fn (mixed $value) => Carbon::parse($this->attributes['birth_date'])->age,
         );
     }
 }
