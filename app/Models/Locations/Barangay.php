@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Barangays;
+namespace App\Models\Locations;
 
 use App\Models\Abstract\KeyModel;
 
