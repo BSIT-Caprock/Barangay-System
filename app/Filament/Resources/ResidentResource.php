@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -34,11 +35,22 @@ class ResidentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('latest_record.full_name')->label('Name'),
-                Tables\Columns\TextColumn::make('latest_record.address')->label('Address'),
+                    //
+                Tables\Columns\TextColumn::make('latest_record.address.street_and_zone')->label('Address'),
+                    //
                 Tables\Columns\TextColumn::make('latest_record.age')->label('Age'),
+                    //
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('age')
+                    ->options([
+                        'minor' => 'Minor',
+                        'adult' => 'Adult',
+                        'senior citizen' => 'Senior citizen',
+                    ])
+                    ->query(function (Builder $builder, array $data) {
+                        // query scope
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -52,14 +64,14 @@ class ResidentResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -67,5 +79,5 @@ class ResidentResource extends Resource
             'create' => Pages\CreateResident::route('/create'),
             'edit' => Pages\EditResident::route('/{record}/edit'),
         ];
-    }    
+    }
 }
