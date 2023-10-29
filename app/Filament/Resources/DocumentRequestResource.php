@@ -19,6 +19,8 @@ use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\ToggleColumn;   
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\Select;
+
 
 class DocumentRequestResource extends Resource
 {
@@ -38,28 +40,31 @@ class DocumentRequestResource extends Resource
                 ->description('Kindly fill up the information below.')
                 ->schema([
                     DatePicker::make('date')
-                    ->label('Date')
-                    ->required(),
+                    ->label('Date'),
+                    // ->required(),
+
+                    Select::make('payment_status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'paid' => 'Paid',
+                        'overdue' => 'Overdue',
+                    ]),
 
                     TextInput::make('address')
-                    ->label('Resident Address')
-                    ->required(),
-
-                    TextInput::make('address')
-                    ->label('Resident Address')
-                    ->required(),
+                    ->label('Resident Address'),
+                    // ->required(),
 
                 ])->columns(3),
 
                 Forms\Components\Section::make('')
                 ->schema([
                     TextInput::make('last_name')
-                    ->label('Last Name')
-                    ->required(),
+                    ->label('Last Name'),
+                    // ->required(),
 
                     TextInput::make('first_name')
-                    ->label('First Name')
-                    ->required(),
+                    ->label('First Name'),
+                    // ->required(),
 
                     TextInput::make('suffix_name')
                     ->label('Extension Name'),
@@ -173,27 +178,27 @@ class DocumentRequestResource extends Resource
     {
         return $table
             ->columns([
-                // TextColumn::make('date')
-                //     ->label('Date')
-                //     ->sortable()
-                //     ->searchable(),
+                TextColumn::make('date')
+                    ->label('Date')
+                    ->sortable()
+                    ->searchable(),
 
-                // TextColumn::make('address')
-                //     ->label('Resident Address')
-                //     ->sortable()
-                //     ->searchable()
-                //     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('address')
+                    ->label('Resident Address')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
-                // TextColumn::make('Certificates')
-                //     ->label('Date')
-                //     ->sortable()
-                //     ->searchable()
-                //     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('Certificates')
+                    ->label('Date')
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
-                // ToggleColumn::make('indegency')
-                //     ->label('Indigency')
-                //     ->sortable()
-                //     ->searchable(),
+                ToggleColumn::make('indegency')
+                    ->label('Indigency')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
