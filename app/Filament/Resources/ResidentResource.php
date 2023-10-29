@@ -18,7 +18,9 @@ class ResidentResource extends Resource
 {
     protected static ?string $model = Resident::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-finger-print';
+
+    protected static ?string $navigationGroup = 'Barangay Records';
 
     protected static ?string $recordTitleAttribute = 'latest_record.full_name';
 
