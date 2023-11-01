@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Barangays\Barangay;
+use App\Observers\Barangays\BarangayObserver;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
          * the hybrid index can only be 125 characters.
          */
         Schema::defaultStringLength(125);
+        
+        Barangay::observe(BarangayObserver::class);
     }
 }
