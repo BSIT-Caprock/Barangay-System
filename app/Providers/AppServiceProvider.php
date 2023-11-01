@@ -32,7 +32,5 @@ class AppServiceProvider extends ServiceProvider
          * the hybrid index can only be 125 characters.
          */
         Schema::defaultStringLength(125);
-        
-        Barangay::observe(BarangayObserver::class);
     }
 }
