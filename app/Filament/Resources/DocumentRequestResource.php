@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\DocumentRequestResource\Pages;
 use App\Filament\Resources\DocumentRequestResource\RelationManagers;
 use App\Models\Documents\DocumentRequest;
+use App\Models\Documents\DocumentTemplate;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -36,23 +37,44 @@ class DocumentRequestResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Document Request Logbook')
+                Forms\Components\Section::make('Transaction Log')
                 ->description('Kindly fill up the information below.')
                 ->schema([
                     DatePicker::make('date')
-                    ->label('Date'),
+                    ->label('Date Payed'),
                     // ->required(),
+
+                    Select::make('mode_of_payment')
+                    ->options([
+                        'cash' => 'Cash',
+                        'gcash' => 'Gcash',
+                    // ->required(),
+                    ]),
 
                     Select::make('payment_status')
                     ->options([
                         'pending' => 'Pending',
                         'paid' => 'Paid',
                         'overdue' => 'Overdue',
+                    // ->required(),
+
                     ]),
 
-                    TextInput::make('address')
-                    ->label('Resident Address'),
+                    TextInput::make('ref_no')
+                    ->label('Reference No.'),
                     // ->required(),
+
+                    Select::make('barangay')
+                    ->options([
+                        //this is just a sample only
+                        'Abango' => 'Abango',
+                        'Abangit' => 'Abangit',
+                        'Balire' => 'Balire',
+
+                        //insert here the list of barangay in Barugo, Leyte
+                         // ->required(),
+
+                    ]),
 
                 ])->columns(3),
 
@@ -66,10 +88,14 @@ class DocumentRequestResource extends Resource
                     ->label('First Name'),
                     // ->required(),
 
+                    TextInput::make('middle_name')
+                    ->label('Middle Name'),
+                    // ->required(),
+
                     TextInput::make('suffix_name')
                     ->label('Extension Name'),
 
-                ])->columns(3),
+                ])->columns(4),
 
                 Forms\Components\Section::make('Certificates')
                 ->description('Please select the requested document.')
@@ -137,7 +163,7 @@ class DocumentRequestResource extends Resource
                     Toggle::make('mcwd')
                     ->onIcon('heroicon-m-check-circle')
                     ->onColor('success')
-                    ->label('MCWD (Metro Carigara Water District'),
+                    ->label('MCWD (Metro Carigara Water District)'),
 
                 ])->columns(3),
 
