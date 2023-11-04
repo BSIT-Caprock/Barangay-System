@@ -17,9 +17,12 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
+
 
 class AdminPanelProvider extends PanelProvider
-{
+{    
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -30,6 +33,29 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
+            // ->globalSearchKeyBindings(['comand+k', 'ctrl+k'])
+            ->sidebarCollapsibleOnDesktop()
+
+            ->navigationItems([
+
+                // this is for the user manual page
+                NavigationItem::make('User Manual')
+                ->url('https://bit.ly/40pP3f1', shouldOpenInNewTab:true)
+                ->icon('heroicon-s-information-circle')
+                ->group('Guide')
+                ->sort(2)
+            ])
+
+            ->navigationItems([
+
+                // this is for the feedback to be fill up, you can change the link
+                NavigationItem::make('Feedback')
+                ->url('https://forms.gle/oofsT22pbQNM8d2x8', shouldOpenInNewTab:true)
+                ->icon('heroicon-s-link')
+                ->group('Guide')
+                ->sort(2)
+            ])
+
             ->favicon(asset('images/barugo-logo.jpg'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
