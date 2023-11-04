@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
+use pxlrbt\FilamentSpotlight\SpotlightPlugin;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -33,7 +34,11 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
-            // ->globalSearchKeyBindings(['comand+k', 'ctrl+k'])
+
+            ->plugins([
+                SpotlightPlugin::make()
+            ])
+
             ->sidebarCollapsibleOnDesktop()
 
             ->navigationItems([
