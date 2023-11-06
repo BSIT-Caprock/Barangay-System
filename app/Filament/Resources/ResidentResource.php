@@ -28,16 +28,17 @@ class ResidentResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'latest_record.full_name';
 
+    protected static ?string $navigationGroup = 'Admin Management';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Section::make('Individual Record of Barangay Inhabitants')
                 ->schema([
-                    TextInput::make('region')->required(),
                     TextInput::make('province')->required(),
                     TextInput::make('city_or_municipality')->label('City / Municipality') ->required(),
-                    TextInput::make('barangay')->required()
+                    TextInput::make('barangay')->label('Barangay') ->required()
                 ])->columns(4),
 
                 Forms\Components\Section::make('Personal Information')
@@ -46,16 +47,16 @@ class ResidentResource extends Resource
                     TextInput::make('last_name')->required(),
                     TextInput::make('first_name')->required(),
                     TextInput::make('middle_name'),
-                    TextInput::make('suffix_name'),
+                    TextInput::make('extension_name'),
                 ])->columns(2),
 
                 Forms\Components\Section::make('')
                 ->schema([
                     DatePicker::make('birth_date')
                         ->label('Date of Birth')
-                        ->format('m/d/'),
+                        ->format('Y-m-d'),
 
-                    TextInput::make('birth_place_id')
+                    TextInput::make('birth_place')
                         ->label('Place of Birth') 
                         ->required(),     
                     
@@ -70,7 +71,7 @@ class ResidentResource extends Resource
 
                 Forms\Components\Section::make('')
                 ->schema([
-                    Select::make('citizenship_id')
+                    Select::make('citizenship')
                         ->label('Citizenship')
                         ->options([
                             'filipino' => 'Filipino',
@@ -87,12 +88,13 @@ class ResidentResource extends Resource
                             'separated' => 'Separated',
                         ])->required(),
 
-                    Select::make('ocupation_id')
+                    Select::make('ocupation')
                         ->label('Profession / Occupation')
                         ->options([
-                            'teacher' => 'Filipino',
+                            'teacher' => 'Teacher',
                             'nurse' => 'Nurse',
-                            'police' => 'Nurse',
+                            'police' => 'Police',
+                            'student' => 'Student'
                         ])->required(),
 
                 ])->columns(3),
@@ -103,11 +105,11 @@ class ResidentResource extends Resource
                         ->label('House No.')
                         ->required(),
 
-                    TextInput::make('streets_id')
+                    TextInput::make('street')
                         ->label('Street Name')
                         ->required(),
 
-                    TextInput::make('zone_id')
+                    TextInput::make('zone')
                         ->label('Zone No.')
                         ->required(),
 
@@ -149,11 +151,6 @@ class ResidentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('region')
-                    ->label('Region')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('province')
                     ->label('Province')
@@ -167,7 +164,7 @@ class ResidentResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\TextColumn::make('barangay')
+                Tables\Columns\TextColumn::make('barangay_id')
                     ->label('Barangay')
                     ->sortable()
                     ->searchable(),
@@ -188,13 +185,13 @@ class ResidentResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\TextColumn::make('suffix_name')
-                    ->label('Suffix Name')
+                Tables\Columns\TextColumn::make('extension_name')
+                    ->label('Extension Name')
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\TextColumn::make('date_of_birth')
+                Tables\Columns\TextColumn::make('birth_date')
                     ->label('Date of Birth')
                     ->dateTime()
                     ->sortable()
@@ -205,12 +202,12 @@ class ResidentResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\TextColumn::make('gender')
+                Tables\Columns\TextColumn::make('gender_id')
                     ->label('Gender')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 
-                Tables\Columns\TextColumn::make('civil_status')
+                Tables\Columns\TextColumn::make('civil_status_id')
                     ->label('Civil Status')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -225,12 +222,12 @@ class ResidentResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\TextColumn::make('houses_id')
+                Tables\Columns\TextColumn::make('houses_number')
                     ->label('House No.')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\TextColumn::make('streets_id')
+                Tables\Columns\TextColumn::make('street_id')
                     ->label('Street Name')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
