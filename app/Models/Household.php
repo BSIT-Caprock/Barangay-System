@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\BarangayScope;
 use App\Models\Traits\HasHistory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,11 @@ class Household extends Model
         'barangay_id',
         'number',
     ];
+    
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new BarangayScope);
+    }
 
     public function barangay()
     {

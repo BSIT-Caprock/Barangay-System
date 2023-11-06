@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\BarangayScope;
 use App\Models\Traits\HasHistory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,11 @@ class Resident extends Model
     protected $historyModel = ResidentHistory::class;
 
     protected $guarded = ['id'];
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new BarangayScope);
+    }
 
     public function barangay()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\BarangayScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,11 @@ class Zone extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new BarangayScope);
+    }
 
     public function barangay()
     {
