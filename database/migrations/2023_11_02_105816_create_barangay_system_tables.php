@@ -21,7 +21,7 @@ return new class extends Migration
         $this->createResidentsWithHistory();
         $this->createDocumentTemplates();
         $this->createDocumentRequests();
-        $this->createPersonnel();
+        $this->createBarangayPersonnel();
     }
 
     /**
@@ -29,7 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $this->dropPersonnel();
+        $this->dropBarangayPersonnel();
         $this->dropDocumentRequests();
         $this->dropDocumentTemplates();
         $this->dropResidentsWithHistory();
@@ -232,7 +232,7 @@ return new class extends Migration
         Schema::dropIfExists('document_requests');
     }
 
-    function createPersonnel()
+    function createBarangayPersonnel()
     {
         $this->createPositions();
 
@@ -251,7 +251,7 @@ return new class extends Migration
         });
     }
 
-    function dropPersonnel()
+    function dropBarangayPersonnel()
     {
         Schema::dropIfExists('personnel');
 
