@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ResidentSeeder extends Seeder
@@ -11,11 +12,6 @@ class ResidentSeeder extends Seeder
      */
     public function run(): void
     {
-        // suffixes
-        // birth_places
-        // citizenships
-        // occupations
-        // residence addresses
-        // residents
+        //
     }
 }

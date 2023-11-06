@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Households\Household;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\HouseholdRecord>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Household>
  */
 class HouseholdFactory extends Factory
 {
@@ -18,9 +17,8 @@ class HouseholdFactory extends Factory
     public function definition(): array
     {
         return [
-            'key_id' => Household::factory(), // Create a related HouseholdKey
-            'barangay_id' => 1, // Replace with the appropriate barangay_id
-            'number' => $this->faker->numberBetween(100, 999),
+            'barangay_id' => 1,
+            'number' => fake()->numberBetween(1000, 1999),
         ];
     }
 }
