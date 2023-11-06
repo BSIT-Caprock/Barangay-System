@@ -15,8 +15,10 @@ class BarangayScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        // return; // may something so gin exit ko dayon
-
+        // Prevent server from exploding
+        if (!Auth::hasUser()) {
+            return;
+        }
          // Assuming the user is authenticated
          /** @var User */
         $user = Auth::user();
