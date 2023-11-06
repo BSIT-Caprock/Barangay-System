@@ -23,6 +23,11 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'edit users']);
         Permission::create(['name' => 'delete users']);
         // barangay zones
+        Permission::create(['name' => 'list zones']);
+        Permission::create(['name' => 'view zones']);
+        Permission::create(['name' => 'create zones']);
+        Permission::create(['name' => 'edit zones']);
+        Permission::create(['name' => 'delete zones']);
         // barangay streets
         // barangay households
         // barangay residents
