@@ -2,13 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Enums\CivilStatus;
-use App\Enums\Gender;
-use App\Models\Residents\Resident;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ResidentRecord>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Resident>
  */
 class ResidentFactory extends Factory
 {
@@ -19,37 +16,33 @@ class ResidentFactory extends Factory
      */
     public function definition(): array
     {
-        $g = fake()->randomElement([
+        $gender = fake()->randomElement([
             'female',
             'male',
         ]);
 
-        $gender = [
-            'female' => Gender::Female->value,
-            'male' => Gender::Male->value,
-        ][$g];
+        $gender_id = [
+            'male' => 1,
+            'female' => 2,
+        ][$gender];
 
         return [
-            'key_id' => Resident::factory(),
-            'household_id' => 1,
+            'barangay_id' => 1,
+            'household_id' => null,
             'last_name' => fake()->lastName(),
-            'first_name' => fake()->firstName($g),
+            'first_name' => fake()->firstName($gender),
             'middle_name' => fake()->lastName(),
-            'suffix' => fake()->suffix(),
-            'birth_place' => fake()->randomElement([
-                fake()->city(),
-                fake()->municipality(),
-            ]),
-            'birth_date' => fake()->date(),
-            'gender' => $gender,
-            'civil_status' => fake()->randomElement(
-                array_column(CivilStatus::cases(), 'value')
-            ),
-            'citizenship' => 'Filipino',
-            'occupation' => fake()->word(),
+            'extension_name' => fake()->suffix(),
             'house_number' => fake()->numberBetween(1000, 9999),
-            'street_name' => fake()->streetName(),
-            'area_name' => fake()->streetSuffix(),
+            'street_id' => null,
+            'zone_id' => null,
+            'birth_place_id' => null,
+            'birth_date' => fake()->date(),
+            'gender_id' => null,
+            'civil_status_id' => null,
+            'citizenship_id' => null,
+            'occupation_id' => null,
+            'date_accomplished' => fake()->date(),
         ];
     }
 }
