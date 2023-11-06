@@ -25,6 +25,7 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'barangay_id',
     ];
 
     /**
@@ -51,5 +52,10 @@ class User extends Authenticatable implements FilamentUser
     {
         // TODO use proper authorization
         return true;
+    }
+
+    public function barangay()
+    {
+        return $this->belongsTo(Barangay::class);
     }
 }
