@@ -220,7 +220,6 @@ return new class extends Migration
             $table->foreignId('barangay_id')->constrained();
             $table->foreignId('document_template_id')->constrained();
             $table->foreignId('resident_id')->nullable()->constrained();
-            $table->foreignId('resident_history_id')->nullable()->constrained();
             $table->jsonb('form_data');
             $table->timestamps();
             $table->softDeletes();
