@@ -51,7 +51,7 @@ class User extends Authenticatable implements FilamentUser
 
     protected static function booted(): void
     {
-        static::addGlobalScope(new BarangayScope);
+        // static::addGlobalScope(new BarangayScope);
     }
 
     public function canAccessPanel(Panel $panel): bool
