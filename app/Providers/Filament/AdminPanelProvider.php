@@ -47,7 +47,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationItem::make('User Manual')
 
                 //url will be change when the system is completed
-                ->url('https://bit.ly/40pP3f1', shouldOpenInNewTab:true)
+                ->url('https://docs.google.com/document/d/1Boq1CuUWelwK_lbQpv4w8Bt1fYnr0xa2S2ZBMw_ZoCc/edit?usp=sharing', shouldOpenInNewTab:true)
                 ->icon('heroicon-s-information-circle')
                 ->group('Guide')
                 ->sort(2)
