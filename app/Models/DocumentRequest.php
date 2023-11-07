@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\TemplateProcessor;
+use Str;
 
 class DocumentRequest extends Model
 {
@@ -72,7 +73,7 @@ class DocumentRequest extends Model
         // set values with form data
         $templateProcessor->setValues($this->form_data);
         // set filename
-        $fileName = 'output.docx';
+        $fileName =  Str::random(10) . '.docx';
         $outputPath = Storage::disk('local')->path('requests/' . $fileName);
         // save file
         $templateProcessor->saveAs($outputPath);

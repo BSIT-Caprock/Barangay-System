@@ -55,5 +55,6 @@ class DocumentRequestTest extends TestCase
         $request->save();
         $filepath = $request->getFilePath();
         $this->assertFileExists($filepath);
+        $this->assertNotEmpty($request->filename);
     }
 }
