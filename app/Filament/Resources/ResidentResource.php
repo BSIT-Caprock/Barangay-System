@@ -54,7 +54,7 @@ class ResidentResource extends Resource
                 ->schema([
                     DatePicker::make('birth_date')
                         ->label('Date of Birth')
-                        ->format('Y-m-d'),
+                        ->format('Y-m'),
 
                     TextInput::make('birth_place')
                         ->label('Place of Birth') 
