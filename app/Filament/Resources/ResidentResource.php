@@ -28,7 +28,7 @@ class ResidentResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'latest_record.full_name';
 
-    protected static ?string $navigationGroup = 'Admin Management';
+    protected static ?string $navigationGroup = 'Management';
 
     public static function form(Form $form): Form
     {

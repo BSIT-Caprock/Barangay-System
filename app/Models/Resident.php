@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Resident extends Model
 {
@@ -20,6 +21,14 @@ class Resident extends Model
 
     protected static function booted(): void
     {
+        static::creating(function ($resident) {
+            $user = Auth::user(); // Get the currently authenticated user
+
+            if ($user) {
+                $resident->barangay_id = $user->barangay_id;
+            }
+        });
+
         static::addGlobalScope(new BarangayScope);
     }
 
