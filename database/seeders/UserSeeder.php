@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Barangay;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,12 +15,21 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         /** @var User */
-        $user = User::create([
+        $superadmin = User::create([
             'name' => 'superadmin',
             'email' => 'superadmin@example.com',
             'password' => 'super',
         ]);
         
-        $user->assignRole('Superadministrator');
+        $superadmin->assignRole('Superadministrator');
+
+        $poblacion1Sect = User::create([
+            'name' => 'Pob. 1 Secretary',
+            'email' => 'sec@pob1.com',
+            'password' => 'pob1',
+            'barangay_id' => Barangay::where(['name' => 'Poblacion Dist. I'])->first()->id,
+        ]);
+
+        $poblacion1Sect->assignRole('Barangay Secretary');
     }
 }
