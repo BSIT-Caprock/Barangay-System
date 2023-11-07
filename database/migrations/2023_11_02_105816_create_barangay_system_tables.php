@@ -201,8 +201,10 @@ return new class extends Migration
         Schema::create('document_templates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('barangay_id')->nullable()->constrained();
-            $table->string('file_path');
+            $table->string('name')->nullable(); // name of the template
+            $table->string('filename'); // actual name of the file
             $table->jsonb('form_schema');
+            $table->unsignedInteger('price')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -219,8 +221,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('barangay_id')->constrained();
             $table->foreignId('document_template_id')->constrained();
+            $table->jsonb('form_data')->nullable();
+            $table->string('filename')->nullable();
             $table->foreignId('resident_id')->nullable()->constrained();
-            $table->jsonb('form_data');
+            $table->unsignedInteger('fee_paid')->nullable();
+            $table->unsignedInteger('dst')->nullable();
+            $table->string('receipt_number')->nullable();
+            $table->date('date_issued')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
