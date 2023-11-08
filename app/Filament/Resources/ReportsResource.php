@@ -39,6 +39,18 @@ class ReportsResource extends Resource
                     Forms\Components\Section::make('')
                     ->description('Kindly fill up the needed information to generate the report.')
                     ->schema([
+                        Forms\Components\TextInput::make('month')
+                        ->label('Month of')
+                        ->required(),
+
+                        Forms\Components\TextInput::make('year')
+                        ->label('Year of')
+                        ->required(),
+
+                    ])->columns(2),
+
+                    Forms\Components\Section::make('')
+                    ->schema([
                         Forms\Components\TextInput::make('type')
                         ->label('Type of Report')
                         ->required()
@@ -52,6 +64,7 @@ class ReportsResource extends Resource
                     ])
                 
                     ]),
+
 
                 Forms\Components\Group::make()
                 ->schema([
@@ -78,6 +91,14 @@ class ReportsResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('month')
+                    ->label('Month')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('year')
+                    ->label('Year')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->label('Type of Reports')
                     ->sortable()

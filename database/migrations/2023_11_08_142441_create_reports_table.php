@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->string('month');
+            $table->string('year');
             $table->string('type');
             $table->longText('name');
             $table->date('date_started');

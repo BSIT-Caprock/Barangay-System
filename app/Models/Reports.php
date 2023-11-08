@@ -12,6 +12,8 @@ class Reports extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'month',
+        'year',
         'type',
         'name',
         'date_started',
