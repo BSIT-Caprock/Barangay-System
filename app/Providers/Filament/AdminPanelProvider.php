@@ -21,9 +21,8 @@ use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
 use pxlrbt\FilamentSpotlight\SpotlightPlugin;
 
-
 class AdminPanelProvider extends PanelProvider
-{    
+{        
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -46,8 +45,10 @@ class AdminPanelProvider extends PanelProvider
                 // this is for the user manual page
                 NavigationItem::make('User Manual')
 
-                //url will be change when the system is completed
-                ->url('https://bit.ly/40pP3f1', shouldOpenInNewTab:true)
+                //url will be change when the system is complete
+
+                ->url('https://docs.google.com/document/d/1Boq1CuUWelwK_lbQpv4w8Bt1fYnr0xa2S2ZBMw_ZoCc/edit?usp=sharing', shouldOpenInNewTab:true)
+
                 ->icon('heroicon-s-information-circle')
                 ->group('Guide')
                 ->sort(2)
