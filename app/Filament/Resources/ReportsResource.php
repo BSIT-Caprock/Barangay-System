@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+
 
 class ReportsResource extends Resource
 {
@@ -54,7 +56,7 @@ class ReportsResource extends Resource
                 Forms\Components\Group::make()
                 ->schema([
 
-                    Forms\Components\Section::make('')
+                    Forms\Components\Section::make('Date Implementation')
                     ->schema([
                         Forms\Components\DatePicker::make('date_started')
                         ->required(),
@@ -63,7 +65,7 @@ class ReportsResource extends Resource
                         ->required(),
 
                         Forms\Components\TextInput::make('remarks')
-                        ->helperText('Type here such as On-Goin or -do-')
+                        ->helperText('Type here such as On-going or -do-')
                         ->required()
                         ->maxLength(125),
                     ])
@@ -117,7 +119,7 @@ class ReportsResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
                 ]),
             ]);
     }
