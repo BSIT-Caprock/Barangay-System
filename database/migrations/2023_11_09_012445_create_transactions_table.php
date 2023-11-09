@@ -13,8 +13,16 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            
+            $table->date('date_payed');
+            $table->string('name');
+            $table->longText('particulars');
+            $table->date('date_applied');
+            $table->date('date_release');
+            $table->date('date_recieved');
+            $table->string('image_signature');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
