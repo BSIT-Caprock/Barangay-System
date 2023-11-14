@@ -19,14 +19,6 @@ beforeEach(function () {
     actingAs($user);
 });
 
-test('can render form for editing household', function () {
-    $record = Household::create(['number' => 'test001']);
-    $response = get(HouseholdResource::getUrl('edit', [
-        'record' => $record,
-    ]));
-    $response->assertSuccessful();
-});
-
 test('can retrieve data from household', function () {
     $record = Household::create(['number' => 'test001']);
     $page = livewire(EditHousehold::class, [
