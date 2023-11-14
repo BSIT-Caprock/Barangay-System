@@ -3,16 +3,14 @@
 namespace App\Models;
 
 use App\Models\Scopes\BarangayScope;
-use App\Models\Traits\HasHistory;
+use App\Models\Traits\AuthBarangay;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Household extends Model
 {
-    use HasFactory, HasHistory, SoftDeletes;
-
-    protected $historyModel = HouseholdHistory::class;
+    use HasFactory, AuthBarangay, SoftDeletes;
 
     protected $fillable = [
         'barangay_id',
@@ -27,5 +25,10 @@ class Household extends Model
     public function barangay()
     {
         return $this->belongsTo(Barangay::class);
+    }
+
+    public function inhabitants()
+    {
+        return $this->hasMany(Inhabitant::class);
     }
 }
