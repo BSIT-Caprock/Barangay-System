@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\HouseholdResource\Pages;
 use App\Filament\Resources\HouseholdResource\RelationManagers;
+use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
 use App\Models\Household;
 use App\Specifications\BarangaySpecification;
 use Filament\Forms;
@@ -53,10 +54,8 @@ class HouseholdResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
-                ]),
+                Tables\Actions\RestoreBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -81,6 +80,13 @@ class HouseholdResource extends Resource
             'index' => Pages\ListHouseholds::route('/'),
             'create' => Pages\CreateHousehold::route('/create'),
             'edit' => Pages\EditHousehold::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            HouseholdCount::class,
         ];
     }
 }
