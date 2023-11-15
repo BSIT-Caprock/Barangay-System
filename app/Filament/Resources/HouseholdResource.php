@@ -14,6 +14,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Maatwebsite\Excel\Excel;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class HouseholdResource extends Resource
 {
@@ -50,10 +54,30 @@ class HouseholdResource extends Resource
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
+            ->headerActions([
+                ExportAction::make('export_table')->label('Export table')
+                    ->exports([
+                        ExcelExport::make('export')->fromTable()
+                            ->askForWriterType(options: [
+                                Excel::CSV => 'Comma Separated Values (*.csv)',
+                                Excel::XLS => 'Microsoft Excel 97-2003 Worksheet (*.xls)',
+                                Excel::XLSX => 'Microsoft Excel Worksheet (*.xlsx)',
+                            ]),
+                    ]),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
+                ExportBulkAction::make('export_selected')->label('Export selected')
+                ->exports([
+                    ExcelExport::make('export')->fromTable()
+                        ->askForWriterType(options: [
+                            Excel::CSV => 'Comma Separated Values (*.csv)',
+                            Excel::XLS => 'Microsoft Excel 97-2003 Worksheet (*.xls)',
+                            Excel::XLSX => 'Microsoft Excel Worksheet (*.xlsx)',
+                        ]),
+                ]),
                 Tables\Actions\RestoreBulkAction::make(),
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
