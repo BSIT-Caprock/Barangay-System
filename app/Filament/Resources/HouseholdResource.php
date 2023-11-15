@@ -6,7 +6,7 @@ use App\Filament\Resources\HouseholdResource\Pages;
 use App\Filament\Resources\HouseholdResource\RelationManagers;
 use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
 use App\Models\Household;
-use App\Specifications\BarangaySpecification;
+use App\Specifications\UserSpecification;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -33,8 +33,8 @@ class HouseholdResource extends Resource
                     ->label('Barangay')
                     ->required()
                     ->relationship('barangay', 'name')
-                    // hidden if user has barangay id
-                    ->hidden(BarangaySpecification::authUserHasBarangay()),
+                    // hidden if user has barangay
+                    ->hidden(UserSpecification::hasBarangay()),
                 Forms\Components\TextInput::make('number')
                     ->required(),
             ]);
@@ -46,7 +46,7 @@ class HouseholdResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('barangay.name')
                     // hidden if user has barangay id
-                    ->hidden(BarangaySpecification::authUserHasBarangay()),
+                    ->hidden(UserSpecification::hasBarangay()),
                 Tables\Columns\TextColumn::make('number'),
                 Tables\Columns\TextColumn::make('inhabitants_count')
                     ->counts('inhabitants'),
