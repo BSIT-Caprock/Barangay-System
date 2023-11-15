@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\HouseholdResource\Pages;
 use App\Filament\Resources\HouseholdResource\RelationManagers;
 use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
+use App\FilamentExcel\WriterType;
 use App\Models\Household;
 use App\Specifications\UserSpecification;
 use Filament\Forms;
@@ -24,7 +25,7 @@ class HouseholdResource extends Resource
     protected static ?string $model = Household::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -58,11 +59,7 @@ class HouseholdResource extends Resource
                 ExportAction::make('export_table')->label('Export table')
                     ->exports([
                         ExcelExport::make('export')->fromTable()
-                            ->askForWriterType(options: [
-                                Excel::CSV => 'Comma Separated Values (*.csv)',
-                                Excel::XLS => 'Microsoft Excel 97-2003 Worksheet (*.xls)',
-                                Excel::XLSX => 'Microsoft Excel Worksheet (*.xlsx)',
-                            ]),
+                            ->askForWriterType(options: WriterType::options()),
                     ]),
             ])
             ->actions([
@@ -70,14 +67,10 @@ class HouseholdResource extends Resource
             ])
             ->bulkActions([
                 ExportBulkAction::make('export_selected')->label('Export selected')
-                ->exports([
-                    ExcelExport::make('export')->fromTable()
-                        ->askForWriterType(options: [
-                            Excel::CSV => 'Comma Separated Values (*.csv)',
-                            Excel::XLS => 'Microsoft Excel 97-2003 Worksheet (*.xls)',
-                            Excel::XLSX => 'Microsoft Excel Worksheet (*.xlsx)',
-                        ]),
-                ]),
+                    ->exports([
+                        ExcelExport::make('export')->fromTable()
+                            ->askForWriterType(options: WriterType::options()),
+                    ]),
                 Tables\Actions\RestoreBulkAction::make(),
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
