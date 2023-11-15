@@ -39,6 +39,13 @@ test('has export selected action', function () {
     $page->assertTableBulkActionExists('export_selected');
 });
 
+/**
+ * NOTE ABOUT EXPORT TABLE
+ * 
+ * filters and columns used in the table are included,
+ * except the pagination. By default. all records are exported.
+ */
+
 test('can export table as csv', function () {
     $page = livewire(ListHouseholds::class);
     $page->callTableAction('export_table', data: [
