@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class CivilStatus extends Model
 {
+    public $timestamps = false;
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public static function getSingle()
     {
         return static::find(1);

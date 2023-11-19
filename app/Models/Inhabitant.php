@@ -2,7 +2,19 @@
 
 namespace App\Models;
 
+use App\Functions\Arrays;
+use App\Models\Relationships\BelongsToBarangay;
+use App\Models\Relationships\BelongsToBirthPlace;
+use App\Models\Relationships\BelongsToCitizenship;
+use App\Models\Relationships\BelongsToCivilStatus;
+use App\Models\Relationships\BelongsToHouse;
+use App\Models\Relationships\BelongsToHousehold;
+use App\Models\Relationships\BelongsToOccupation;
+use App\Models\Relationships\BelongsToSex;
+use App\Models\Relationships\BelongsToStreet;
+use App\Models\Relationships\BelongsToZone;
 use App\Models\Scopes\BarangayScope;
+use App\Models\Traits\AuthBarangay;
 use App\Models\Traits\HasHistory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -13,15 +25,30 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Inhabitant extends Model
 {
-    use HasFactory, HasHistory, SoftDeletes;
+    use HasFactory,
+        BelongsToBarangay,
+        BelongsToHousehold,
+        BelongsToHouse,
+        BelongsToStreet,
+        BelongsToZone,
+        BelongsToBirthPlace,
+        BelongsToSex,
+        BelongsToCivilStatus,
+        BelongsToCitizenship,
+        BelongsToOccupation,
+        SoftDeletes,
+        // HasHistory,
+        AuthBarangay;
 
-    protected $historyModel = InhabitantHistory::class;
+    // protected $historyModel = InhabitantHistory::class;
 
-    protected $guarded = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+    protected $fillable = [
+        'last_name',
+        'first_name',
+        'middle_name',
+        'extension_name',
+        'birth_date',
+        'date_accomplished',
     ];
 
     protected static function booted(): void
@@ -29,98 +56,29 @@ class Inhabitant extends Model
         static::addGlobalScope(new BarangayScope);
     }
 
-    public function barangay(): BelongsTo
+    public function getFullNameAttribute()
     {
-        return $this->belongsTo(Barangay::class);
+        return Arrays::joinWhereNotNull(', ', [
+            $this->last_name,
+            Arrays::joinWhereNotNull(' ', [
+                $this->first_name,
+                $this->middle_name,
+                $this->extension_name,
+            ]),
+        ]);
     }
 
-    public function household(): BelongsTo
+    public function getAddressAttribute()
     {
-        return $this->belongsTo(Household::class);
+        return Arrays::joinWhereNotNull(', ', [
+            $this->house_number,
+            $this->street_name, 
+            $this->zone_name,
+        ]) ?: null;
     }
 
-    public function householdNumber(): Attribute
+    public function getAgeAttribute()
     {
-        return Attribute::make(
-            get: fn () => $this->household->number
-        );
-    }
-
-    public function fullName(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => implode(', ', array_filter([
-                $this->last_name,
-                $this->first_name . ' ' . $this->middle_name,
-            ], fn ($x) => !empty($x)))
-        );
-    }
-
-    public function house(): BelongsTo
-    {
-        return $this->belongsTo(House::class);
-    }
-
-    public function houseNumber(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->house->number
-        );
-    }
-
-    public function street(): BelongsTo
-    {
-        return $this->belongsTo(Street::class);
-    }
-
-    public function streetName(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->street->name
-        );
-    }
-
-    public function zone(): BelongsTo
-    {
-        return $this->belongsTo(Zone::class);
-    }
-
-    public function zoneName(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->zone->name
-        );
-    }
-
-    public function age(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => Carbon::parse($this->birth_date)->age
-        );
-    }
-
-    public function birthPlace(): BelongsTo
-    {
-        return $this->belongsTo(BirthPlace::class);
-    }
-
-    public function gender(): BelongsTo
-    {
-        return $this->belongsTo(Sex::class);
-    }
-
-    public function civilStatus(): BelongsTo
-    {
-        return $this->belongsTo(CivilStatus::class);
-    }
-
-    public function citizenship(): BelongsTo
-    {
-        return $this->belongsTo(Citizenship::class);
-    }
-
-    public function occupation(): BelongsTo
-    {
-        return $this->belongsTo(Occupation::class);
+        return Carbon::parse($this->birth_date)->age;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Functions\Arrays;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,8 +11,15 @@ class BirthPlace extends Model
     protected $fillable = [
         'province',
         'city_or_municipality',
-        'label',
+        'name',
     ];
+
+    public $timestamps = false;
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public static function boot()
     {
@@ -19,25 +27,30 @@ class BirthPlace extends Model
 
         // When creating a new record
         static::creating(function (self $model) {
-            $model->autosetLabel();
+            $model->autoName();
         });
 
         // When updating an existing record
         static::updating(function (self $model) {
-            $model->autosetLabel();
+            $model->autoName();
         });
     }
 
-    // Method to set the label attribute
-    public function autosetLabel()
+    // Method to set the name attribute
+    public function autoName()
     {
-        if ($this->label === null || trim($this->label) === '') {
+        if ($this->name === null || trim($this->name) === '') {
             if ($this->isDirty('city_or_municipality') || $this->isDirty('province')) {
-                $this->label = implode(', ', array_filter([
+                $this->name = Arrays::joinWhereNotNull(', ', [
                     $this->city_or_municipality,
                     $this->province,
-                ], fn ($x) => !empty($x)));
+                ]);
             }
         }
+    }
+
+    public function inhabitants()
+    {
+        return $this->hasMany(Inhabitant::class);
     }
 }

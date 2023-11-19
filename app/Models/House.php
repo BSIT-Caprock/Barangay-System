@@ -6,30 +6,41 @@ use App\Models\Scopes\BarangayScope;
 use App\Models\Traits\AuthBarangay;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Household extends Model
+class House extends Model
 {
-    use HasFactory, AuthBarangay, SoftDeletes;
+    use HasFactory, AuthBarangay;
 
     protected $fillable = [
         'barangay_id',
+        'street_id',
+        'zone_id',
         'number',
     ];
 
-    public function __toString()
-    {
-        return $this->number;
-    }
-    
     protected static function booted(): void
     {
         static::addGlobalScope(new BarangayScope);
     }
 
+    public function __toString()
+    {
+        return $this->number;
+    }
+
     public function barangay()
     {
         return $this->belongsTo(Barangay::class);
+    }
+
+    public function street()
+    {
+        return $this->belongsTo(Street::class);
+    }
+
+    public function zone()
+    {
+        return $this->belongsTo(Zone::class);
     }
 
     public function inhabitants()
