@@ -14,20 +14,17 @@ class BirthPlaceSeeder extends Seeder
      */
     public function run(): void
     {
-        $file = new SplFileObject(database_path('data/MunCit_Prov.csv'));
+        $file = new SplFileObject(database_path('data/birth_places.csv'));
         $file->setFlags(
-            SplFileObject::READ_AHEAD | 
-            SplFileObject::SKIP_EMPTY | 
-            SplFileObject::DROP_NEW_LINE
+            SplFileObject::READ_AHEAD | SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE
         );
         // skip first line
-        $file->next(); 
+        $file->next();
         // parse each line as csv
         while ($data = $file->fgetcsv()) {
             $model = BirthPlace::create([
-                'province' => $data[0],
-                'city_or_municipality' => $data[1],
-                'label' => $data[1] . ', ' . $data[0],
+                'province' => $data[1],
+                'city_or_municipality' => $data[0],
             ]);
             // $model->id = $model->newUniqueId();
             // dump($model->getAttributes());
