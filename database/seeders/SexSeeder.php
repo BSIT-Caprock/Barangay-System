@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Gender;
+use App\Models\Sex;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class GenderSeeder extends Seeder
+class SexSeeder extends Seeder
 {
 
     /**
@@ -15,8 +15,8 @@ class GenderSeeder extends Seeder
     public function run(): void
     {
         // 1
-        Gender::create(['name' => 'Male']);
+        Sex::create(['name' => 'Male']);
         // 2
-        Gender::create(['name' => 'Female']);
+        Sex::create(['name' => 'Female']);
     }
 }
