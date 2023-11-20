@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\InhabitantResource\Pages;
 
 use App\Filament\Resources\InhabitantResource;
-use App\Filament\Resources\InhabitantResource\Widgets\InhabitantCount;
+use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -21,7 +21,7 @@ class ListInhabitants extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            InhabitantCount::class,
+            TotalInhabitants::class,
         ];
     }
 }

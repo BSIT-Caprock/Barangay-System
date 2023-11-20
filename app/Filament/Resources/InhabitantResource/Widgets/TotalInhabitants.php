@@ -6,7 +6,7 @@ use App\Models\Inhabitant;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
-class InhabitantCount extends BaseWidget
+class TotalInhabitants extends BaseWidget
 {
     protected function getStats(): array
     {

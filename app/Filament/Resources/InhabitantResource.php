@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\InhabitantResource\Pages;
 use App\Filament\Resources\InhabitantResource\RelationManagers;
-use App\Filament\Resources\InhabitantResource\Widgets\InhabitantCount;
+use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
 use App\FilamentExcel\WriterType;
 use App\Models\Inhabitant;
 use Filament\Forms;
@@ -223,7 +223,7 @@ class InhabitantResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            InhabitantCount::class,
+            TotalInhabitants::class,
         ];
     }
 }
