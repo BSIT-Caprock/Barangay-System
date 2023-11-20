@@ -11,7 +11,7 @@ class InhabitantCount extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('No. of inhabitants', Inhabitant::count()),
+            Stat::make('Total inhabitants', Inhabitant::count()),
         ];
     }
 }
