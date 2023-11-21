@@ -1,7 +1,7 @@
 <?php
 
 use App\Filament\Resources\InhabitantResource;
-use App\Filament\Resources\InhabitantResource\Widgets\InhabitantCount;
+use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
 use App\Models\Inhabitant;
 use App\Models\User;
 
@@ -33,7 +33,7 @@ test('has edit page', function () {
     $response->assertSuccessful();
 });
 
-test('has widget for inhabitants count', function () {
+test('has widget for total inhabitants', function () {
     $response = get(InhabitantResource::getUrl('index'));
-    $response->assertSeeLivewire(InhabitantCount::class);
+    $response->assertSeeLivewire(TotalInhabitants::class);
 });
