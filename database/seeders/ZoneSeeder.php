@@ -2,19 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Barangay;
 use App\Models\Zone;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ZoneSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $barangay = Barangay::where('name', 'Poblacion Dist. I')->first();
+        $barangayId = 25;
         $zones = [
             'Zone I',
             'Zone II',
@@ -25,7 +26,7 @@ class ZoneSeeder extends Seeder
         ];
         foreach ($zones as $zone) {
             Zone::create([
-                'barangay_id' => $barangay->id,
+                'barangay_id' => $barangayId,
                 'name' => $zone,
             ]);
         }

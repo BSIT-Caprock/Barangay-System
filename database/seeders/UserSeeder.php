@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Barangay;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -20,7 +19,7 @@ class UserSeeder extends Seeder
             'email' => 'superadmin@example.com',
             'password' => 'super',
         ]);
-        
+
         $superadmin->assignRole('Superadministrator');
 
         $poblacion1Sect = User::create([

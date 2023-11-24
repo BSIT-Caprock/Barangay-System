@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Barangays\Barangay;
-use App\Observers\Barangays\BarangayObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -35,10 +33,10 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(125);
 
         /**
-         * By default, attributes that are not included in the $fillable array 
-         * are silently discarded when performing mass-assignment operations. 
-         * In production, this is expected behavior; however, 
-         * during local development it can lead to confusion 
+         * By default, attributes that are not included in the $fillable array
+         * are silently discarded when performing mass-assignment operations.
+         * In production, this is expected behavior; however,
+         * during local development it can lead to confusion
          * as to why model changes are not taking effect.
          */
         Model::preventSilentlyDiscardingAttributes(app()->environment('local'));

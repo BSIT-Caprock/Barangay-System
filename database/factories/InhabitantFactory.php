@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Sex;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Inhabitant>
@@ -28,7 +29,7 @@ class InhabitantFactory extends Factory
         ][$sexId];
 
         return [
-            'barangay_id' => 1,
+            'barangay_id' => null,
             'household_id' => null,
             'last_name' => fake()->lastName(),
             'first_name' => fake()->firstName($gender),

@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\InhabitantResource\Pages;
 
 use App\Filament\Resources\InhabitantResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateInhabitant extends CreateRecord
@@ -12,6 +11,6 @@ class CreateInhabitant extends CreateRecord
 
     public function getSubheading(): ?string
     {
-        return __('Kindly fill out the information below.');
+        return __('(*) fields are required.');
     }
 }

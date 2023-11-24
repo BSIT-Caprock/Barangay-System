@@ -20,6 +20,6 @@ class EditInhabitant extends EditRecord
 
     public function getSubheading(): ?string
     {
-        return __('Kindly fill out the information below.');
+        return __('(*) fields are required.');
     }
 }

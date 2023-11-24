@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sex extends Model
 {
+    use \App\Attributes\InhabitantsAttribute;
+
     public $timestamps = false;
 
     public const MALE = 1;

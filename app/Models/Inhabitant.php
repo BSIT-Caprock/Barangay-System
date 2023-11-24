@@ -2,45 +2,26 @@
 
 namespace App\Models;
 
-use App\Functions\Arrays;
-use App\Models\Relationships\BelongsToBarangay;
-use App\Models\Relationships\BelongsToBirthPlace;
-use App\Models\Relationships\BelongsToCitizenship;
-use App\Models\Relationships\BelongsToCivilStatus;
-use App\Models\Relationships\BelongsToHouse;
-use App\Models\Relationships\BelongsToHousehold;
-use App\Models\Relationships\BelongsToOccupation;
-use App\Models\Relationships\BelongsToSex;
-use App\Models\Relationships\BelongsToStreet;
-use App\Models\Relationships\BelongsToZone;
-use App\Models\Scopes\BarangayScope;
-use App\Models\Traits\AuthBarangay;
-use App\Models\Traits\HasHistory;
+use App\Helpers\Strings;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Inhabitant extends Model
 {
-    use HasFactory,
-        BelongsToBarangay,
-        BelongsToHousehold,
-        BelongsToHouse,
-        BelongsToStreet,
-        BelongsToZone,
-        BelongsToBirthPlace,
-        BelongsToSex,
-        BelongsToCivilStatus,
-        BelongsToCitizenship,
-        BelongsToOccupation,
-        SoftDeletes,
-        // HasHistory,
-        AuthBarangay;
-
-    // protected $historyModel = InhabitantHistory::class;
+    use \App\Attributes\BarangayAttribute;
+    use \App\Attributes\BirthPlaceAttribute;
+    use \App\Attributes\CitizenshipAttribute;
+    use \App\Attributes\CivilStatusAttribute;
+    use \App\Attributes\HouseAttribute;
+    use \App\Attributes\HouseholdAttribute;
+    use \App\Attributes\OccupationAttribute;
+    use \App\Attributes\SexAttribute;
+    use \App\Attributes\StreetAttribute;
+    use \App\Attributes\ZoneAttribute;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'last_name',
@@ -51,16 +32,11 @@ class Inhabitant extends Model
         'date_accomplished',
     ];
 
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new BarangayScope);
-    }
-
     public function getFullNameAttribute()
     {
-        return Arrays::joinWhereNotNull(', ', [
+        return Strings::joinWithoutNulls(', ', [
             $this->last_name,
-            Arrays::joinWhereNotNull(' ', [
+            Strings::joinWithoutNulls(' ', [
                 $this->first_name,
                 $this->middle_name,
                 $this->extension_name,
@@ -70,9 +46,9 @@ class Inhabitant extends Model
 
     public function getAddressAttribute()
     {
-        return Arrays::joinWhereNotNull(', ', [
+        return Strings::joinWithoutNulls(', ', [
             $this->house_number,
-            $this->street_name, 
+            $this->street_name,
             $this->zone_name,
         ]) ?: null;
     }

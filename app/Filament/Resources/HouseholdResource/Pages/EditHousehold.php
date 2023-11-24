@@ -10,6 +10,11 @@ class EditHousehold extends EditRecord
 {
     protected static string $resource = HouseholdResource::class;
 
+    public function getSubheading(): ?string
+    {
+        return __('(*) fields are required.');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

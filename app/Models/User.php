@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Models\Scopes\BarangayScope;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +14,11 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use \App\Attributes\BarangayAttribute;
+    use HasApiTokens;
+    use HasFactory;
+    use HasRoles;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,8 +29,9 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
-        'barangay_id',
     ];
+
+    protected $guarded = ['barangay_id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -49,19 +53,14 @@ class User extends Authenticatable implements FilamentUser
         'password' => 'hashed',
     ];
 
-    protected static function booted(): void
+    protected function initializeBelongsToBarangay()
     {
-        static::addGlobalScope(new BarangayScope);
+        // disabled
     }
 
     public function canAccessPanel(Panel $panel): bool
     {
         // TODO use proper authorization
         return true;
-    }
-
-    public function barangay()
-    {
-        return $this->belongsTo(Barangay::class);
     }
 }

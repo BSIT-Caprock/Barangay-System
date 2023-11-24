@@ -53,13 +53,13 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        
+
         Schema::create('houses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('barangay_id')->constrained();
             $table->foreignId('street_id')->nullable()->constrained();
             $table->foreignId('zone_id')->nullable()->constrained();
-            $table->string('number'); 
+            $table->string('number');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -116,7 +116,7 @@ return new class extends Migration
         Schema::table('inhabitants', function (Blueprint $table) use ($historized) {
             $historized($table);
         });
-        
+
         Schema::table('inhabitant_history', function (Blueprint $table) use ($historized) {
             $historized($table);
         });

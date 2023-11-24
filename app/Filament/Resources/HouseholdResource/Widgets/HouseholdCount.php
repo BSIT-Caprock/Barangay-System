@@ -11,7 +11,7 @@ class HouseholdCount extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('No. of households', Household::count()),
+            Stat::make('Total households', Household::count()),
         ];
     }
 }

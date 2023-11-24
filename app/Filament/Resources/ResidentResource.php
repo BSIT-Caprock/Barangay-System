@@ -3,22 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ResidentResource\Pages;
-use App\Filament\Resources\ResidentResource\RelationManagers;
 use App\Models\Resident;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\FileUpload;
-
 
 class ResidentResource extends Resource
 {
@@ -33,115 +28,114 @@ class ResidentResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Individual Record of Barangay Inhabitants')
-                ->schema([
-                    TextInput::make('region')->required(),
-                    TextInput::make('province')->required(),
-                    TextInput::make('city_or_municipality')->label('City / Municipality') ->required(),
-                    TextInput::make('barangay')->required()
-                ])->columns(4),
+                    ->schema([
+                        TextInput::make('region')->required(),
+                        TextInput::make('province')->required(),
+                        TextInput::make('city_or_municipality')->label('City / Municipality')->required(),
+                        TextInput::make('barangay')->required(),
+                    ])->columns(4),
 
                 Forms\Components\Section::make('Personal Information')
-                ->description('Kindly fill out the information below.')
-                ->schema([
-                    TextInput::make('last_name')->required(),
-                    TextInput::make('first_name')->required(),
-                    TextInput::make('middle_name'),
-                    TextInput::make('suffix_name'),
-                ])->columns(2),
+                    ->description('Kindly fill out the information below.')
+                    ->schema([
+                        TextInput::make('last_name')->required(),
+                        TextInput::make('first_name')->required(),
+                        TextInput::make('middle_name'),
+                        TextInput::make('suffix_name'),
+                    ])->columns(2),
 
                 Forms\Components\Section::make('')
-                ->schema([
-                    DatePicker::make('birth_date')
-                        ->label('Date of Birth')
-                        ->format('m/d/'),
+                    ->schema([
+                        DatePicker::make('birth_date')
+                            ->label('Date of Birth')
+                            ->format('m/d/'),
 
-                    TextInput::make('birth_place_id')
-                        ->label('Place of Birth') 
-                        ->required(),     
-                    
-                    Select::make('gender')
-                        ->label('Sex')
-                        ->options([
-                            'male' => 'Male',
-                            'female' => 'Female',
-                        ])->required(),
-                    
-                ])->columns(3),
+                        TextInput::make('birth_place_id')
+                            ->label('Place of Birth')
+                            ->required(),
+
+                        Select::make('gender')
+                            ->label('Sex')
+                            ->options([
+                                'male' => 'Male',
+                                'female' => 'Female',
+                            ])->required(),
+
+                    ])->columns(3),
 
                 Forms\Components\Section::make('')
-                ->schema([
-                    Select::make('citizenship_id')
-                        ->label('Citizenship')
-                        ->options([
-                            'filipino' => 'Filipino',
-                            'american' => 'American',
-                            'japanese' => 'Japanese',
-                        ])->required(),
+                    ->schema([
+                        Select::make('citizenship_id')
+                            ->label('Citizenship')
+                            ->options([
+                                'filipino' => 'Filipino',
+                                'american' => 'American',
+                                'japanese' => 'Japanese',
+                            ])->required(),
 
-                    Select::make('civil_status')
-                        ->label('Civil Status')
-                        ->options([
-                            'single' => 'Single',
-                            'married' => 'Married',
-                            'widowed' => 'Widowed',
-                            'separated' => 'Separated',
-                        ])->required(),
+                        Select::make('civil_status')
+                            ->label('Civil Status')
+                            ->options([
+                                'single' => 'Single',
+                                'married' => 'Married',
+                                'widowed' => 'Widowed',
+                                'separated' => 'Separated',
+                            ])->required(),
 
-                    Select::make('ocupation_id')
-                        ->label('Profession / Occupation')
-                        ->options([
-                            'teacher' => 'Filipino',
-                            'nurse' => 'Nurse',
-                            'police' => 'Nurse',
-                        ])->required(),
+                        Select::make('ocupation_id')
+                            ->label('Profession / Occupation')
+                            ->options([
+                                'teacher' => 'Filipino',
+                                'nurse' => 'Nurse',
+                                'police' => 'Nurse',
+                            ])->required(),
 
-                ])->columns(3),
+                    ])->columns(3),
 
                 Forms\Components\Section::make('Residence Address')
-                ->schema([
-                    TextInput::make('houses_id')
-                        ->label('House No.')
-                        ->required(),
+                    ->schema([
+                        TextInput::make('houses_id')
+                            ->label('House No.')
+                            ->required(),
 
-                    TextInput::make('streets_id')
-                        ->label('Street Name')
-                        ->required(),
+                        TextInput::make('streets_id')
+                            ->label('Street Name')
+                            ->required(),
 
-                    TextInput::make('zone_id')
-                        ->label('Zone No.')
-                        ->required(),
+                        TextInput::make('zone_id')
+                            ->label('Zone No.')
+                            ->required(),
 
-                ])->columns(3),
+                    ])->columns(3),
 
                 Forms\Components\Section::make('Thumbmark')
-                ->schema([
-                    FileUpload::make('left_fingerprint')
-                        ->label('Left Thumbmark')
-                        ->image()
-                        ->imageEditor()
-                        ->imageEditorAspectRatios([
-                            '1:1',
-                        ])
-                        ->preserveFilenames()
-                        ->openable()
-                        ->downloadable()
-                        ->previewable(false),
+                    ->schema([
+                        FileUpload::make('left_fingerprint')
+                            ->label('Left Thumbmark')
+                            ->image()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                '1:1',
+                            ])
+                            ->preserveFilenames()
+                            ->openable()
+                            ->downloadable()
+                            ->previewable(false),
 
-                    FileUpload::make('right_fingerprint')
-                        ->label('Right Thumbmark')
-                        ->image()
-                        ->imageEditor()
-                        ->imageEditorAspectRatios([
-                            '1:1',
-                        ])
-                        ->preserveFilenames()
-                        ->openable()
-                        ->downloadable()
-                        ->previewable(false)
+                        FileUpload::make('right_fingerprint')
+                            ->label('Right Thumbmark')
+                            ->image()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                '1:1',
+                            ])
+                            ->preserveFilenames()
+                            ->openable()
+                            ->downloadable()
+                            ->previewable(false),
 
-                ])->columns(2)
+                    ])->columns(2),
 
-            
             ]);
     }
 
@@ -209,17 +203,17 @@ class ResidentResource extends Resource
                     ->label('Gender')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                
+
                 Tables\Columns\TextColumn::make('civil_status')
                     ->label('Civil Status')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                
+
                 Tables\Columns\TextColumn::make('citizenship_id')
                     ->label('Citizenship')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                
+
                 Tables\Columns\TextColumn::make('occupation_id')
                     ->label('Profession / Occupation')
                     ->sortable()
@@ -244,7 +238,7 @@ class ResidentResource extends Resource
                     ->label('Left Thumbmark')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                
+
                 Tables\Columns\TextColumn::make('right_fingerprint')
                     ->label('Right Thumbmark')
                     ->sortable()

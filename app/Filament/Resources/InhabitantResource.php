@@ -2,21 +2,33 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Actions\FilamentExcel\TableExportAction;
+use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
+use App\Filament\Forms\SelectBarangay;
+use App\Filament\Forms\SelectBirthPlace;
+use App\Filament\Forms\SelectCitizenship;
+use App\Filament\Forms\SelectCivilStatus;
+use App\Filament\Forms\SelectHouseholdNumber;
+use App\Filament\Forms\SelectHouseNumber;
+use App\Filament\Forms\SelectOccupation;
+use App\Filament\Forms\SelectSex;
+use App\Filament\Forms\SelectStreet;
+use App\Filament\Forms\SelectZone;
+use App\Filament\Resources\HouseholdResource\RelationManagers\InhabitantsRelationManager;
 use App\Filament\Resources\InhabitantResource\Pages;
-use App\Filament\Resources\InhabitantResource\RelationManagers;
+use App\Filament\Resources\InhabitantResource\Pages\ListInhabitants;
 use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
-use App\FilamentExcel\WriterType;
+// use App\Filament\Resources\InhabitantResource\RelationManagers;
+use App\Filament\Tables\TextColumnHiddenByDefault;
 use App\Models\Inhabitant;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\Column;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class InhabitantResource extends Resource
 {
@@ -28,85 +40,43 @@ class InhabitantResource extends Resource
     {
         return $form->schema([
             Forms\Components\Grid::make(4)->schema([
-                Forms\Components\Select::make('barangay_id')
-                    // ->label('Barangay')
-                    ->required()
-                    ->relationship('barangay', 'name')
-                    // hidden if user has barangay
-                    ->hidden((bool) auth()->user()->barangay),
-                Forms\Components\Select::make('household_id')
-                    ->label('Household number')
-                    ->relationship('household', 'number')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('number')
-                            ->required(),
-                    ]),
+                SelectBarangay::make()->required()->hidden((bool) auth()->user()->barangay),
+
+                SelectHouseholdNumber::make()->hiddenOn(InhabitantsRelationManager::class),
             ]),
+
             Forms\Components\Grid::make(4)->schema([
-                Forms\Components\TextInput::make('last_name')
-                    ->required(),
-                Forms\Components\TextInput::make('first_name')
-                    ->required(),
+                Forms\Components\TextInput::make('last_name')->required(),
+
+                Forms\Components\TextInput::make('first_name')->required(),
+
                 Forms\Components\TextInput::make('middle_name'),
+
                 Forms\Components\TextInput::make('extension_name'),
             ]),
+
             Forms\Components\Grid::make(3)->schema([
-                Forms\Components\Select::make('house_id')
-                    ->relationship('house', 'number')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('number')
-                            ->required(),
-                    ]),
-                Forms\Components\Select::make('street_id')
-                    ->relationship('street', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
-                            ->required(),
-                    ]),
-                Forms\Components\Select::make('zone_id')
-                    ->relationship('zone', 'name'),
+                SelectHouseNumber::make(),
+
+                SelectStreet::make(),
+
+                SelectZone::make(),
             ]),
+
             Forms\Components\Grid::make(3)->schema([
-                Forms\Components\DatePicker::make('birth_date')
-                    ->label('Date of birth')
-                    ->required(),
-                Forms\Components\Select::make('birth_place_id')
-                    ->label('Place of birth')
-                    ->relationship('birth_place', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('province')
-                            ->required(),
-                        Forms\Components\TextInput::make('city_or_municipality')
-                            ->label('City/Municipality')
-                            ->required(),
-                        Forms\Components\TextInput::make('name')
-                            ->label('Label (optional)')
-                    ]),
-                Forms\Components\Select::make('sex_id')
-                    // ->label('Sex')
-                    ->required()
-                    ->relationship('sex', 'name'),
-                Forms\Components\Select::make('civil_status_id')
-                    ->relationship('civil_status', 'name'),
-                Forms\Components\Select::make('citizenship_id')
-                    ->relationship('citizenship', 'name'),
-                Forms\Components\Select::make('occupation_id')
-                    ->relationship('occupation', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
-                            ->required(),
-                    ]),
+                Forms\Components\DatePicker::make('birth_date')->label('Date of birth')->required(),
+
+                SelectBirthPlace::make(),
+
+                SelectSex::make()->required(),
+
+                SelectCivilStatus::make(),
+
+                SelectCitizenship::make(),
+
+                SelectOccupation::make(),
             ]),
+
             Forms\Components\Grid::make(4)->schema([
                 Forms\Components\DatePicker::make('date_accomplished'),
             ]),
@@ -115,82 +85,66 @@ class InhabitantResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $onlyVisibleAndToggleableHere = fn (Column $column) => $column
+            ->visibleOn(ListInhabitants::class)
+            ->toggleable(fn (Column $column) => $column->isVisible());
+
+        $onListInhabintants = fn ($livewire) => $livewire instanceof ListInhabitants;
+
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('barangay')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('household.number')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('last_name')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('first_name')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('middle_name')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('extension_name')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('full_name')
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('house')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('street')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('zone')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('address')
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('birth_date')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('age')
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('birth_place')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('sex')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('civil_status')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('citizenship')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('occupation')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                Tables\Columns\TextColumn::make('date_accomplished')
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
+                TextColumnHiddenByDefault::make('barangay')
+                    ->visible(! auth()->user()->barangay)
+                    ->toggleable(fn (Column $column) => $column->isVisible()),
+
+                TextColumnHiddenByDefault::make('last_name')->tap($onlyVisibleAndToggleableHere),
+
+                TextColumnHiddenByDefault::make('first_name')->tap($onlyVisibleAndToggleableHere),
+
+                TextColumnHiddenByDefault::make('middle_name')->tap($onlyVisibleAndToggleableHere),
+
+                TextColumnHiddenByDefault::make('extension_name')->tap($onlyVisibleAndToggleableHere),
+
+                Tables\Columns\TextColumn::make('full_name')->toggleable($onListInhabintants),
+
+                TextColumnHiddenByDefault::make('household_number')->label('Household #')->tap($onlyVisibleAndToggleableHere),
+
+                TextColumnHiddenByDefault::make('house_number')->label('House #'),
+
+                TextColumnHiddenByDefault::make('street'),
+
+                TextColumnHiddenByDefault::make('zone'),
+
+                Tables\Columns\TextColumn::make('address')->toggleable($onListInhabintants),
+
+                TextColumnHiddenByDefault::make('birth_date'),
+
+                Tables\Columns\TextColumn::make('age')->toggleable($onListInhabintants),
+
+                TextColumnHiddenByDefault::make('birth_place'),
+
+                Tables\Columns\TextColumn::make('sex')->toggleable($onListInhabintants),
+
+                TextColumnHiddenByDefault::make('civil_status')->toggleable($onListInhabintants),
+
+                TextColumnHiddenByDefault::make('citizenship')->toggleable($onListInhabintants),
+
+                TextColumnHiddenByDefault::make('occupation')->toggleable($onListInhabintants),
+
+                TextColumnHiddenByDefault::make('date_accomplished')->tap($onlyVisibleAndToggleableHere),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
-                ExportAction::make('export_table')->label('Export table')
-                    ->exports([
-                        ExcelExport::make('export')->fromTable()
-                            ->askForWriterType(options: WriterType::options()),
-                    ]),
+                TableExportAction::make(),
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                ExportBulkAction::make('export_selected')->label('Export selected')
-                    ->exports([
-                        ExcelExport::make('export')->fromTable()
-                            ->askForWriterType(options: WriterType::options()),
-                    ]),
+                TableExportBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
                 Tables\Actions\DeleteBulkAction::make(),
             ]);

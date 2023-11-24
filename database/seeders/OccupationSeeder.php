@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Occupation;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use SplFileObject;
 
@@ -16,12 +15,12 @@ class OccupationSeeder extends Seeder
     {
         $file = new SplFileObject(database_path('data/occupations.csv'));
         $file->setFlags(
-            SplFileObject::READ_AHEAD | 
-            SplFileObject::SKIP_EMPTY | 
+            SplFileObject::READ_AHEAD |
+            SplFileObject::SKIP_EMPTY |
             SplFileObject::DROP_NEW_LINE
         );
         // skip first line
-        $file->next(); 
+        $file->next();
         // parse each line as csv
         while ($data = $file->fgetcsv()) {
             Occupation::create([

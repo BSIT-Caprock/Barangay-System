@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Actions\FilamentExcel\TableExportAction;
+use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
+use App\Filament\Forms\SelectBarangay;
 use App\Filament\Resources\HouseholdResource\Pages;
 use App\Filament\Resources\HouseholdResource\RelationManagers;
 use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
-use App\FilamentExcel\WriterType;
 use App\Models\Household;
-use App\Specifications\UserSpecification;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,29 +16,20 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Maatwebsite\Excel\Excel;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class HouseholdResource extends Resource
 {
     protected static ?string $model = Household::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('barangay_id')
-                    ->label('Barangay')
-                    ->required()
-                    ->relationship('barangay', 'name')
-                    // hidden if user has barangay
-                    ->hidden(UserSpecification::hasBarangay()),
-                Forms\Components\TextInput::make('number')
-                    ->required(),
+                SelectBarangay::make()->required()->hidden((bool) auth()->user()->barangay),
+
+                Forms\Components\TextInput::make('number')->required(),
             ]);
     }
 
@@ -45,32 +37,26 @@ class HouseholdResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('barangay.name')
-                    // hidden if user has barangay id
-                    ->hidden(UserSpecification::hasBarangay()),
+                Tables\Columns\TextColumn::make('barangay')
+                    ->hidden((bool) auth()->user()->barangay)
+                    ->toggleable(! auth()->user()->barangay),
+
                 Tables\Columns\TextColumn::make('number'),
-                Tables\Columns\TextColumn::make('inhabitants_count')
-                    ->counts('inhabitants'),
+
+                Tables\Columns\TextColumn::make('inhabitants_count')->label('Total inhabitants')->counts('inhabitants'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
-                ExportAction::make('export_table')->label('Export table')
-                    ->exports([
-                        ExcelExport::make('export')->fromTable()
-                            ->askForWriterType(options: WriterType::options()),
-                    ]),
+                TableExportAction::make(),
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                ExportBulkAction::make('export_selected')->label('Export selected')
-                    ->exports([
-                        ExcelExport::make('export')->fromTable()
-                            ->askForWriterType(options: WriterType::options()),
-                    ]),
+                TableExportBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
@@ -87,7 +73,7 @@ class HouseholdResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\InhabitantsRelationManager::class,
         ];
     }
 

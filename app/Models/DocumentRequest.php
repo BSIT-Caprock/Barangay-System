@@ -73,7 +73,7 @@ class DocumentRequest extends Model
         // set values with form data
         $templateProcessor->setValues($this->form_data);
         // set filename
-        $fileName =  Str::random(10) . '.docx';
+        $fileName = Str::random(10) . '.docx';
         $outputPath = Storage::disk('local')->path('requests/' . $fileName);
         // save file
         $templateProcessor->saveAs($outputPath);
@@ -84,6 +84,7 @@ class DocumentRequest extends Model
     public function getFilePath()
     {
         $filePath = Storage::disk('local')->path('requests/' . $this->filename);
+
         return $filePath;
     }
 }

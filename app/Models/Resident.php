@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\BarangayScope;
+use App\Models\Scopes\CurrentBarangayScope;
 use App\Models\Traits\HasHistory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +12,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Resident extends Model
 {
-    use HasFactory, HasHistory, SoftDeletes;
+    use HasFactory;
+    use HasHistory;
+    use SoftDeletes;
 
     protected $historyModel = ResidentHistory::class;
 
@@ -20,7 +22,7 @@ class Resident extends Model
 
     protected static function booted(): void
     {
-        static::addGlobalScope(new BarangayScope);
+        static::addGlobalScope(new CurrentBarangayScope);
     }
 
     public function barangay()
@@ -46,7 +48,7 @@ class Resident extends Model
             get: fn () => implode(', ', array_filter([
                 $this->last_name,
                 $this->first_name . ' ' . $this->middle_name,
-            ], fn ($x) => !empty($x)))
+            ], fn ($x) => ! empty($x)))
         );
     }
 
