@@ -1,6 +1,20 @@
 name: Run tests
 
 on:
+  push:
+    paths: 
+      - '**/**'
+      - '!README.md'
+      - '!.github/**'
+
+  pull_request: 
+    branches: 
+      - main    
+    paths: 
+      - '**/**'
+      - '!README.md'
+      - '!.github/**'
+
   workflow_run: 
     workflows:
       - Check & fix styling
@@ -20,7 +34,6 @@ jobs:
         php-version: '8.1'
         extensions: curl, exif, fileinfo, gd, intl, mbstring, mysqli, openssl, pdo_mysql, pdo_sqlite, sqlite3, xsl
 
-      
     - name: Checkout code
       uses: actions/checkout@v3
       
