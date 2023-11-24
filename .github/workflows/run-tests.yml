@@ -1,0 +1,44 @@
+# run-tests.yml
+name: Run tests
+
+on:
+  push:
+    branches:
+    - main
+
+  pull_request: 
+    paths:
+    - '**/**'
+    - '!README.md'
+    - '!.github/**'
+
+  workflow_dispatch: 
+
+jobs:
+  call-fix-code-style:
+    name: Fix code style
+    uses: ./.github/workflows/fix-code-style.yml
+
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:      
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: curl, exif, fileinfo, gd, intl, mbstring, mysqli, openssl, pdo_mysql, pdo_sqlite, sqlite3, xsl
+      
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress
+        
+    - name: Setup environment
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      
+    - name: Set application key
+      run: php artisan key:generate
+        
+    - name: Execute tests
+      run: php artisan test --compact

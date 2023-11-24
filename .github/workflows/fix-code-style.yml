@@ -1,0 +1,25 @@
+# fix-code-style.yml
+name: Fix code style
+
+on:
+  workflow_dispatch: 
+  
+  workflow_call: 
+
+jobs:
+  fix-code-style:
+    name: Fix code style
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+
+    - name: Format code
+      uses: aglipanci/laravel-pint-action@2.3.0
+
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Fix styling
