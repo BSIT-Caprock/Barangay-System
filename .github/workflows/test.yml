@@ -1,24 +1,14 @@
 name: Run tests
 
 on:
-  push:
-    branches:
-      - main
-    paths: 
-      - '**/**'
-      - '!README.md'
-      - '!.github/**'
-
-  pull_request:
-    branches:
-      - main
-    paths: 
-      - '**/**'
-      - '!README.md'
-      - '!.github/**'
+  workflow_run: 
+    workflows:
+      - Check & fix styling
+    types:
+      - completed
 
   workflow_dispatch:
-  
+
 
 jobs:
   run-tests:
@@ -47,6 +37,9 @@ jobs:
       run: |
         mkdir -p database
         touch database/database.sqlite
+
+    - name: Generate key
+      run: php artisan key:generate
 
     - name: Run migrations
       run: php artisan migrate

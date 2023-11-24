@@ -7,6 +7,15 @@ on:
       - '!README.md'
       - '!.github/**'
 
+  pull_request: 
+    branches: 
+      - main
+    
+    paths: 
+      - '**/**'
+      - '!README.md'
+      - '!.github/**'
+
   workflow_dispatch:
 
 jobs:
@@ -25,3 +34,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Fix styling
+    
+    outputs:
+      pint_completed: true
