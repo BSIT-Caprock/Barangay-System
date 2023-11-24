@@ -7,14 +7,19 @@ assignees: ''
 
 ---
 
-**Proposed requirements**
+## Specific requirements
+
+* Requirement 1
+* Requirement 2...
+
+## Proposed solutions
+
 ...
 
-**Proposed solutions**
+## Alternatives
+
 ...
 
-**Alternatives**
-...
+## References
 
-**References**
-..
+...
