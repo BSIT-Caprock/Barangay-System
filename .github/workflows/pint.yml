@@ -2,6 +2,8 @@ name: Check & fix styling
 
 on: 
   push:
+    branches:
+      - main
     paths: 
       - '**/**'
       - '!README.md'
