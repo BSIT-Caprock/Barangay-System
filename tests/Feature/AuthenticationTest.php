@@ -28,7 +28,7 @@ test('can log in', function () {
     // create user
     User::factory()->for(Barangay::find(1))->create([
         'email' => 'email@test.com',
-        'password' => 'testpass'
+        'password' => 'testpass',
     ]);
     // visit page
     livewire(Login::class)

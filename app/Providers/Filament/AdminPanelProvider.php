@@ -48,7 +48,7 @@ class AdminPanelProvider extends PanelProvider
                     ->url('https://bit.ly/40pP3f1', shouldOpenInNewTab: true)
                     ->icon('heroicon-s-information-circle')
                     ->group('Guide')
-                    ->sort(2)
+                    ->sort(2),
             ])
 
             ->navigationItems([
