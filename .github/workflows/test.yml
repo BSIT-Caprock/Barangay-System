@@ -16,6 +16,8 @@ on:
       - '**/**'
       - '!README.md'
       - '!.github/**'
+
+  workflow_dispatch:
   
 
 jobs:
