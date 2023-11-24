@@ -2,28 +2,44 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class CivilStatus extends Model
 {
-    public static function getSingle()
+    use \App\Attributes\InhabitantsAttribute;
+
+    public $timestamps = false;
+
+    public const SINGLE = 1;
+
+    public const MARRIED = 2;
+
+    public const WIDOWED = 3;
+
+    public const SEPARATED = 4;
+
+    public function __toString()
     {
-        return static::find(1);
-    }
-    
-    public static function getMarried()
-    {
-        return static::find(2);
+        return $this->name;
     }
 
-    public static function getWidowed()
+    public static function Single()
     {
-        return static::find(3);
+        return static::find(self::SINGLE);
     }
 
-    public static function getSeparated()
+    public static function Married()
     {
-        return static::find(4);
+        return static::find(self::MARRIED);
+    }
+
+    public static function Widowed()
+    {
+        return static::find(self::WIDOWED);
+    }
+
+    public static function Separated()
+    {
+        return static::find(self::SEPARATED);
     }
 }

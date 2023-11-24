@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-use function PHPUnit\Framework\returnSelf;
 
 class Barangay extends Model
 {
     protected $fillable = [
         'name',
-        'logo',
     ];
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function users()
     {
@@ -34,8 +35,13 @@ class Barangay extends Model
         return $this->hasMany(Household::class);
     }
 
-    public function residents()
+    public function houses()
     {
-        return $this->hasMany(Resident::class);
+        return $this->hasMany(House::class);
+    }
+
+    public function inhabitants()
+    {
+        return $this->hasMany(Inhabitant::class);
     }
 }

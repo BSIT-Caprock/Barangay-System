@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\Barangay;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -15,13 +15,13 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         /** @var User */
-        $user = User::create([
+        $superadmin = User::create([
             'name' => 'superadmin',
             'email' => 'superadmin@example.com',
             'password' => 'super',
         ]);
-        
-        $user->assignRole('Superadministrator');
+
+        $superadmin->assignRole('Superadministrator');
 
         $poblacion1Sect = User::create([
             'name' => 'Pob. 1 Secretary',
@@ -31,6 +31,5 @@ class UserSeeder extends Seeder
         ]);
 
         $poblacion1Sect->assignRole('Barangay Secretary');
-
     }
 }

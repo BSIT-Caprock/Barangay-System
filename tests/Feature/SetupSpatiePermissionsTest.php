@@ -2,16 +2,13 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Spatie\Permission\Traits\HasRoles;
-use Spatie\Permission\PermissionServiceProvider;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
+use Spatie\Permission\PermissionServiceProvider;
+use Spatie\Permission\Traits\HasRoles;
+use Tests\TestCase;
 
 class SetupSpatiePermissionsTest extends TestCase
 {
-
     public function test_spatie_permission_config_exists(): void
     {
         $permission = config('permission');

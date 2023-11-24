@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Barangay;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use SplFileObject;
 
 class BarangaySeeder extends Seeder
 {
@@ -13,52 +13,21 @@ class BarangaySeeder extends Seeder
      */
     public function run(): void
     {
-        // list of barangays in Barugo, Leyte
-        $barangayNames = [
-            'Abango',
-            'Amahit',
-            'Balire',
-            'Balud',
-            'Bukid',
-            'Bulod',
-            'Busay',
-            'Cabarasan',
-            'Cabolo-An',
-            'Calingcaguing',
-            'Can-Isak',
-            'Canomantag',
-            'Cuta',
-            'Domogdog',
-            'Duka',
-            'Guindaohan',
-            'Hiagsam',
-            'Hilaba',
-            'Hinugayan',
-            'Ibag',
-            'Minuhang',
-            'Minuswang',
-            'Pikas',
-            'Pitogo',
-            'Poblacion Dist. I',
-            'Poblacion Dist. II',
-            'Poblacion Dist. III',
-            'Poblacion Dist. IV',
-            'Poblacion Dist. V',
-            'Poblacion Dist. VI',
-            'Pongso',
-            'Roosevelt',
-            'San Isidro',
-            'San Roque',
-            'Santa Rosa',
-            'Santarin',
-            'Tutug-An',
-        ];
-        // create barangays
-        foreach ($barangayNames as $name) {
+        $file = new SplFileObject(database_path('data/barangays.csv'));
+        $file->setFlags(
+            SplFileObject::READ_AHEAD |
+            SplFileObject::SKIP_EMPTY |
+            SplFileObject::DROP_NEW_LINE
+        );
+        // skip first line
+        $file->next();
+        // parse each line as csv
+        while ($data = $file->fgetcsv()) {
             Barangay::create([
-                'name' => $name,
-                'logo' => 'logo',
+                'name' => $data[0],
             ]);
         }
+        // close file
+        $file = null;
     }
 }

@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 
 class StreetSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      */

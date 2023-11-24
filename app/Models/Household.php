@@ -2,30 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\BarangayScope;
-use App\Models\Traits\HasHistory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Household extends Model
 {
-    use HasFactory, HasHistory, SoftDeletes;
+    use \App\Attributes\BarangayAttribute;
+    use \App\Attributes\InhabitantsAttribute;
+    use HasFactory;
+    use SoftDeletes;
 
-    protected $historyModel = HouseholdHistory::class;
+    protected $fillable = ['number'];
 
-    protected $fillable = [
-        'barangay_id',
-        'number',
-    ];
-    
-    protected static function booted(): void
+    public function __toString()
     {
-        static::addGlobalScope(new BarangayScope);
-    }
-
-    public function barangay()
-    {
-        return $this->belongsTo(Barangay::class);
+        return $this->number;
     }
 }

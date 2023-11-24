@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -17,13 +18,10 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Filament\Navigation\NavigationGroup;
-use Filament\Navigation\NavigationItem;
 use pxlrbt\FilamentSpotlight\SpotlightPlugin;
 
-
 class AdminPanelProvider extends PanelProvider
-{    
+{
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -36,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ])
 
             ->plugins([
-                SpotlightPlugin::make()
+                SpotlightPlugin::make(),
             ])
 
             ->sidebarCollapsibleOnDesktop()
@@ -46,11 +44,11 @@ class AdminPanelProvider extends PanelProvider
                 // this is for the user manual page
                 NavigationItem::make('User Manual')
 
-                //url will be change when the system is completed
-                ->url('https://docs.google.com/document/d/1Boq1CuUWelwK_lbQpv4w8Bt1fYnr0xa2S2ZBMw_ZoCc/edit?usp=sharing', shouldOpenInNewTab:true)
-                ->icon('heroicon-s-information-circle')
-                ->group('Guide')
-                ->sort(2)
+                    //url will be change when the system is completed
+                    ->url('https://bit.ly/40pP3f1', shouldOpenInNewTab: true)
+                    ->icon('heroicon-s-information-circle')
+                    ->group('Guide')
+                    ->sort(2)
             ])
 
             ->navigationItems([
@@ -58,11 +56,11 @@ class AdminPanelProvider extends PanelProvider
                 // this is for the feedback to be fill up, you can change the link
                 NavigationItem::make('Feedback')
 
-                //url will be change when it need to be updated
-                ->url('https://forms.gle/oofsT22pbQNM8d2x8', shouldOpenInNewTab:true)
-                ->icon('heroicon-s-link')
-                ->group('Guide')
-                ->sort(2)
+                    //url will be change when it need to be updated
+                    ->url('https://forms.gle/oofsT22pbQNM8d2x8', shouldOpenInNewTab: true)
+                    ->icon('heroicon-s-link')
+                    ->group('Guide')
+                    ->sort(2),
             ])
 
             ->favicon(asset('images/barugo-logo.jpg'))

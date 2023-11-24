@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
@@ -39,7 +38,7 @@ class UserPolicy
         if ($user->hasRole('Barangay Administrator')) {
             return false;
         }
-        
+
         if ($user->can('create users')) {
             return true;
         }
