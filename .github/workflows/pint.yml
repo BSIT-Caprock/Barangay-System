@@ -2,8 +2,9 @@ name: Check & fix styling
 
 on: 
   push:
-    paths-ignore: 
-      - .github/*
+    paths: 
+      - '!README.md'
+      - '!.github/**'
 
 jobs:
   fix-code-style:
