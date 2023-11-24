@@ -44,11 +44,11 @@ class AdminPanelProvider extends PanelProvider
                 // this is for the user manual page
                 NavigationItem::make('User Manual')
 
-                //url will be change when the system is completed
+                    //url will be change when the system is completed
                     ->url('https://bit.ly/40pP3f1', shouldOpenInNewTab: true)
                     ->icon('heroicon-s-information-circle')
                     ->group('Guide')
-                    ->sort(2),
+                    ->sort(2)
             ])
 
             ->navigationItems([
@@ -56,7 +56,7 @@ class AdminPanelProvider extends PanelProvider
                 // this is for the feedback to be fill up, you can change the link
                 NavigationItem::make('Feedback')
 
-                //url will be change when it need to be updated
+                    //url will be change when it need to be updated
                     ->url('https://forms.gle/oofsT22pbQNM8d2x8', shouldOpenInNewTab: true)
                     ->icon('heroicon-s-link')
                     ->group('Guide')
