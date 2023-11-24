@@ -28,7 +28,7 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     needs: fix-code-style
-    steps:      
+    steps:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Setup PHP
@@ -36,9 +36,9 @@ jobs:
       with:
         php-version: '8.1'
         extensions: curl, exif, fileinfo, gd, intl, mbstring, mysqli, openssl, pdo_mysql, pdo_sqlite, sqlite3, xsl
-      
+
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress
-        
+
     - name: Execute tests
-      run: php artisan test --compact
+      run: php artisan test --parallel
