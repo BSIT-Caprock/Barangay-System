@@ -1,11 +1,11 @@
 name: Run tests
 
 on:
-  push:
-    paths: 
-      - '**/**'
-      - '!README.md'
-      - '!.github/**'
+  # push:
+  #   paths: 
+  #     - '**/**'
+  #     - '!README.md'
+  #     - '!.github/**'
 
   pull_request: 
     branches: 
