@@ -3,6 +3,8 @@
 use App\Models\Barangay;
 use App\Models\User;
 use Filament\Pages\Auth\Login;
+use Filament\Pages\Auth\PasswordReset\RequestPasswordReset;
+use Filament\Pages\Auth\Register;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
@@ -24,7 +26,7 @@ test('can redirect to login page', function () {
         ->assertRedirect('/login');
 });
 
-test('can log in', function () {
+test('user can log in', function () {
     // create user
     User::factory()->for(Barangay::find(1))->create([
         'email' => 'email@test.com',
@@ -40,3 +42,21 @@ test('can log in', function () {
         ->assertHasNoErrors()
         ->assertRedirect('/');
 });
+
+test('has password reset page', function () {
+    get('/password-reset/request')
+        ->assertOk()
+        ->assertSeeLivewire(RequestPasswordReset::class);
+});
+
+test('can reset pasword', function () {
+})->markTestIncomplete();
+
+test('has registration page', function () {
+    get('/register')
+        ->assertOk()
+        ->assertSeeLivewire(Register::class);
+});
+
+test('can register new account', function () {
+})->markTestIncomplete();
