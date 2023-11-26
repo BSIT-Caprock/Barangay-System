@@ -4,12 +4,12 @@
 - [ ] write passing code
 - [ ] refactor code
 
-## How to tests
+## How to run tests
 
 ```shell
-php artisan test --paralllel
+php artisan test --parallel
 ```
 
 ## Results
 
-Attach screenshots here...
+Results of tests/screenshots of user interface...
