@@ -2,7 +2,6 @@
 
 - [ ] write tests
 - [ ] write passing code
-- [ ] refactor code
 
 ## How to run tests
 
