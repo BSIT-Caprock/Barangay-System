@@ -14,7 +14,8 @@ class Street extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $fillable = ['name',];
+
+    protected $fillable = ['name'];
 
     public function __toString()
     {

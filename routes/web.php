@@ -18,7 +18,7 @@ Route::get('/laravel', function () {
 });
 
 Route::get('/datademo', function () { //to check if fillable worked
-    $streets = DB::select("select * from streets");
+    $streets = DB::select('select * from streets');
 
     // $user = DB::insert('insert into users (name, email, password) values (?, ?, ?)', ['Marie', 'mariekoy@gmail.com', 'monalisa']);
     // $user = DB::update("update users set email='monalisa@gmail.com' where id=2");
