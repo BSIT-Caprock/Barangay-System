@@ -4,24 +4,18 @@ use App\Filament\Resources\FirstTimeJobSeekerResource\Pages\CreateFirstTimeJobSe
 use App\Filament\Resources\FirstTimeJobSeekerResource\Pages\EditFirstTimeJobSeeker;
 use App\Filament\Resources\FirstTimeJobSeekerResource\Pages\ListFirstTimeJobSeekers;
 use App\Models\Barangay;
-use App\Models\Course;
-use App\Models\EducationalLevel;
 use App\Models\FirstTimeJobSeeker;
-use App\Models\Sex;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\RestoreAction;
-use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Excel;
 
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
-use function PHPUnit\Framework\assertContains;
 use function PHPUnit\Framework\assertEqualsCanonicalizing;
 use function PHPUnit\Framework\assertFalse;
-use function PHPUnit\Framework\assertTrue;
 
 function seekerFactory()
 {
@@ -75,7 +69,7 @@ test('can edit first-time job seeker', function () {
     $key = $seeker->getRouteKey();
     $currentData = collect($seeker->getAttributes())->only($seeker->getFillable())->toArray();
     $newData = seekerFactory()->raw();
-    
+
     get(EditFirstTimeJobSeeker::getUrl(['record' => $key]))
         ->assertOk();
 
@@ -84,7 +78,7 @@ test('can edit first-time job seeker', function () {
         ->fillForm($newData)
         ->call('save')
         ->assertHasNoFormErrors();
-    
+
     $seeker->refresh();
     $savedData = collect($seeker->getAttributes())->only($seeker->getFillable())->toArray();
     assertEqualsCanonicalizing($newData, $savedData);
@@ -109,7 +103,7 @@ test('can restore deleted first-time job seeker', function () {
     livewire(EditFirstTimeJobSeeker::class, ['record' => $key])
         ->callAction(RestoreAction::class)
         ->assertHasNoActionErrors();
-    
+
     $seeker->refresh();
     assertFalse($seeker->trashed());
 });

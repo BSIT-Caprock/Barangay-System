@@ -9,7 +9,6 @@ use App\Filament\Forms\SelectCourse;
 use App\Filament\Forms\SelectEducationalLevel;
 use App\Filament\Forms\SelectSex;
 use App\Filament\Resources\FirstTimeJobSeekerResource\Pages;
-use App\Filament\Resources\FirstTimeJobSeekerResource\RelationManagers;
 use App\Filament\Tables\BarangayColumn;
 use App\Models\FirstTimeJobSeeker;
 use Filament\Forms;

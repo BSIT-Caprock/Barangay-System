@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class EducationalLevel extends Model
 {
     use HasFactory;
-    
+
     public $timestamps = false;
 
     public const ELEMENTARY_OR_HIGH_SCHOOL = 1;

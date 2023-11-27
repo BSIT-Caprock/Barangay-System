@@ -11,7 +11,7 @@ class BarangayColumn extends TextColumn
     {
         return parent::make($name)
             // show only if user has no barangay
-            ->visible(!auth()->user()->barangay)
+            ->visible(! auth()->user()->barangay)
             // allow toggling only if column is visible
             ->toggleable(fn (Column $column) => $column->isVisible());
     }

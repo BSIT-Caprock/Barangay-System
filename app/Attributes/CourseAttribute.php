@@ -3,7 +3,6 @@
 namespace App\Attributes;
 
 use App\Models\Course;
-use App\Models\EducationalLevel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait CourseAttribute
