@@ -11,6 +11,8 @@
 |
 */
 
+use function Pest\Livewire\livewire;
+
 uses(
     Tests\TestCase::class,
     Illuminate\Foundation\Testing\RefreshDatabase::class,
@@ -45,4 +47,19 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+function exportTable($listPage, $writerType)
+{
+    // visit page
+    return livewire($listPage)
+        // export table
+        ->callTableAction('export_table', data: ['export.writer_type' => $writerType]);
+}
+
+function exportSelectedRecords($listPage, $records, $writerType)
+{
+    return livewire($listPage)
+        // export selected
+        ->callTableBulkAction('export_selected', $records, data: ['export.writer_type' => $writerType]);
 }
