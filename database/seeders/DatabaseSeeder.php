@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ZoneSeeder::class,
             RolesAndPermissionsSeeder::class,
             UserSeeder::class,
+            EducationalLevelSeeder::class,
         ]);
     }
 }

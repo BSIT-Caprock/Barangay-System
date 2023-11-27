@@ -152,18 +152,3 @@ function inhabitantFactory()
 {
     return Inhabitant::factory()->for(auth()->user()->barangay);
 }
-
-function exportTable($listPage, $writerType)
-{
-    // visit page
-    return livewire($listPage)
-        // export table
-        ->callTableAction('export_table', data: ['export.writer_type' => $writerType]);
-}
-
-function exportSelectedRecords($listPage, $records, $writerType)
-{
-    return livewire($listPage)
-        // export selected
-        ->callTableBulkAction('export_selected', $records, data: ['export.writer_type' => $writerType]);
-}

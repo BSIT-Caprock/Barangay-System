@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\BirthPlace;
+use App\Models\FirstTimeJobSeeker;
 use App\Models\House;
 use App\Models\Household;
 use App\Models\Inhabitant;
@@ -40,6 +41,8 @@ class EventServiceProvider extends ServiceProvider
         Zone::observe(CurrentBarangayObserver::class);
 
         BirthPlace::observe(BirthPlaceObserver::class);
+
+        FirstTimeJobSeeker::observe(CurrentBarangayObserver::class);
     }
 
     /**
