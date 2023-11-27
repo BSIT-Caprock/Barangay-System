@@ -15,6 +15,8 @@ class Street extends Model
 
     protected $guarded = ['id'];
 
+    protected $fillable = ['name'];
+
     public function __toString()
     {
         return $this->name;
