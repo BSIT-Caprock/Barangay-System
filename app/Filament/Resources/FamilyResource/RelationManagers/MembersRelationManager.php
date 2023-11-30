@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\FamilyResource\RelationManagers;
 
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
-use App\Filament\Forms\SelectBarangay;
 use App\Filament\Forms\SelectInhabitant;
 use Filament\Forms;
 use Filament\Forms\Form;

@@ -15,7 +15,6 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 use function Pest\Livewire\livewire;
-use function PHPUnit\Framework\assertContains;
 use function PHPUnit\Framework\assertEqualsCanonicalizing;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNotContains;
@@ -184,7 +183,7 @@ test('can edit family member', function () {
             // 'is_pregnant' => $currentData['is_pregnant'],
             // 'pregnancy_due' => $currentData['pregnancy_due'],
         ]);
-    
+
     $record->refresh();
 
     assertTrue($record->members->count() > 0);

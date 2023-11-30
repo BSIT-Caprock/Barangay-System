@@ -21,7 +21,7 @@ class FamilyMember extends Model
         'is_pregnant',
         'pregnancy_due',
     ];
-    
+
     public function getNameAttribute()
     {
         return $this->inhabitant->full_name;
