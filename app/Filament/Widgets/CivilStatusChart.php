@@ -2,14 +2,13 @@
 
 namespace App\Filament\Widgets;
 
-use Filament\Widgets\ChartWidget;
-use ArberMustafa\FilamentGoogleCharts\Widgets\DonutChartWidget;
 use App\Models\Inhabitant;
-use Illuminate\Support\Facades\DB;
+use ArberMustafa\FilamentGoogleCharts\Widgets\DonutChartWidget;
 
 class CivilStatusChart extends DonutChartWidget
 {
     protected static ?string $heading = 'Civil Status';
+
     protected static ?float $pieHole = 0.5;
 
     protected static ?array $options = [
@@ -19,6 +18,7 @@ class CivilStatusChart extends DonutChartWidget
         'height' => 400,
 
     ];
+
     protected function getData(): array
     {
         $singleCount = Inhabitant::where('civil_status_id', 1)->count();

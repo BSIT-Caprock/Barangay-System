@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Filament\Widgets;
-use ArberMustafa\FilamentGoogleCharts\Widgets\PieChartWidget;
-use App\Models\Inhabitant;
-use Illuminate\Support\Facades\DB;
 
+use App\Models\Inhabitant;
+use ArberMustafa\FilamentGoogleCharts\Widgets\PieChartWidget;
 
 class SexPopulationChart extends PieChartWidget
 {
     protected static ?int $sort = 1;
+
     protected static ?string $heading = 'Population';
 
     protected static ?array $options = [
