@@ -2,10 +2,10 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Inhabitant;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
-use App\Models\Inhabitant;
 
 class SavedInhabitantChart extends ChartWidget
 {
@@ -14,12 +14,12 @@ class SavedInhabitantChart extends ChartWidget
     protected function getData(): array
     {
         $data = Trend::model(Inhabitant::class)
-        ->between(
-            start: now()->startOfYear(),
-            end: now()->endOfYear(),
-        )
-        ->perMonth()
-        ->count();
+            ->between(
+                start: now()->startOfYear(),
+                end: now()->endOfYear(),
+            )
+            ->perMonth()
+            ->count();
 
         return [
             'datasets' => [
@@ -31,6 +31,7 @@ class SavedInhabitantChart extends ChartWidget
             'labels' => $data->map(fn (TrendValue $value) => $value->date),
         ];
     }
+
     protected static string $color = 'danger';
 
     protected function getType(): string
