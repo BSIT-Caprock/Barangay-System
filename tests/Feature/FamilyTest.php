@@ -40,7 +40,7 @@ test('can list families', function () {
 
     livewire(ListFamilies::class)
         ->assertCanRenderTableColumn('location')
-        ->assertCanRenderTableColumn('total_members')
+        ->assertCanRenderTableColumn('members_count')
         ->assertCanSeeTableRecords($records);
 });
 
