@@ -18,10 +18,10 @@ Route::get('/laravel', function () {
 });
 
 Route::get('/datademo', function () { //to check if fillable worked
-    $streets = DB::select('select * from streets');
+    $inhabitants = DB::select('select count(*) from inhabitants where sex_id=1');
 
     // $user = DB::insert('insert into users (name, email, password) values (?, ?, ?)', ['Marie', 'mariekoy@gmail.com', 'monalisa']);
-    // $user = DB::update("update users set email='monalisa@gmail.com' where id=2");
+    // $inhabitants = DB::update("update inhabitants set created_at='2023-11-27 16:38:26' where last_name='jeric'");
     // $user = DB::delete('delete from users where id=2');
-    dd($streets);
+    dd($inhabitants);
 });
