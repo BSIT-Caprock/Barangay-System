@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Database\Eloquent\Model;
+
 use function Pest\Livewire\livewire;
 
 uses(
@@ -62,4 +64,9 @@ function exportSelectedRecords($listPage, $records, $writerType)
     return livewire($listPage)
         // export selected
         ->callTableBulkAction('export_selected', $records, data: ['export.writer_type' => $writerType]);
+}
+
+function getModelFillable(Model $model): array
+{
+    return collect($model->getAttributes())->only($model->getFillable())->toArray();
 }
