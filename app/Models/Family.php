@@ -6,19 +6,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Street extends Model
+class Family extends Model
 {
     use \App\Attributes\BarangayAttribute;
-    use \App\Attributes\InhabitantsAttribute;
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'location_id',
+        'location_type',
+    ];
 
-    protected $fillable = ['name'];
-
-    public function __toString()
+    public function location()
     {
-        return $this->name;
+        return $this->morphTo();
+    }
+
+    public function members()
+    {
+        return $this->hasMany(FamilyMember::class);
     }
 }

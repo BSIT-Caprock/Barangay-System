@@ -13,7 +13,7 @@ class Zone extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $guarded = ['id'];
+    protected $fillable = ['name'];
 
     public function __toString()
     {

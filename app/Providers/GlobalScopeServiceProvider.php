@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Family;
 use App\Models\FirstTimeJobSeeker;
 use App\Models\House;
 use App\Models\Household;
@@ -34,5 +35,6 @@ class GlobalScopeServiceProvider extends ServiceProvider
         Street::addGlobalScope(new CurrentBarangayScope);
         Zone::addGlobalScope(new CurrentBarangayScope);
         FirstTimeJobSeeker::addGlobalScope(new CurrentBarangayScope);
+        Family::addGlobalScope(new CurrentBarangayScope);
     }
 }
