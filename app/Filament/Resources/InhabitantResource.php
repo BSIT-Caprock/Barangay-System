@@ -38,6 +38,11 @@ class InhabitantResource extends Resource
 
     protected static ?string $navigationGroup = 'RBI';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
