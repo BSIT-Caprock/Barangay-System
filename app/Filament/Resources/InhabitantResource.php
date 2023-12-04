@@ -34,7 +34,9 @@ class InhabitantResource extends Resource
 {
     protected static ?string $model = Inhabitant::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+
+    protected static ?string $navigationGroup = 'RBI';
 
     public static function form(Form $form): Form
     {
