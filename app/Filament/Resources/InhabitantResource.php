@@ -17,6 +17,7 @@ use App\Filament\Forms\SelectZone;
 use App\Filament\Resources\HouseholdResource\RelationManagers\InhabitantsRelationManager;
 use App\Filament\Resources\InhabitantResource\Pages;
 use App\Filament\Resources\InhabitantResource\Pages\ListInhabitants;
+use App\Filament\Resources\InhabitantResource\Widgets\MaleInhabitantsCount;
 use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
 // use App\Filament\Resources\InhabitantResource\RelationManagers;
 use App\Filament\Tables\TextColumnHiddenByDefault;
@@ -34,7 +35,9 @@ class InhabitantResource extends Resource
 {
     protected static ?string $model = Inhabitant::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+
+    protected static ?string $navigationGroup = 'RBI';
 
     public static function form(Form $form): Form
     {

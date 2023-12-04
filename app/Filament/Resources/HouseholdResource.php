@@ -21,7 +21,9 @@ class HouseholdResource extends Resource
 {
     protected static ?string $model = Household::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-home-modern';
+    
+    protected static ?string $navigationGroup = 'RBI';
 
     public static function form(Form $form): Form
     {
