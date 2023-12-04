@@ -7,8 +7,6 @@ use ArberMustafa\FilamentGoogleCharts\Widgets\PieChartWidget;
 
 class SexPopulationChart extends PieChartWidget
 {
-    protected static ?int $sort = 1;
-
     protected static ?string $heading = 'Population';
 
     protected static ?array $options = [
