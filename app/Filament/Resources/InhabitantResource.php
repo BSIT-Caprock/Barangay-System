@@ -17,7 +17,6 @@ use App\Filament\Forms\SelectZone;
 use App\Filament\Resources\HouseholdResource\RelationManagers\InhabitantsRelationManager;
 use App\Filament\Resources\InhabitantResource\Pages;
 use App\Filament\Resources\InhabitantResource\Pages\ListInhabitants;
-use App\Filament\Resources\InhabitantResource\Widgets\MaleInhabitantsCount;
 use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
 // use App\Filament\Resources\InhabitantResource\RelationManagers;
 use App\Filament\Tables\TextColumnHiddenByDefault;
