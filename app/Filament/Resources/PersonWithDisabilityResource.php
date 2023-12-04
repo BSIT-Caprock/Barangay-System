@@ -6,7 +6,6 @@ use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
 use App\Filament\Forms\SelectBarangay;
 use App\Filament\Resources\PersonWithDisabilityResource\Pages;
-use App\Filament\Resources\PersonWithDisabilityResource\RelationManagers;
 use App\Filament\Tables\BarangayColumn;
 use App\Models\PersonWithDisability;
 use Filament\Forms;

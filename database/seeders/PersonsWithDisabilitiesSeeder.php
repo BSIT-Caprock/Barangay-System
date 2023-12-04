@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Disability;
 use App\Models\DisabilityCause;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PersonsWithDisabilitiesSeeder extends Seeder
