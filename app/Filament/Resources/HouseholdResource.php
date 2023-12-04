@@ -24,7 +24,7 @@ class HouseholdResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';
 
     protected static ?string $navigationGroup = 'RBI';
-    
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
@@ -46,7 +46,7 @@ class HouseholdResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('barangay')
                     ->hidden((bool) auth()->user()->barangay)
-                    ->toggleable(!auth()->user()->barangay),
+                    ->toggleable(! auth()->user()->barangay),
 
                 Tables\Columns\TextColumn::make('number'),
 
