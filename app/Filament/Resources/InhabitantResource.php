@@ -38,6 +38,11 @@ class InhabitantResource extends Resource
 
     protected static ?string $navigationGroup = 'RBI';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -96,7 +101,7 @@ class InhabitantResource extends Resource
         return $table
             ->columns([
                 TextColumnHiddenByDefault::make('barangay')
-                    ->visible(! auth()->user()->barangay)
+                    ->visible(!auth()->user()->barangay)
                     ->toggleable(fn (Column $column) => $column->isVisible()),
 
                 TextColumnHiddenByDefault::make('last_name')->tap($onlyVisibleAndToggleableHere),
