@@ -5,7 +5,10 @@ namespace App\Filament\Resources;
 use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
 use App\Filament\Actions\GenerateDocxAction;
+use App\Filament\Forms\SelectInhabitant;
 use App\Filament\Resources\ResidencyCertificateResource\Pages;
+use App\Models\CivilStatus;
+use App\Models\Inhabitant;
 use App\Models\ResidencyCertificate;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -34,15 +37,54 @@ class ResidencyCertificateResource extends Resource
         return $form
             ->schema(
                 [
-                    Forms\Components\TextInput::make('resident_name')->required(),
+                    Forms\Components\Grid::make(1)->schema(
+                        [
+                            Forms\Components\Select::make('inhabitant')
+                                ->label('Select existing inhabitant')
+                                ->searchable()
+                                ->searchPrompt('<Name> or <Last name, First name>')
+                                ->getSearchResultsUsing(function (string $search): array {
+                                    $split = array_map('trim', explode(',', $search, 2));
+                                    $lastName = $split[0] ?? null;
+                                    $firstName = $split[1] ?? $split[0];
+
+                                    $query = Inhabitant::query();
+
+                                    if (!!$lastName) $query->where('last_name', 'like', "%{$lastName}%");
+
+                                    if (!!$firstName) $query->orWhere('first_name', 'like', "%{$firstName}%");
+
+                                    $results = $query
+                                        ->limit(10)
+                                        ->get()
+                                        ->pluck('full_name', 'id')
+                                        ->toArray();
+                                    // dd($results);
+                                    return $results;
+                                })
+                                ->afterStateUpdated(function ($state, Forms\Set $set) {
+                                    $model = Inhabitant::find($state);
+
+                                    $set('resident_name', strtoupper($model->full_name_first));
+                                    $set('resident_age', $model->age);
+                                    $set('resident_citizenship', (string) $model->citizenship);
+                                    $set('resident_civil_status', (string) $model->civil_status);
+                                })
+                                ->live(),
+                        ]
+                    ),
+
+                    Forms\Components\TextInput::make('resident_name')->required()->autocapitalize(),
 
                     Forms\Components\TextInput::make('resident_age')->required(),
 
                     Forms\Components\TextInput::make('resident_citizenship')->required(),
 
-                    Forms\Components\TextInput::make('resident_civil_status')->required(),
+                    Forms\Components\Select::make('resident_civil_status')->required()
+                        ->options(CivilStatus::all()->pluck('name', 'name'))
+                        ->native(false),
 
-                    Forms\Components\TextInput::make('punong_barangay')->required(),
+                    Forms\Components\TextInput::make('punong_barangay')->required()->autocapitalize(),
 
                     Forms\Components\DatePicker::make('date_issued')->required(),
 
@@ -68,9 +110,9 @@ class ResidencyCertificateResource extends Resource
 
                     Tables\Columns\TextColumn::make('resident_civil_status')->toggleable()->toggledHiddenByDefault(),
 
-                    Tables\Columns\TextColumn::make('amount_paid'),
+                    Tables\Columns\TextColumn::make('amount_paid')->money('Php'),
 
-                    Tables\Columns\TextColumn::make('dst')->label('DST'),
+                    Tables\Columns\TextColumn::make('dst')->label('DST')->money('Php'),
 
                     Tables\Columns\TextColumn::make('date_issued')->date('M d, Y'),
                 ]
