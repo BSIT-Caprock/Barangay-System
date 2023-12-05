@@ -8,6 +8,7 @@ use App\Models\House;
 use App\Models\Household;
 use App\Models\Inhabitant;
 use App\Models\PersonWithDisability;
+use App\Models\ResidencyCertificate;
 use App\Models\Street;
 use App\Models\User;
 use App\Models\Zone;
@@ -38,5 +39,8 @@ class GlobalScopeServiceProvider extends ServiceProvider
         FirstTimeJobSeeker::addGlobalScope(new CurrentBarangayScope);
         Family::addGlobalScope(new CurrentBarangayScope);
         PersonWithDisability::addGlobalScope(new CurrentBarangayScope);
+
+        // certificates
+        ResidencyCertificate::addGlobalScope(new CurrentBarangayScope);
     }
 }
