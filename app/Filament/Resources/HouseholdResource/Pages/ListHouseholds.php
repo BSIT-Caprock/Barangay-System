@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\HouseholdResource\Pages;
 
 use App\Filament\Resources\HouseholdResource;
-use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

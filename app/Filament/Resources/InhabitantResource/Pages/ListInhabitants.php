@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\InhabitantResource\Pages;
 
 use App\Filament\Resources\InhabitantResource;
-use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

@@ -7,7 +7,6 @@ use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
 use App\Filament\Forms\SelectBarangay;
 use App\Filament\Resources\HouseholdResource\Pages;
 use App\Filament\Resources\HouseholdResource\RelationManagers;
-use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
 use App\Models\Household;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -46,7 +45,7 @@ class HouseholdResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('barangay')
                     ->hidden((bool) auth()->user()->barangay)
-                    ->toggleable(!auth()->user()->barangay),
+                    ->toggleable(! auth()->user()->barangay),
 
                 Tables\Columns\TextColumn::make('number'),
 

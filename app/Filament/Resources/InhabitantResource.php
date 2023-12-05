@@ -17,12 +17,9 @@ use App\Filament\Forms\SelectZone;
 use App\Filament\Resources\HouseholdResource\RelationManagers\InhabitantsRelationManager;
 use App\Filament\Resources\InhabitantResource\Pages;
 use App\Filament\Resources\InhabitantResource\Pages\ListInhabitants;
-use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
 // use App\Filament\Resources\InhabitantResource\RelationManagers;
 use App\Filament\Tables\TextColumnHiddenByDefault;
-use App\Models\CivilStatus;
 use App\Models\Inhabitant;
-use App\Models\Sex;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -31,7 +28,6 @@ use Filament\Tables\Columns\Column;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class InhabitantResource extends Resource
 {
@@ -104,7 +100,7 @@ class InhabitantResource extends Resource
         return $table
             ->columns([
                 TextColumnHiddenByDefault::make('barangay')
-                    ->visible(!auth()->user()->barangay)
+                    ->visible(! auth()->user()->barangay)
                     ->toggleable(fn (Column $column) => $column->isVisible()),
 
                 TextColumnHiddenByDefault::make('last_name')->tap($onlyVisibleAndToggleableHere)->searchable(),
