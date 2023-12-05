@@ -41,4 +41,3 @@ class SexPopulationChart extends PieChartWidget
     //     return 'doughnut';
     // }
 }
-

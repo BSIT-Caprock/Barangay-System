@@ -4,8 +4,6 @@ namespace App\Filament\Widgets;
 
 use App\Models\Inhabitant;
 use ArberMustafa\FilamentGoogleCharts\Widgets\DonutChartWidget;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class AgeChart extends DonutChartWidget
 {
@@ -32,7 +30,7 @@ class AgeChart extends DonutChartWidget
         $results = Inhabitant::selectRaw("strftime('%Y', birth_date) AS birth_year")->get();
         $infantCount = 0;
         $toddlerCount = 0;
-        $childCount= 0;
+        $childCount = 0;
         $teenCount = 0;
         $adultCount = 0;
         $midAgeCount = 0;
@@ -41,25 +39,25 @@ class AgeChart extends DonutChartWidget
         foreach ($results as $result) {
             $birthYear = $result->birth_year;
             $age = $currentYear - $birthYear;
-            if ($age <= 1){
+            if ($age <= 1) {
                 $infantCount++;
             }
-            if ($age > 1 && $age < 5){
+            if ($age > 1 && $age < 5) {
                 $toddlerCount++;
             }
-            if ($age > 6 && $age < 13){
+            if ($age > 6 && $age < 13) {
                 $childCount++;
             }
-            if ($age > 14 && $age < 20){
+            if ($age > 14 && $age < 20) {
                 $teenCount++;
             }
-            if ($age > 19 && $age < 40){
+            if ($age > 19 && $age < 40) {
                 $adultCount++;
             }
-            if ($age > 39 && $age < 60){
+            if ($age > 39 && $age < 60) {
                 $midAgeCount++;
             }
-            if ($age > 60){
+            if ($age > 60) {
                 $seniorCount++;
             }
         }

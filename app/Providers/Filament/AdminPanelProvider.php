@@ -4,9 +4,9 @@ namespace App\Providers\Filament;
 
 use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
 use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
+use App\Filament\Widgets\AgeChart;
 use App\Filament\Widgets\CivilStatusChart;
 use App\Filament\Widgets\SexPopulationChart;
-use App\Filament\Widgets\AgeChart;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
