@@ -13,12 +13,12 @@ class GenerateDocxAction extends Action
 
     protected $data = null;
 
-    public static function make(?string $name = null): static
+    public static function make(string $name = null): static
     {
         $static = parent::make($name)
             ->icon('heroicon-s-document-arrow-down')
             ->color('primary');
-        
+
         return $static;
     }
 
@@ -30,7 +30,7 @@ class GenerateDocxAction extends Action
             $data = $data($record);
             $processor->setValues($data);
             $templateinfo = pathinfo($template);
-            $filename = time()  . '_' . $identifier($record) . "_{$templateinfo['basename']}";
+            $filename = time() . '_' . $identifier($record) . "_{$templateinfo['basename']}";
             $filepath = Storage::path("/tmp/{$filename}");
             $processor->saveAs($filepath);
 

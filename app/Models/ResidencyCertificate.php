@@ -30,6 +30,6 @@ class ResidencyCertificate extends Model
 
     public function getTemplatePathAttribute()
     {
-        return "/templates/brgy-25/residency-certificate.docx";
+        return '/templates/brgy-25/residency-certificate.docx';
     }
 }
