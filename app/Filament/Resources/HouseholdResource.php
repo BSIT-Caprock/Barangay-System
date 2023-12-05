@@ -7,7 +7,6 @@ use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
 use App\Filament\Forms\SelectBarangay;
 use App\Filament\Resources\HouseholdResource\Pages;
 use App\Filament\Resources\HouseholdResource\RelationManagers;
-use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
 use App\Models\Household;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -60,8 +59,11 @@ class HouseholdResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+                Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
+
+                Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+
+            ], Tables\Enums\ActionsPosition::BeforeColumns)
             ->bulkActions([
                 TableExportBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
@@ -96,7 +98,7 @@ class HouseholdResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            HouseholdCount::class,
+            //
         ];
     }
 }

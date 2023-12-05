@@ -20,9 +20,13 @@ class PersonWithDisabilityResource extends Resource
 {
     protected static ?string $model = PersonWithDisability::class;
 
+    protected static ?string $slug = 'persons-with-disabilities';
+
     protected static ?string $navigationIcon = 'heroicon-o-shield-check';
 
     protected static ?string $navigationGroup = 'MSWDO';
+
+    protected static ?string $pluralModelLabel = 'Persons with Disabilities';
 
     public static function getNavigationBadge(): ?string
     {
@@ -113,8 +117,11 @@ class PersonWithDisabilityResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+                Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
+
+                Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+
+            ], Tables\Enums\ActionsPosition::BeforeColumns)
             ->bulkActions([
                 TableExportBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
