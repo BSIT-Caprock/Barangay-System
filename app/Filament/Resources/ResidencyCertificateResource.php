@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
 use App\Filament\Actions\GenerateDocxAction;
-use App\Filament\Forms\SelectInhabitant;
 use App\Filament\Resources\ResidencyCertificateResource\Pages;
 use App\Models\CivilStatus;
 use App\Models\Inhabitant;
@@ -50,15 +49,20 @@ class ResidencyCertificateResource extends Resource
 
                                     $query = Inhabitant::query();
 
-                                    if (!!$lastName) $query->where('last_name', 'like', "%{$lastName}%");
+                                    if ((bool) $lastName) {
+                                        $query->where('last_name', 'like', "%{$lastName}%");
+                                    }
 
-                                    if (!!$firstName) $query->orWhere('first_name', 'like', "%{$firstName}%");
+                                    if ((bool) $firstName) {
+                                        $query->orWhere('first_name', 'like', "%{$firstName}%");
+                                    }
 
                                     $results = $query
                                         ->limit(10)
                                         ->get()
                                         ->pluck('full_name', 'id')
                                         ->toArray();
+
                                     // dd($results);
                                     return $results;
                                 })

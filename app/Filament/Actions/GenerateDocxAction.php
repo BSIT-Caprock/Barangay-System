@@ -13,7 +13,7 @@ class GenerateDocxAction extends Action
 
     protected $data = null;
 
-    public static function make(string $name = null): static
+    public static function make(?string $name = null): static
     {
         $static = parent::make($name)
             ->icon('heroicon-s-document-arrow-down')
