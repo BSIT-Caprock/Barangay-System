@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
 use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
+use App\Filament\Widgets\AgeChart;
 use App\Filament\Widgets\CivilStatusChart;
 use App\Filament\Widgets\SexPopulationChart;
 use Filament\Http\Middleware\Authenticate;
@@ -80,8 +81,10 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 CivilStatusChart::class,
                 SexPopulationChart::class,
+                AgeChart::class,
                 TotalInhabitants::class,
                 HouseholdCount::class,
+
             ])
             ->middleware([
                 EncryptCookies::class,
