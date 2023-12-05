@@ -71,8 +71,11 @@ class FirstTimeJobSeekerResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+                Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
+
+                Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+
+            ], Tables\Enums\ActionsPosition::BeforeColumns)
             ->bulkActions([
                 TableExportBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),

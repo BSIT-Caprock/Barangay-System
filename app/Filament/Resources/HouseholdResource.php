@@ -46,7 +46,7 @@ class HouseholdResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('barangay')
                     ->hidden((bool) auth()->user()->barangay)
-                    ->toggleable(! auth()->user()->barangay),
+                    ->toggleable(!auth()->user()->barangay),
 
                 Tables\Columns\TextColumn::make('number'),
 
@@ -60,8 +60,11 @@ class HouseholdResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+                Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
+
+                Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+
+            ], Tables\Enums\ActionsPosition::BeforeColumns)
             ->bulkActions([
                 TableExportBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
@@ -96,7 +99,7 @@ class HouseholdResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            HouseholdCount::class,
+            //
         ];
     }
 }

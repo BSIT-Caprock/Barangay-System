@@ -20,7 +20,9 @@ use App\Filament\Resources\InhabitantResource\Pages\ListInhabitants;
 use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
 // use App\Filament\Resources\InhabitantResource\RelationManagers;
 use App\Filament\Tables\TextColumnHiddenByDefault;
+use App\Models\CivilStatus;
 use App\Models\Inhabitant;
+use App\Models\Sex;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -29,6 +31,7 @@ use Filament\Tables\Columns\Column;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class InhabitantResource extends Resource
 {
@@ -101,16 +104,16 @@ class InhabitantResource extends Resource
         return $table
             ->columns([
                 TextColumnHiddenByDefault::make('barangay')
-                    ->visible(! auth()->user()->barangay)
+                    ->visible(!auth()->user()->barangay)
                     ->toggleable(fn (Column $column) => $column->isVisible()),
 
-                TextColumnHiddenByDefault::make('last_name')->tap($onlyVisibleAndToggleableHere),
+                TextColumnHiddenByDefault::make('last_name')->tap($onlyVisibleAndToggleableHere)->searchable(),
 
-                TextColumnHiddenByDefault::make('first_name')->tap($onlyVisibleAndToggleableHere),
+                TextColumnHiddenByDefault::make('first_name')->tap($onlyVisibleAndToggleableHere)->searchable(),
 
-                TextColumnHiddenByDefault::make('middle_name')->tap($onlyVisibleAndToggleableHere),
+                TextColumnHiddenByDefault::make('middle_name')->tap($onlyVisibleAndToggleableHere)->searchable(),
 
-                TextColumnHiddenByDefault::make('extension_name')->tap($onlyVisibleAndToggleableHere),
+                TextColumnHiddenByDefault::make('extension_name')->tap($onlyVisibleAndToggleableHere)->searchable(),
 
                 Tables\Columns\TextColumn::make('full_name')->toggleable($onListInhabintants),
 
@@ -148,8 +151,11 @@ class InhabitantResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+                Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
+
+                Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+
+            ], Tables\Enums\ActionsPosition::BeforeColumns)
             ->bulkActions([
                 TableExportBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
@@ -184,7 +190,7 @@ class InhabitantResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            TotalInhabitants::class,
+            //
         ];
     }
 }

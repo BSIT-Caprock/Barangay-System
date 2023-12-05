@@ -21,7 +21,7 @@ class ListHouseholds extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            HouseholdCount::class,
+            //
         ];
     }
 }

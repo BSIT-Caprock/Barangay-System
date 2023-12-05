@@ -21,7 +21,7 @@ class ListInhabitants extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            TotalInhabitants::class,
+            //
         ];
     }
 }
