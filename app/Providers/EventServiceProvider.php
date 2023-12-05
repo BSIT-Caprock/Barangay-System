@@ -9,6 +9,7 @@ use App\Models\House;
 use App\Models\Household;
 use App\Models\Inhabitant;
 use App\Models\PersonWithDisability;
+use App\Models\ResidencyCertificate;
 use App\Models\Street;
 use App\Models\Zone;
 use App\Observers\BirthPlaceObserver;
@@ -49,6 +50,9 @@ class EventServiceProvider extends ServiceProvider
         Family::observe(CurrentBarangayObserver::class);
 
         PersonWithDisability::observe(CurrentBarangayObserver::class);
+
+        // certificates
+        ResidencyCertificate::observe(CurrentBarangayObserver::class);
     }
 
     /**
