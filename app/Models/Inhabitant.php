@@ -44,6 +44,16 @@ class Inhabitant extends Model
         ]);
     }
 
+    public function getFullNameFirstAttribute()
+    {
+        return Strings::joinWithoutNulls(' ', [
+            $this->first_name,
+            $this->middle_name,
+            $this->last_name,
+            $this->extension_name,
+        ]);
+    }
+
     public function getAddressAttribute()
     {
         return Strings::joinWithoutNulls(', ', [
