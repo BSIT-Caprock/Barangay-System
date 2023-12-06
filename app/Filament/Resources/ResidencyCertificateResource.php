@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Actions\DownloadWordDocumentAction;
 use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
-use App\Filament\Actions\GenerateDocxAction;
 use App\Filament\Resources\ResidencyCertificateResource\Pages;
 use App\Models\CivilStatus;
 use App\Models\Inhabitant;
@@ -17,7 +16,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Storage;
 
 class ResidencyCertificateResource extends Resource
 {

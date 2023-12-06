@@ -4,7 +4,6 @@ namespace App\Filament\Actions;
 
 use App\Contracts\DownloadableDocument;
 use Filament\Tables\Actions\Action;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\TemplateProcessor;
 
@@ -24,6 +23,7 @@ class DownloadWordDocumentAction extends Action
                 $filename = $record->getFilename();
                 $filepath = Storage::path($filename);
                 $processor->saveAs($filepath);
+
                 return response()->download($filepath, $filename)->deleteFileAfterSend();
             });
     }
