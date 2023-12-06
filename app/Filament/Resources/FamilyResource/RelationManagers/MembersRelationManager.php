@@ -4,7 +4,6 @@ namespace App\Filament\Resources\FamilyResource\RelationManagers;
 
 use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
-use App\Filament\Forms\SelectInhabitant;
 use App\Models\Inhabitant;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -33,7 +32,7 @@ class MembersRelationManager extends RelationManager
                                 ->get()
                                 ->pluck('full_name', 'id')
                                 ->toArray())
-                            ->getOptionLabelUsing(fn ($value) => Inhabitant::find($value)->full_name)
+                            ->getOptionLabelUsing(fn ($value) => Inhabitant::find($value)->full_name),
                         // ->getOptionLabelFromRecordUsing(fn (Inhabitant $record) => $record->full_name),
                     ]
                 ),
@@ -93,7 +92,7 @@ class MembersRelationManager extends RelationManager
             ->headerActions(
                 [
                     TableExportAction::make(),
-                    
+
                     Tables\Actions\CreateAction::make(),
                 ]
             )

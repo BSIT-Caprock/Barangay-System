@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
 use App\Filament\Resources\FamilyResource\Pages;
 use App\Models\Family;
-use App\Models\Inhabitant;
 use App\Models\Street;
 use App\Models\Zone;
 use Filament\Forms;
@@ -47,7 +46,7 @@ class FamilyResource extends Resource
                         ->native(false)
                         ->options(
                             fn (?Family $record): array => $record?->members->pluck('name', 'id')->toArray() ?? []
-                        )
+                        ),
                 ]
             );
     }
