@@ -32,44 +32,53 @@ class FamilyResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\MorphToSelect::make('location')->types([
-                    Forms\Components\MorphToSelect\Type::make(Zone::class)
-                        ->titleAttribute('name'),
-                    Forms\Components\MorphToSelect\Type::make(Street::class)
-                        ->titleAttribute('name'),
-                ]),
+                Forms\Components\MorphToSelect::make('location')->types(
+                    [
+                        Forms\Components\MorphToSelect\Type::make(Zone::class)->titleAttribute('name'),
+
+                        Forms\Components\MorphToSelect\Type::make(Street::class)->titleAttribute('name'),
+                    ]
+                )->columns(2),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('location'),
-                Tables\Columns\TextColumn::make('members_count')->label('Total members')->counts('members'),
-            ])
-            ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
-            ->actions([
-                Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
+            ->columns(
+                [
+                    Tables\Columns\TextColumn::make('location'),
 
-                Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+                    Tables\Columns\TextColumn::make('members_count')->label('Total members')->counts('members'),
+                ]
+            )
+            ->filters(
+                [
+                    Tables\Filters\TrashedFilter::make(),
+                ]
+            )
+            ->actions(
+                [
+                    Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
 
-            ], Tables\Enums\ActionsPosition::BeforeColumns)
-            ->bulkActions([
-                TableExportBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
+                    Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+                ],
+                Tables\Enums\ActionsPosition::BeforeColumns
+            )
+            ->bulkActions(
+                [
+                    TableExportBulkAction::make(),
+
+                    Tables\Actions\RestoreBulkAction::make(),
+
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]
+            );
     }
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
+        return parent::getEloquentQuery()->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public static function getRelations(): array
