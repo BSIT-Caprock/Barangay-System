@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateFirstTimeJobSeeker extends CreateRecord
 {
     protected static string $resource = FirstTimeJobSeekerResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

@@ -9,6 +9,11 @@ class CreateInhabitant extends CreateRecord
 {
     protected static string $resource = InhabitantResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     public function getSubheading(): ?string
     {
         return __('(*) fields are required.');
