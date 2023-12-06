@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\Strings;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -66,5 +67,20 @@ class Inhabitant extends Model
     public function getAgeAttribute()
     {
         return Carbon::parse($this->birth_date)->age;
+    }
+
+    public function scopewhereFullName(Builder $query, string $search)
+    {
+        $split = array_map('trim', explode(',', $search, 2));
+        $lastName = $split[0] ?? null;
+        $firstName = $split[1] ?? $split[0];
+
+        if (! empty($lastName)) {
+            $query->where('last_name', 'like', "%{$lastName}%");
+        }
+
+        if (! empty($firstName)) {
+            $query->orWhere('first_name', 'like', "%{$firstName}%");
+        }
     }
 }
