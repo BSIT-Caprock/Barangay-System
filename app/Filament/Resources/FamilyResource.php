@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
 use App\Filament\Resources\FamilyResource\Pages;
 use App\Models\Family;
+use App\Models\Inhabitant;
 use App\Models\Street;
 use App\Models\Zone;
 use Filament\Forms;
@@ -31,15 +32,24 @@ class FamilyResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\MorphToSelect::make('location')->types(
-                    [
-                        Forms\Components\MorphToSelect\Type::make(Zone::class)->titleAttribute('name'),
+            ->schema(
+                [
+                    Forms\Components\MorphToSelect::make('location')->types(
+                        [
+                            Forms\Components\MorphToSelect\Type::make(Zone::class)->titleAttribute('name'),
 
-                        Forms\Components\MorphToSelect\Type::make(Street::class)->titleAttribute('name'),
-                    ]
-                )->columns(2),
-            ]);
+                            Forms\Components\MorphToSelect\Type::make(Street::class)->titleAttribute('name'),
+                        ]
+                    )->columns(2),
+
+                    Forms\Components\Select::make('head_id')
+                        ->label('Family head')
+                        ->native(false)
+                        ->options(
+                            fn (?Family $record): array => $record?->members->pluck('name', 'id')->toArray() ?? []
+                        )
+                ]
+            );
     }
 
     public static function table(Table $table): Table

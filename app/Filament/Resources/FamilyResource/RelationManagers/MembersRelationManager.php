@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources\FamilyResource\RelationManagers;
 
+use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
 use App\Filament\Forms\SelectInhabitant;
+use App\Models\Inhabitant;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -20,16 +22,33 @@ class MembersRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\Grid::make(4)->schema([
-                    SelectInhabitant::make(),
-                ]),
-                Forms\Components\Grid::make(4)->schema([
-                    Forms\Components\Select::make('is_lgbtq')->label('LGBTQ+')->boolean(),
-                    Forms\Components\Select::make('has_disability')->label('PWD')->boolean()
-                        ->hintIcon('heroicon-m-question-mark-circle', 'Person with disabilities'),
-                    Forms\Components\Select::make('has_disease')->boolean(),
-                    Forms\Components\Select::make('is_pregnant')->label('Pregnant')->boolean(),
-                ]),
+                Forms\Components\Grid::make(1)->schema(
+                    [
+                        Forms\Components\Select::make('inhabitant_id')
+                            ->label('Name')
+                            ->searchable()
+                            ->searchPrompt('<Name> or <Last name, First name>')
+                            ->getSearchResultsUsing(fn (string $search): array => Inhabitant::whereFullName($search)
+                                ->limit(10)
+                                ->get()
+                                ->pluck('full_name', 'id')
+                                ->toArray())
+                            ->getOptionLabelUsing(fn ($value) => Inhabitant::find($value)->full_name)
+                        // ->getOptionLabelFromRecordUsing(fn (Inhabitant $record) => $record->full_name),
+                    ]
+                ),
+                Forms\Components\Grid::make(4)->schema(
+                    [
+                        Forms\Components\Select::make('is_lgbtq')->label('LGBTQ+')->boolean(),
+
+                        Forms\Components\Select::make('has_disability')->label('PWD')->boolean()
+                            ->hintIcon('heroicon-m-question-mark-circle', 'Person with disabilities'),
+
+                        Forms\Components\Select::make('has_disease')->boolean(),
+
+                        Forms\Components\Select::make('is_pregnant')->label('Pregnant')->boolean(),
+                    ]
+                ),
             ]);
     }
 
@@ -37,27 +56,64 @@ class MembersRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('name')
-            ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\IconColumn::make('is_lgbtq')->label('LGBTQ+')->boolean(),
-                Tables\Columns\IconColumn::make('has_disability')->label('Disability')->boolean(),
-                Tables\Columns\IconColumn::make('has_disease')->label('Disease')->boolean(),
-                Tables\Columns\IconColumn::make('is_pregnant')->label('Pregnant')->boolean(),
-            ])
-            ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                TableExportBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
-                Tables\Actions\DeleteBulkAction::make(),
-            ])->modifyQueryUsing(fn (Builder $query) => $query->withoutGlobalScopes([SoftDeletingScope::class]));
+            ->columns(
+                [
+                    Tables\Columns\TextColumn::make('name'),
+
+                    Tables\Columns\TextColumn::make('is_lgbtq')->label('Is LGBTQ+')
+                        ->formatStateUsing(fn (mixed $state) => match ($state) {
+                            1 => 'Yes',
+                            0 => 'No',
+                        }),
+
+                    Tables\Columns\TextColumn::make('has_disability')->label('Has disability')
+                        ->formatStateUsing(fn (mixed $state) => match ($state) {
+                            1 => 'Yes',
+                            0 => 'No',
+                        }),
+
+                    Tables\Columns\TextColumn::make('has_disease')->label('Has disease')
+                        ->formatStateUsing(fn (mixed $state) => match ($state) {
+                            1 => 'Yes',
+                            0 => 'No',
+                        }),
+
+                    Tables\Columns\TextColumn::make('is_pregnant')->label('Is pregnant')
+                        ->formatStateUsing(fn (mixed $state) => match ($state) {
+                            1 => 'Yes',
+                            0 => 'No',
+                        }),
+                ]
+            )
+            ->filters(
+                [
+                    Tables\Filters\TrashedFilter::make(),
+                ]
+            )
+            ->headerActions(
+                [
+                    TableExportAction::make(),
+                    
+                    Tables\Actions\CreateAction::make(),
+                ]
+            )
+            ->actions(
+                [
+                    Tables\Actions\EditAction::make()->iconButton(),
+                ],
+                Tables\Enums\ActionsPosition::BeforeColumns
+            )
+            ->bulkActions(
+                [
+                    TableExportBulkAction::make(),
+
+                    Tables\Actions\RestoreBulkAction::make(),
+
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]
+            )
+            ->modifyQueryUsing(
+                fn (Builder $query) => $query->withoutGlobalScopes([SoftDeletingScope::class])
+            );
     }
 }

@@ -15,6 +15,7 @@ class Family extends Model
     protected $fillable = [
         'location_id',
         'location_type',
+        'head_id',
     ];
 
     public function location()

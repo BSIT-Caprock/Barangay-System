@@ -31,6 +31,10 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::table('families', function (Blueprint $table) {
+            $table->foreignId('head_id')->nullable()->constrained('family_members');
+        });
     }
 
     /**
@@ -38,6 +42,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('families');
+        Schema::dropIfExists('family_members');
+        Schema::enableForeignKeyConstraints();
     }
 };
