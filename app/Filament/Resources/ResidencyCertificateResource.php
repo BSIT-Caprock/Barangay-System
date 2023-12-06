@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Actions\DownloadWordDocumentAction;
 use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
 use App\Filament\Actions\GenerateDocxAction;
@@ -42,30 +43,11 @@ class ResidencyCertificateResource extends Resource
                                 ->label('Select existing inhabitant')
                                 ->searchable()
                                 ->searchPrompt('<Name> or <Last name, First name>')
-                                ->getSearchResultsUsing(function (string $search): array {
-                                    $split = array_map('trim', explode(',', $search, 2));
-                                    $lastName = $split[0] ?? null;
-                                    $firstName = $split[1] ?? $split[0];
-
-                                    $query = Inhabitant::query();
-
-                                    if ((bool) $lastName) {
-                                        $query->where('last_name', 'like', "%{$lastName}%");
-                                    }
-
-                                    if ((bool) $firstName) {
-                                        $query->orWhere('first_name', 'like', "%{$firstName}%");
-                                    }
-
-                                    $results = $query
-                                        ->limit(10)
-                                        ->get()
-                                        ->pluck('full_name', 'id')
-                                        ->toArray();
-
-                                    // dd($results);
-                                    return $results;
-                                })
+                                ->getSearchResultsUsing(fn (string $search): array => Inhabitant::whereFullName($search)
+                                    ->limit(10)
+                                    ->get()
+                                    ->pluck('full_name', 'id')
+                                    ->toArray())
                                 ->afterStateUpdated(function ($state, Forms\Set $set) {
                                     $model = Inhabitant::find($state);
 
@@ -137,29 +119,7 @@ class ResidencyCertificateResource extends Resource
                 [
                     Tables\Actions\EditAction::make()->iconButton()->color('primary'),
 
-                    GenerateDocxAction::make('download_certificate')
-                        ->iconButton()
-                        ->processTemplate(
-                            // template
-                            fn (ResidencyCertificate $record) => Storage::path($record->template_path),
-                            // data
-                            fn (ResidencyCertificate $record) => [
-                                'resident_name' => $record->resident_name,
-                                'resident_age' => $record->resident_age,
-                                'resident_citizenship' => $record->resident_citizenship,
-                                'resident_civil_status' => $record->resident_civil_status,
-                                'date_issued_day_ord' => $record->date_issued->isoFormat('Do'),
-                                'date_issued_month' => $record->date_issued->isoFormat('MMMM'),
-                                'date_issued_year' => $record->date_issued->isoFormat('YYYY'),
-                                'punong_barangay' => $record->punong_barangay,
-                                'amount_paid' => $record->amount_paid,
-                                'dst' => $record->dst,
-                                'receipt_number' => $record->receipt_number,
-                                'date_issued' => $record->date_issued->isoFormat('MMMM D, YYYY'),
-                            ],
-                            // identifier
-                            fn (ResidencyCertificate $record) => \Illuminate\Support\Str::slug($record->resident_name),
-                        ),
+                    DownloadWordDocumentAction::make('download_document')->iconButton(),
                 ],
                 Tables\Enums\ActionsPosition::BeforeColumns
             )
