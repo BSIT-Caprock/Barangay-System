@@ -101,7 +101,7 @@ class InhabitantResource extends Resource
         return $table
             ->columns([
                 TextColumnHiddenByDefault::make('barangay')
-                    ->visible(!auth()->user()->barangay)
+                    ->visible(! auth()->user()->barangay)
                     ->toggleable(fn (Column $column) => $column->isVisible()),
 
                 TextColumnHiddenByDefault::make('last_name')->tap($onlyVisibleAndToggleableHere)->searchable(),
