@@ -15,32 +15,42 @@ class InhabitantImporter extends Importer
     {
         return [
             ImportColumn::make('barangay')
+                ->example('Poblacion Dist. I')
                 ->requiredMapping()
                 ->relationship(resolveUsing: 'name')
                 ->rules(['required']),
 
-            ImportColumn::make('last_name'),
+            ImportColumn::make('last_name')
+                ->example('Cruz'),
 
-            ImportColumn::make('first_name'),
+            ImportColumn::make('first_name')
+                ->example('Juan'),
 
             ImportColumn::make('middle_name'),
 
-            ImportColumn::make('extension_name'),
+            ImportColumn::make('extension_name')
+                ->example('Paz'),
 
-            ImportColumn::make('birth_date'),
+            ImportColumn::make('birth_date')
+                ->example('1999-09-09'),
 
-            ImportColumn::make('date_accomplished'),
+            ImportColumn::make('date_accomplished')
+                ->example('2023-01-01'),
 
             ImportColumn::make('birth_place')
+                ->example('Barugo, Leyte')
                 ->relationship(resolveUsing: ['name', 'city_or_municipality']),
 
             ImportColumn::make('sex')
+                ->example('Male')
                 ->relationship(resolveUsing: 'name'),
 
             ImportColumn::make('civil_status')
+                ->example('Single')
                 ->relationship(resolveUsing: 'name'),
 
             ImportColumn::make('citizenship')
+                ->example('Filipino')
                 ->relationship(resolveUsing: 'name'),
 
             ImportColumn::make('occupation')
