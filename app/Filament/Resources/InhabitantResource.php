@@ -14,6 +14,7 @@ use App\Filament\Forms\SelectOccupation;
 use App\Filament\Forms\SelectSex;
 use App\Filament\Forms\SelectStreet;
 use App\Filament\Forms\SelectZone;
+use App\Filament\Imports\InhabitantImporter;
 use App\Filament\Resources\HouseholdResource\RelationManagers\InhabitantsRelationManager;
 use App\Filament\Resources\InhabitantResource\Pages;
 use App\Filament\Resources\InhabitantResource\Pages\ListInhabitants;
@@ -100,7 +101,7 @@ class InhabitantResource extends Resource
         return $table
             ->columns([
                 TextColumnHiddenByDefault::make('barangay')
-                    ->visible(! auth()->user()->barangay)
+                    ->visible(!auth()->user()->barangay)
                     ->toggleable(fn (Column $column) => $column->isVisible()),
 
                 TextColumnHiddenByDefault::make('last_name')->tap($onlyVisibleAndToggleableHere)->searchable(),
@@ -139,24 +140,40 @@ class InhabitantResource extends Resource
 
                 TextColumnHiddenByDefault::make('date_accomplished')->tap($onlyVisibleAndToggleableHere),
             ])
-            ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
-            ->headerActions([
-                TableExportAction::make(),
-                Tables\Actions\CreateAction::make(),
-            ])
-            ->actions([
-                Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
+            ->filters(
+                [
+                    Tables\Filters\TrashedFilter::make(),
+                ]
+            )
+            ->headerActions(
+                [
+                    Tables\Actions\ImportAction::make()
+                        ->icon('heroicon-o-arrow-up-tray')
+                        ->importer(InhabitantImporter::class),
 
-                Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+                    TableExportAction::make(),
 
-            ], Tables\Enums\ActionsPosition::BeforeColumns)
-            ->bulkActions([
-                TableExportBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
+                    Tables\Actions\CreateAction::make(),
+                ]
+            )
+            ->actions(
+                [
+                    Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
+
+                    Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+
+                ],
+                Tables\Enums\ActionsPosition::BeforeColumns
+            )
+            ->bulkActions(
+                [
+                    TableExportBulkAction::make(),
+
+                    Tables\Actions\RestoreBulkAction::make(),
+
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]
+            );
     }
 
     public static function getEloquentQuery(): Builder
