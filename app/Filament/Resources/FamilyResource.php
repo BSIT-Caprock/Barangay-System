@@ -19,7 +19,7 @@ class FamilyResource extends Resource
 {
     protected static ?string $model = Family::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'icon-pedestrian-family';
 
     protected static ?string $navigationGroup = 'RBI';
 

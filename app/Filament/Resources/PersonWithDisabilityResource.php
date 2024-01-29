@@ -22,7 +22,7 @@ class PersonWithDisabilityResource extends Resource
 
     protected static ?string $slug = 'persons-with-disabilities';
 
-    protected static ?string $navigationIcon = 'heroicon-o-shield-check';
+    protected static ?string $navigationIcon = 'icon-wheelchair';
 
     protected static ?string $navigationGroup = 'MSWDO';
 

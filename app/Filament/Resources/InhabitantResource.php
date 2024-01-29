@@ -34,7 +34,7 @@ class InhabitantResource extends Resource
 {
     protected static ?string $model = Inhabitant::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationIcon = 'icon-regular-home-user';
 
     protected static ?string $navigationGroup = 'RBI';
 
