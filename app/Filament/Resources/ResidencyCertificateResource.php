@@ -23,7 +23,7 @@ class ResidencyCertificateResource extends Resource
 
     protected static ?string $navigationGroup = 'Certificates';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'icon-certificate-24';
 
     public static function getNavigationBadge(): ?string
     {
