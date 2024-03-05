@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         $historized = function (Blueprint $table) {
-            $table->foreignId('barangay_id')->constrained();
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
@@ -54,7 +53,6 @@ return new class extends Migration
     public function down(): void
     {
         $historized = function (Blueprint $table) {
-            $table->dropForeign(['barangay_id']);
         };
 
         Schema::table('inhabitants', function (Blueprint $table) use ($historized) {

@@ -27,7 +27,6 @@ class UserSeeder extends Seeder
             'name' => 'Pob. 1 Secretary',
             'email' => 'sec@pob1.com',
             'password' => 'pob1',
-            'barangay_id' => Barangay::where(['name' => 'Poblacion Dist. I'])->first()->id,
         ]);
 
         $poblacion1Sect->assignRole('Barangay Secretary');

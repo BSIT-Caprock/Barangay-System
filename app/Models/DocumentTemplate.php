@@ -14,7 +14,6 @@ class DocumentTemplate extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'barangay_id',
         'name',
         'filename',
         'form_schema',
@@ -49,10 +48,5 @@ class DocumentTemplate extends Model
         $templatePath = Storage::disk('local')->path('templates/' . $this->filename);
 
         return $templatePath;
-    }
-
-    public function barangay()
-    {
-        return $this->belongsTo(Barangay::class);
     }
 }

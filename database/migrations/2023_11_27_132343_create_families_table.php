@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('families', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barangay_id')->constrained();
             $table->nullableMorphs('location');
             $table->timestamps();
             $table->softDeletes();

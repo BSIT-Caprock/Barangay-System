@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Inhabitant extends Model
 {
-    use \App\Attributes\BarangayAttribute;
     use \App\Attributes\BirthPlaceAttribute;
     use \App\Attributes\CitizenshipAttribute;
     use \App\Attributes\CivilStatusAttribute;

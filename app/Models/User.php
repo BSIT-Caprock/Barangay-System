@@ -14,7 +14,6 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use \App\Attributes\BarangayAttribute;
     use HasApiTokens;
     use HasFactory;
     use HasRoles;
@@ -30,8 +29,6 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'password',
     ];
-
-    protected $guarded = ['barangay_id'];
 
     /**
      * The attributes that should be hidden for serialization.

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class House extends Model
 {
-    use \App\Attributes\BarangayAttribute;
     use \App\Attributes\InhabitantsAttribute;
     use \App\Attributes\StreetAttribute;
     use \App\Attributes\ZoneAttribute;

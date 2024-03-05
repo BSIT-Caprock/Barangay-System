@@ -4,12 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
-use App\Filament\Forms\SelectBarangay;
 use App\Filament\Forms\SelectCourse;
 use App\Filament\Forms\SelectEducationalLevel;
 use App\Filament\Forms\SelectSex;
 use App\Filament\Resources\FirstTimeJobSeekerResource\Pages;
-use App\Filament\Tables\BarangayColumn;
 use App\Models\FirstTimeJobSeeker;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -36,7 +34,6 @@ class FirstTimeJobSeekerResource extends Resource
     {
         return $form
             ->schema([
-                SelectBarangay::make()->required()->hidden((bool) auth()->user()->barangay),
                 Forms\Components\TextInput::make('last_name')->required(),
                 Forms\Components\TextInput::make('first_name')->required(),
                 Forms\Components\TextInput::make('middle_name')->required(),
@@ -52,7 +49,6 @@ class FirstTimeJobSeekerResource extends Resource
     {
         return $table
             ->columns([
-                BarangayColumn::make(),
                 Tables\Columns\TextColumn::make('month_year')->label('Month'),
                 Tables\Columns\TextColumn::make('last_name'),
                 Tables\Columns\TextColumn::make('first_name'),

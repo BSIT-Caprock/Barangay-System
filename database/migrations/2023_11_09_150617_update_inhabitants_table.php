@@ -40,7 +40,6 @@ return new class extends Migration
 
         Schema::create('streets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barangay_id')->constrained();
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
@@ -48,7 +47,6 @@ return new class extends Migration
 
         Schema::create('zones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barangay_id')->constrained();
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
@@ -56,7 +54,6 @@ return new class extends Migration
 
         Schema::create('houses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barangay_id')->constrained();
             $table->foreignId('street_id')->nullable()->constrained();
             $table->foreignId('zone_id')->nullable()->constrained();
             $table->string('number');
@@ -66,7 +63,6 @@ return new class extends Migration
 
         Schema::create('households', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barangay_id')->constrained();
             $table->string('number');
             $table->timestamps();
             $table->softDeletes();

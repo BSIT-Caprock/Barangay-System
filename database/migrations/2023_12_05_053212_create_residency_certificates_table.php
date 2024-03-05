@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('residency_certificates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barangay_id')->constrained();
             $table->string('resident_name');
             $table->string('resident_age');
             $table->string('resident_citizenship');

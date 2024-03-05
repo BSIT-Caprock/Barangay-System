@@ -17,7 +17,6 @@ class StreetFactory extends Factory
     public function definition(): array
     {
         return [
-            'barangay_id' => 1,
             'name' => fake()->streetName(),
         ];
     }
