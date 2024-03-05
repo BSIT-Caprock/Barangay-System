@@ -24,6 +24,7 @@ class BirthPlaceSeeder extends Seeder
             $model = BirthPlace::create([
                 'province' => $data[1],
                 'city_or_municipality' => $data[0],
+                'name' => $data[0] . ', ' . $data[1]
             ]);
             // $model->id = $model->newUniqueId();
             // dump($model->getAttributes());
