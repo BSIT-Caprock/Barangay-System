@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FirstTimeJobSeeker extends Model
 {
-    use \App\Attributes\BarangayAttribute;
     use \App\Attributes\CourseAttribute;
     use \App\Attributes\EducationalLevelAttribute;
     use \App\Attributes\SexAttribute;

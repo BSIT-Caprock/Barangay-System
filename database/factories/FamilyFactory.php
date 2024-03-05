@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Factories\Concerns\ForCurrentBarangay;
 use App\Models\Street;
 use App\Models\Zone;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -12,8 +11,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class FamilyFactory extends Factory
 {
-    use ForCurrentBarangay;
-
     /**
      * Define the model's default state.
      *

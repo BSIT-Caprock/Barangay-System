@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
-use App\Filament\Forms\SelectBarangay;
 use App\Filament\Resources\HouseholdResource\Pages;
 use App\Filament\Resources\HouseholdResource\RelationManagers;
 use App\Models\Household;
@@ -33,8 +32,6 @@ class HouseholdResource extends Resource
     {
         return $form
             ->schema([
-                SelectBarangay::make()->required()->hidden((bool) auth()->user()->barangay),
-
                 Forms\Components\TextInput::make('number')->required(),
             ]);
     }
@@ -43,10 +40,6 @@ class HouseholdResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('barangay')
-                    ->hidden((bool) auth()->user()->barangay)
-                    ->toggleable(! auth()->user()->barangay),
-
                 Tables\Columns\TextColumn::make('number'),
 
                 Tables\Columns\TextColumn::make('inhabitants_count')->label('Total inhabitants')->counts('inhabitants'),

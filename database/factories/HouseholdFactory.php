@@ -17,7 +17,6 @@ class HouseholdFactory extends Factory
     public function definition(): array
     {
         return [
-            'barangay_id' => 1,
             'number' => fake()->numberBetween(1000, 1999),
         ];
     }

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Family extends Model
 {
-    use \App\Attributes\BarangayAttribute;
     use HasFactory;
     use SoftDeletes;
 

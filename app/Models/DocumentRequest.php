@@ -45,11 +45,6 @@ class DocumentRequest extends Model
         // });
     }
 
-    public function barangay()
-    {
-        return $this->belongsTo(Barangay::class);
-    }
-
     public function template()
     {
         return $this->belongsTo(DocumentTemplate::class, 'document_template_id');

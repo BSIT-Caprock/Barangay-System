@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ResidencyCertificate extends Model implements DownloadableDocument
 {
-    use \App\Attributes\BarangayAttribute;
     use HasFactory;
     use SoftDeletes;
 

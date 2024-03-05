@@ -14,12 +14,6 @@ class InhabitantImporter extends Importer
     public static function getColumns(): array
     {
         return [
-            ImportColumn::make('barangay')
-                ->example('Poblacion Dist. I')
-                ->requiredMapping()
-                ->relationship(resolveUsing: 'name')
-                ->rules(['required']),
-
             ImportColumn::make('last_name')
                 ->example('Cruz'),
 

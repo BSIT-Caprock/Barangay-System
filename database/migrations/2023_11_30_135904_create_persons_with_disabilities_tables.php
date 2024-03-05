@@ -25,7 +25,6 @@ return new class extends Migration
 
         Schema::create('persons_with_disabilities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barangay_id')->constrained();
             $table->string('last_name');
             $table->string('first_name');
             $table->string('middle_name')->nullable();

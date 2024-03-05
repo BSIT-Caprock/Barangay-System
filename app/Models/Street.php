@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Street extends Model
 {
-    use \App\Attributes\BarangayAttribute;
     use \App\Attributes\InhabitantsAttribute;
     use HasFactory;
     use SoftDeletes;

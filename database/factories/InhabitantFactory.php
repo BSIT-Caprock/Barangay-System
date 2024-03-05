@@ -29,7 +29,6 @@ class InhabitantFactory extends Factory
         ][$sexId];
 
         return [
-            'barangay_id' => null,
             'household_id' => null,
             'last_name' => fake()->lastName(),
             'first_name' => fake()->firstName($gender),

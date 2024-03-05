@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
-use App\Filament\Forms\SelectBarangay;
 use App\Filament\Forms\SelectBirthPlace;
 use App\Filament\Forms\SelectCitizenship;
 use App\Filament\Forms\SelectCivilStatus;
@@ -47,8 +46,6 @@ class InhabitantResource extends Resource
     {
         return $form->schema([
             Forms\Components\Grid::make(4)->schema([
-                SelectBarangay::make()->required()->hidden((bool) auth()->user()->barangay),
-
                 SelectHouseholdNumber::make()->hiddenOn(InhabitantsRelationManager::class),
             ]),
 
@@ -100,10 +97,6 @@ class InhabitantResource extends Resource
 
         return $table
             ->columns([
-                TextColumnHiddenByDefault::make('barangay')
-                    ->visible(! auth()->user()->barangay)
-                    ->toggleable(fn (Column $column) => $column->isVisible()),
-
                 TextColumnHiddenByDefault::make('last_name')->tap($onlyVisibleAndToggleableHere)->searchable(),
 
                 TextColumnHiddenByDefault::make('first_name')->tap($onlyVisibleAndToggleableHere)->searchable(),

@@ -32,6 +32,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
+            ->brandName(env('BRGY_FULL'))
             ->path('/')
             ->login()
             ->registration()

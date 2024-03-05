@@ -26,7 +26,6 @@ class ZoneSeeder extends Seeder
         ];
         foreach ($zones as $zone) {
             Zone::create([
-                'barangay_id' => $barangayId,
                 'name' => $zone,
             ]);
         }

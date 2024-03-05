@@ -4,9 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Actions\FilamentExcel\TableExportAction;
 use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
-use App\Filament\Forms\SelectBarangay;
 use App\Filament\Resources\PersonWithDisabilityResource\Pages;
-use App\Filament\Tables\BarangayColumn;
 use App\Models\PersonWithDisability;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -37,8 +35,6 @@ class PersonWithDisabilityResource extends Resource
     {
         return $form
             ->schema([
-                SelectBarangay::make()->required()->hidden((bool) auth()->user()->barangay),
-
                 Forms\Components\Select::make('disability_id')
                     ->label('Disability')
                     ->required()
@@ -68,9 +64,6 @@ class PersonWithDisabilityResource extends Resource
     {
         return $table
             ->columns([
-                BarangayColumn::make()
-                    ->sortable(),
-
                 Tables\Columns\TextColumn::make('last_name')
                     ->searchable(),
 
