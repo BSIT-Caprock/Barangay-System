@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d7afe30a2c549618c11df9c84e7a670",
+    "content-hash": "41e4f5f1466ce185c62966363a16a9c8",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -8623,6 +8623,90 @@
                 }
             ],
             "time": "2022-03-08T17:03:00+00:00"
+        },
+        {
+            "name": "voltra/filament-svg-avatar",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Voltra/filament-svg-avatar.git",
+                "reference": "5f634bad39022711ff471d5d003d070bf6a2c28f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Voltra/filament-svg-avatar/zipball/5f634bad39022711ff471d5d003d070bf6a2c28f",
+                "reference": "5f634bad39022711ff471d5d003d070bf6a2c28f",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "illuminate/contracts": "^10.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "laravel/facade-documenter": "dev-main",
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "pestphp/pest-plugin-watch": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Voltra\\FilamentSvgAvatar\\FilamentSvgAvatarServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentSvgAvatar": "Voltra\\FilamentSvgAvatar\\Facades\\FilamentSvgAvatar"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Voltra\\FilamentSvgAvatar\\": "src/",
+                    "Voltra\\FilamentSvgAvatar\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Voltra",
+                    "email": "ludwig.guerin.98@gmx.fr",
+                    "role": "Developer"
+                }
+            ],
+            "description": " Change the default avatar url provider with one for inline SVGs",
+            "homepage": "https://github.com/voltra/filament-svg-avatar",
+            "keywords": [
+                "Voltra",
+                "avatar",
+                "filament",
+                "filament-svg-avatar",
+                "laravel",
+                "laravel-filament"
+            ],
+            "support": {
+                "issues": "https://github.com/voltra/filament-svg-avatar/issues",
+                "source": "https://github.com/voltra/filament-svg-avatar"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Voltra",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-02-05T21:10:08+00:00"
         },
         {
             "name": "webmozart/assert",
