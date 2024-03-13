@@ -2,10 +2,14 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Dashboard;
 use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
 use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
 use App\Filament\Widgets\AgeChart;
 use App\Filament\Widgets\CivilStatusChart;
+use App\Filament\Widgets\InhabitantAgeGroupsChart;
+use App\Filament\Widgets\InhabitantCivilStatusRatioChart;
+use App\Filament\Widgets\MaleAndFemaleInhabitantsRatioChart;
 use App\Filament\Widgets\SexPopulationChart;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -80,13 +84,13 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                Dashboard::class,
             ])
             // ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                CivilStatusChart::class,
-                SexPopulationChart::class,
-                AgeChart::class,
+                MaleAndFemaleInhabitantsRatioChart::class,
+                InhabitantCivilStatusRatioChart::class,
+                InhabitantAgeGroupsChart::class,
                 TotalInhabitants::class,
                 HouseholdCount::class,
 
