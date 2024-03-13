@@ -74,12 +74,24 @@ class Inhabitant extends Model
         $lastName = $split[0] ?? null;
         $firstName = $split[1] ?? $split[0];
 
-        if (! empty($lastName)) {
+        if (!empty($lastName)) {
             $query->where('last_name', 'like', "%{$lastName}%");
         }
 
-        if (! empty($firstName)) {
+        if (!empty($firstName)) {
             $query->orWhere('first_name', 'like', "%{$firstName}%");
         }
+    }
+
+    public function scopeAgedBetween($query, $start, $end = null)
+    {
+        if (is_null($end)) {
+            $end = $start;
+        }
+
+        $now = today();
+        $from = $now->subYears($end);
+        $to = $now->subYears($start)->addYear()->subDay(); // plus 1 year minus a day
+        return $query->whereBetween('birth_date', [$from->toDateString(), $to->toDateString()]);
     }
 }
