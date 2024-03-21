@@ -2,23 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Actions\FilamentExcel\TableExportAction;
-use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
-use App\Filament\Forms\SelectBirthPlace;
-use App\Filament\Forms\SelectCitizenship;
-use App\Filament\Forms\SelectCivilStatus;
-use App\Filament\Forms\SelectHouseholdNumber;
-use App\Filament\Forms\SelectHouseNumber;
-use App\Filament\Forms\SelectOccupation;
-use App\Filament\Forms\SelectSex;
-use App\Filament\Forms\SelectStreet;
-use App\Filament\Forms\SelectZone;
+use App\FilamentExcel\Actions\Tables\TableExportAction;
+use App\FilamentExcel\Actions\Tables\TableExportBulkAction;
+use App\Filament\Forms\Components\SelectBirthPlace;
+use App\Filament\Forms\Components\SelectCitizenship;
+use App\Filament\Forms\Components\SelectCivilStatus;
+use App\Filament\Forms\Components\SelectHouseholdNumber;
+use App\Filament\Forms\Components\SelectHouseNumber;
+use App\Filament\Forms\Components\SelectOccupation;
+use App\Filament\Forms\Components\SelectSex;
+use App\Filament\Forms\Components\SelectStreet;
+use App\Filament\Forms\Components\SelectZone;
 use App\Filament\Imports\InhabitantImporter;
 use App\Filament\Resources\HouseholdResource\RelationManagers\InhabitantsRelationManager;
 use App\Filament\Resources\InhabitantResource\Pages;
 use App\Filament\Resources\InhabitantResource\Pages\ListInhabitants;
 // use App\Filament\Resources\InhabitantResource\RelationManagers;
-use App\Filament\Tables\TextColumnHiddenByDefault;
+use App\Filament\Tables\Columns\TextColumnHiddenByDefault;
 use App\Models\Inhabitant;
 use Filament\Forms;
 use Filament\Forms\Form;

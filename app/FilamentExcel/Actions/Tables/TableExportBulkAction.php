@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Filament\Actions\FilamentExcel;
+namespace App\FilamentExcel\Actions\Tables;
 
+use App\FilamentExcel\Exports\MultiOptionExport;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class TableExportBulkAction extends ExportBulkAction
@@ -11,6 +12,6 @@ class TableExportBulkAction extends ExportBulkAction
         return parent::make($name)
             ->label('Export selected')
             ->color('gray')
-            ->exports([Export::make()]);
+            ->exports([MultiOptionExport::make()]);
     }
 }

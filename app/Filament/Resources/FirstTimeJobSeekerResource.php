@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Actions\FilamentExcel\TableExportAction;
-use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
-use App\Filament\Forms\SelectCourse;
-use App\Filament\Forms\SelectEducationalLevel;
-use App\Filament\Forms\SelectSex;
+use App\FilamentExcel\Actions\Tables\TableExportAction;
+use App\FilamentExcel\Actions\Tables\TableExportBulkAction;
+use App\Filament\Forms\Components\SelectCourse;
+use App\Filament\Forms\Components\SelectEducationalLevel;
+use App\Filament\Forms\Components\SelectSex;
 use App\Filament\Resources\FirstTimeJobSeekerResource\Pages;
 use App\Models\FirstTimeJobSeeker;
 use Filament\Forms;

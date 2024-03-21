@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\DocumentResource\RelationManagers;
 
-use App\Filament\Actions\FilamentExcel\TableExportAction;
+use App\FilamentExcel\Actions\Tables\TableExportAction;
 use App\Models\Document;
 use App\Models\DocumentOutput;
 use Filament\Forms;

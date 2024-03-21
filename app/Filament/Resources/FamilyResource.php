@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
+use App\FilamentExcel\Actions\Tables\TableExportBulkAction;
 use App\Filament\Resources\FamilyResource\Pages;
 use App\Models\Family;
 use App\Models\Street;

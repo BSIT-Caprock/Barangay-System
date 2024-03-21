@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
+use App\FilamentExcel\Actions\Tables\TableExportBulkAction;
 use App\Filament\Resources\DocumentResource\Pages;
 use App\Filament\Resources\DocumentResource\RelationManagers;
 use App\Models\Document;

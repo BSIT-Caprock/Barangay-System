@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Filament\Actions\FilamentExcel;
+namespace App\FilamentExcel\Exports;
 
 use Maatwebsite\Excel\Excel;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class Export extends ExcelExport
+class MultiOptionExport extends \pxlrbt\FilamentExcel\Exports\ExcelExport
 {
     public static function make(string $name = 'export'): static
     {

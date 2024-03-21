@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Actions\FilamentExcel\TableExportAction;
-use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
+use App\FilamentExcel\Actions\Tables\TableExportAction;
+use App\FilamentExcel\Actions\Tables\TableExportBulkAction;
 use App\Filament\Resources\PersonWithDisabilityResource\Pages;
 use App\Models\PersonWithDisability;
 use Filament\Forms;

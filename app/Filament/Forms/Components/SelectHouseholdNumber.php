@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Forms;
+namespace App\Filament\Forms\Components;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;

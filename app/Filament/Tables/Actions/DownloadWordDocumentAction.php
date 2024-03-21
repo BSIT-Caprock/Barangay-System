@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Actions;
+namespace App\Filament\Tables\Actions;
 
 use App\Contracts\DownloadableDocument;
 use Filament\Tables\Actions\Action;

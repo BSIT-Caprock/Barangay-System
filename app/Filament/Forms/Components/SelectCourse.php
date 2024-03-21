@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Filament\Forms;
+namespace App\Filament\Forms\Components;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 
-class SelectOccupation extends Select
+class SelectCourse extends Select
 {
-    public static function make(string $name = 'occupation_id'): static
+    public static function make(string $name = 'course_id'): static
     {
         return parent::make($name)
-            ->relationship('occupation', 'name')
+            ->relationship('course', 'name')
             ->searchable()
             ->preload()
             ->createOptionForm([

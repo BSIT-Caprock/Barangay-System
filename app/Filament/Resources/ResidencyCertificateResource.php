@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Actions\DownloadWordDocumentAction;
-use App\Filament\Actions\FilamentExcel\TableExportAction;
-use App\Filament\Actions\FilamentExcel\TableExportBulkAction;
+use App\Filament\Tables\Actions\DownloadWordDocumentAction;
+use App\FilamentExcel\Actions\Tables\TableExportAction;
+use App\FilamentExcel\Actions\Tables\TableExportBulkAction;
 use App\Filament\Resources\ResidencyCertificateResource\Pages;
 use App\Models\CivilStatus;
 use App\Models\Inhabitant;
