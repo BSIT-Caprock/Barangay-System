@@ -106,13 +106,6 @@ class ResidencyCertificateResource extends Resource
                     Tables\Filters\TrashedFilter::make(),
                 ]
             )
-            ->headerActions(
-                [
-                    TableExportAction::make(),
-
-                    Tables\Actions\CreateAction::make(),
-                ]
-            )
             ->actions(
                 [
                     Tables\Actions\EditAction::make(),

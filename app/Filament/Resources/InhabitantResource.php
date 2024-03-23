@@ -138,17 +138,6 @@ class InhabitantResource extends Resource
                     Tables\Filters\TrashedFilter::make(),
                 ]
             )
-            ->headerActions(
-                [
-                    Tables\Actions\ImportAction::make()
-                        ->icon('heroicon-o-arrow-up-tray')
-                        ->importer(InhabitantImporter::class),
-
-                    TableExportAction::make(),
-
-                    Tables\Actions\CreateAction::make(),
-                ]
-            )
             ->actions(
                 [
                     Tables\Actions\ViewAction::make(),

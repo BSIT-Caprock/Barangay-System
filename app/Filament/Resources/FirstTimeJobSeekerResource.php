@@ -62,10 +62,6 @@ class FirstTimeJobSeekerResource extends Resource
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->headerActions([
-                TableExportAction::make(),
-                Tables\Actions\CreateAction::make(),
-            ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
 

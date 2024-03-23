@@ -41,21 +41,14 @@ class HouseholdResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('number'),
-
                 Tables\Columns\TextColumn::make('inhabitants_count')->label('Total inhabitants')->counts('inhabitants'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->headerActions([
-                TableExportAction::make(),
-                Tables\Actions\CreateAction::make(),
-            ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-
                 Tables\Actions\EditAction::make(),
-
             ])
             ->bulkActions([
                 TableExportBulkAction::make(),
