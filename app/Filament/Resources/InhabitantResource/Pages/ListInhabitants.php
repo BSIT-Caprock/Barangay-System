@@ -13,14 +13,8 @@ class ListInhabitants extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            // Actions\CreateAction::make(),
-        ];
-    }
-
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            //
+            \App\FilamentExcel\Actions\Pages\ExportTableAction::make(),
+            Actions\CreateAction::make(),
         ];
     }
 }

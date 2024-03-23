@@ -16,18 +16,7 @@ class ListDocuments extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            ExportAction::make()
-                ->label('Export table')
-                ->color('gray')
-                ->exports([
-                    ExcelExport::make('export_table')
-                        ->fromTable()
-                        ->askForWriterType(options: [
-                            Excel::CSV => 'Comma Separated Values (*.csv)',
-                            Excel::XLS => 'Microsoft Excel 97-2003 Worksheet (*.xls)',
-                            Excel::XLSX => 'Microsoft Excel Worksheet (*.xlsx)',
-                        ])
-                ]),
+            \App\FilamentExcel\Actions\Pages\ExportTableAction::make(),
             Actions\CreateAction::make()
                 ->label('Upload document')
                 ->modalHeading('Upload document')

@@ -13,7 +13,8 @@ class ListPersonWithDisabilities extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            // Actions\CreateAction::make(),
+            \App\FilamentExcel\Actions\Pages\ExportTableAction::make(),
+            Actions\CreateAction::make()->url(null),
         ];
     }
 }
