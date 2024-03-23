@@ -106,9 +106,9 @@ class PersonWithDisabilityResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()->url(null),
 
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->url(null),
 
             ])
             ->bulkActions([
