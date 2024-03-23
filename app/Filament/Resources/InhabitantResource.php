@@ -151,12 +151,11 @@ class InhabitantResource extends Resource
             )
             ->actions(
                 [
-                    Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
+                    Tables\Actions\ViewAction::make(),
 
-                    Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+                    Tables\Actions\EditAction::make(),
 
-                ],
-                Tables\Enums\ActionsPosition::BeforeColumns
+                ]
             )
             ->bulkActions(
                 [

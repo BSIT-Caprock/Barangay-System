@@ -60,14 +60,14 @@ class DocumentResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\Action::make('download')->iconButton()
+                Tables\Actions\Action::make('download')
                     ->icon('heroicon-m-arrow-down-tray')
                     ->action(function (Document $record) {
                         return response()->download($record->full_path, $record->filename)->deleteFileAfterSend();
                     }),
-                Tables\Actions\EditAction::make()->iconButton()->url(null),
-                Tables\Actions\DeleteAction::make()->iconButton(),
-            ], Tables\Enums\ActionsPosition::BeforeColumns)
+                Tables\Actions\EditAction::make()->url(null),
+                Tables\Actions\DeleteAction::make(),
+            ])
             ->bulkActions([
                 TableExportBulkAction::make(),
                 // Tables\Actions\RestoreBulkAction::make(),

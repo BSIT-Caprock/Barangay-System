@@ -68,11 +68,10 @@ class FamilyResource extends Resource
             )
             ->actions(
                 [
-                    Tables\Actions\ViewAction::make()->iconButton()->color('primary'),
+                    Tables\Actions\ViewAction::make(),
 
-                    Tables\Actions\EditAction::make()->iconButton()->color('primary'),
-                ],
-                Tables\Enums\ActionsPosition::BeforeColumns
+                    Tables\Actions\EditAction::make(),
+                ]
             )
             ->bulkActions(
                 [

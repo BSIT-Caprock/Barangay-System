@@ -115,11 +115,10 @@ class ResidencyCertificateResource extends Resource
             )
             ->actions(
                 [
-                    Tables\Actions\EditAction::make()->iconButton()->color('primary'),
+                    Tables\Actions\EditAction::make(),
 
-                    DownloadWordDocumentAction::make('download_document')->iconButton(),
-                ],
-                Tables\Enums\ActionsPosition::BeforeColumns
+                    DownloadWordDocumentAction::make('download_document'),
+                ]
             )
             ->bulkActions(
                 [

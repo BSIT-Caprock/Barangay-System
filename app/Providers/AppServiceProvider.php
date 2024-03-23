@@ -13,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(\Filament\Tables\Table::class, \App\Filament\Tables\Table::class);
+        $this->app->bind(\Filament\Tables\Actions\Action::class, \App\Filament\Tables\Actions\Action::class);
+        $this->app->bind(\Filament\Tables\Actions\ViewAction::class, \App\Filament\Tables\Actions\ViewAction::class);
+        $this->app->bind(\Filament\Tables\Actions\EditAction::class, \App\Filament\Tables\Actions\EditAction::class);
+        $this->app->bind(\Filament\Tables\Actions\DeleteAction::class, \App\Filament\Tables\Actions\DeleteAction::class);
     }
 
     /**
