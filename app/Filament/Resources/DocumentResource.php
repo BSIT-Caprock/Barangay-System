@@ -60,11 +60,9 @@ class DocumentResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\Action::make('download')
-                    ->icon('heroicon-m-arrow-down-tray')
-                    ->action(function (Document $record) {
-                        return response()->download($record->full_path, $record->filename)->deleteFileAfterSend();
-                    }),
+                \App\Filament\Tables\Actions\DownloadAction::make()->action(function (Document $record) {
+                    return response()->download($record->full_path, $record->filename)->deleteFileAfterSend();
+                }),
                 Tables\Actions\EditAction::make()->url(null),
                 Tables\Actions\DeleteAction::make(),
             ])
