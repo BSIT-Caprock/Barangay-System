@@ -115,4 +115,9 @@ class MembersRelationManager extends RelationManager
                 fn (Builder $query) => $query->withoutGlobalScopes([SoftDeletingScope::class])
             );
     }
+
+    public function isReadOnly(): bool
+    {
+        return false;
+    }
 }
