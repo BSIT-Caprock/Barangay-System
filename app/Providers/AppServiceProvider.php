@@ -9,15 +9,24 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
+     * All of the container bindings that should be registered.
+     *
+     * @var array
+     */
+    public $bindings = [
+        \Filament\Tables\Table::class => \App\Filament\Tables\Table::class,
+        \Filament\Tables\Actions\Action::class => \App\Filament\Tables\Actions\Action::class,
+        \Filament\Tables\Actions\ViewAction::class => \App\Filament\Tables\Actions\ViewAction::class,
+        \Filament\Tables\Actions\EditAction::class => \App\Filament\Tables\Actions\EditAction::class,
+        \Filament\Tables\Actions\DeleteAction::class => \App\Filament\Tables\Actions\DeleteAction::class,
+    ];
+
+    /**
      * Register any application services.
      */
     public function register(): void
     {
-        $this->app->bind(\Filament\Tables\Table::class, \App\Filament\Tables\Table::class);
-        $this->app->bind(\Filament\Tables\Actions\Action::class, \App\Filament\Tables\Actions\Action::class);
-        $this->app->bind(\Filament\Tables\Actions\ViewAction::class, \App\Filament\Tables\Actions\ViewAction::class);
-        $this->app->bind(\Filament\Tables\Actions\EditAction::class, \App\Filament\Tables\Actions\EditAction::class);
-        $this->app->bind(\Filament\Tables\Actions\DeleteAction::class, \App\Filament\Tables\Actions\DeleteAction::class);
+        //
     }
 
     /**
