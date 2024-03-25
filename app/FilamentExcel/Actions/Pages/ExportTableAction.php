@@ -7,6 +7,11 @@ use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ExportTableAction extends \pxlrbt\FilamentExcel\Actions\Pages\ExportAction
 {
+    public static function getDefaultName(): ?string
+    {
+        return 'export_table';
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
