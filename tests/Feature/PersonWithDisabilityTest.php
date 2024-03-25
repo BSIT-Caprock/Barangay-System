@@ -2,11 +2,9 @@
 
 use App\Filament\Resources\PersonWithDisabilityResource\Pages\CreatePersonWithDisability;
 use App\Filament\Resources\PersonWithDisabilityResource\Pages\ListPersonWithDisabilities;
-use App\Models\Barangay;
 use App\Models\Disability;
 use App\Models\DisabilityCause;
 use App\Models\PersonWithDisability;
-use App\Scopes\CurrentBarangayScope;
 use Database\Factories\PersonWithDisabilityFactory;
 use Database\Factories\UserFactory;
 use Database\Seeders\PersonsWithDisabilitiesSeeder;
@@ -21,7 +19,7 @@ use function PHPUnit\Framework\assertTrue;
 beforeEach(function () {
     // seed database
     seed();
-    // create test user with barangay
+    // create test user
     $user = UserFactory::new()->create();
     // login
     auth()->login($user);
@@ -29,7 +27,6 @@ beforeEach(function () {
 
 test('table columns', function () {
     livewire(ListPersonWithDisabilities::class)
-        ->assertTableColumnExists('barangay')
         ->assertTableColumnExists('last_name')
         ->assertTableColumnExists('first_name')
         ->assertTableColumnExists('middle_name')
@@ -42,7 +39,6 @@ test('table columns', function () {
 test('form fields', function () {
     seed(PersonsWithDisabilitiesSeeder::class);
     livewire(CreatePersonWithDisability::class)
-        ->assertFormFieldExists('barangay_id')
         ->assertFormFieldExists('last_name')
         ->assertFormFieldExists('first_name')
         ->assertFormFieldExists('middle_name')
@@ -78,14 +74,4 @@ test('model factory', function () {
     foreach ($models as $model) {
         assertModelExists($model);
     }
-});
-
-test('autofill barangay', function () {
-    seed(PersonsWithDisabilitiesSeeder::class);
-    $model = PersonWithDisabilityFactory::new()->create(['barangay_id' => null]);
-    assertEquals($model->barangay->id, auth()->user()->barangay->id);
-});
-
-test('current barangay scope', function () {
-    assertTrue(PersonWithDisability::hasGlobalScope(CurrentBarangayScope::class));
 });

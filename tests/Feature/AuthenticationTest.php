@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Barangay;
 use App\Models\User;
 use Filament\Pages\Auth\Login;
 use Filament\Pages\Auth\PasswordReset\RequestPasswordReset;

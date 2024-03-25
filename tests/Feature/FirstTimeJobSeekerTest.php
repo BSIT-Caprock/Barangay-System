@@ -3,7 +3,6 @@
 use App\Filament\Resources\FirstTimeJobSeekerResource\Pages\CreateFirstTimeJobSeeker;
 use App\Filament\Resources\FirstTimeJobSeekerResource\Pages\EditFirstTimeJobSeeker;
 use App\Filament\Resources\FirstTimeJobSeekerResource\Pages\ListFirstTimeJobSeekers;
-use App\Models\Barangay;
 use App\Models\FirstTimeJobSeeker;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
@@ -19,7 +18,7 @@ use function PHPUnit\Framework\assertFalse;
 
 function seekerFactory()
 {
-    return FirstTimeJobSeeker::factory()->for(auth()->user()->barangay);
+    return FirstTimeJobSeeker::factory();
 }
 
 beforeEach(function () {

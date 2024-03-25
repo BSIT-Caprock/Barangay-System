@@ -50,11 +50,6 @@ class User extends Authenticatable implements FilamentUser
         'password' => 'hashed',
     ];
 
-    protected function initializeBelongsToBarangay()
-    {
-        // disabled
-    }
-
     public function canAccessPanel(Panel $panel): bool
     {
         // TODO use proper authorization

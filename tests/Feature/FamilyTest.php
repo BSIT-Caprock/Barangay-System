@@ -4,7 +4,6 @@ use App\Filament\Resources\FamilyResource;
 use App\Filament\Resources\FamilyResource\Pages\CreateFamily;
 use App\Filament\Resources\FamilyResource\Pages\EditFamily;
 use App\Filament\Resources\FamilyResource\Pages\ListFamilies;
-use App\Models\Barangay;
 use App\Models\User;
 use Database\Factories\FamilyFactory;
 use Database\Factories\FamilyMemberFactory;
@@ -32,7 +31,6 @@ beforeEach(function () {
 test('can list families', function () {
     $records = FamilyFactory::new()
         ->count(3)
-        ->forCurrentBarangay()
         ->forRandomLocation()
         ->create();
 
@@ -48,7 +46,6 @@ test('can add family', function () {
     get(CreateFamily::getUrl())->assertOk();
 
     $record = FamilyFactory::new()
-        ->forCurrentBarangay()
         ->forRandomLocation()
         ->make();
 
@@ -62,14 +59,12 @@ test('can add family', function () {
 
 test('can edit family', function () {
     $record = FamilyFactory::new()
-        ->forCurrentBarangay()
         ->forRandomLocation()
         ->create();
 
     $currentData = getModelFillable($record);
 
     $newData = FamilyFactory::new()
-        ->forCurrentBarangay()
         ->forRandomLocation()
         ->raw();
 
@@ -86,7 +81,6 @@ test('can edit family', function () {
 
 test('can delete family', function () {
     $record = FamilyFactory::new()
-        ->forCurrentBarangay()
         ->forRandomLocation()
         ->create();
 
@@ -99,7 +93,6 @@ test('can delete family', function () {
 
 test('can restore family', function () {
     $record = FamilyFactory::new()
-        ->forCurrentBarangay()
         ->forRandomLocation()
         ->create();
 
@@ -116,7 +109,6 @@ test('can restore family', function () {
 
 test('can list family members', function () {
     $record = FamilyFactory::new()
-        ->forCurrentBarangay()
         ->forRandomLocation()
         ->has(FamilyMemberFactory::new()->count(3), 'members')
         ->create();
@@ -134,7 +126,6 @@ test('can list family members', function () {
 
 test('can add family members', function () {
     $record = FamilyFactory::new()
-        ->forCurrentBarangay()
         ->forRandomLocation()
         ->create();
 
@@ -154,7 +145,6 @@ test('can add family members', function () {
 
 test('can edit family member', function () {
     $record = FamilyFactory::new()
-        ->forCurrentBarangay()
         ->forRandomLocation()
         ->has(FamilyMemberFactory::new(), 'members')
         ->create();

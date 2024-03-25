@@ -3,7 +3,6 @@
 use App\Filament\Resources\InhabitantResource\Pages\CreateInhabitant;
 use App\Filament\Resources\InhabitantResource\Pages\EditInhabitant;
 use App\Filament\Resources\InhabitantResource\Pages\ListInhabitants;
-use App\Models\Barangay;
 use App\Models\Inhabitant;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
@@ -21,7 +20,7 @@ use function PHPUnit\Framework\assertNotContains;
 beforeEach(function () {
     // seed database
     seed();
-    // create test user with barangay
+    // create test user
     $user = User::factory()->create();
     // login
     auth()->login($user);
@@ -150,5 +149,5 @@ test('can export selected records to XLS', function () {
 
 function inhabitantFactory()
 {
-    return Inhabitant::factory()->for(auth()->user()->barangay);
+    return Inhabitant::factory();
 }

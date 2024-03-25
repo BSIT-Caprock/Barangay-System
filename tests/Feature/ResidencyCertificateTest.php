@@ -2,7 +2,6 @@
 
 use App\Filament\Resources\ResidencyCertificateResource;
 use App\Filament\Resources\ResidencyCertificateResource\Pages\ManageResidencyCertificates;
-use App\Models\Barangay;
 use Database\Factories\UserFactory;
 
 use function Pest\Laravel\get;
@@ -12,7 +11,7 @@ use function Pest\Livewire\livewire;
 beforeEach(function () {
     // seed database
     seed();
-    // create test user with barangay
+    // create test user
     $user = UserFactory::new()->create();
     // login
     auth()->login($user);

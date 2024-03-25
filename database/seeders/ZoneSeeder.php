@@ -15,7 +15,6 @@ class ZoneSeeder extends Seeder
      */
     public function run(): void
     {
-        $barangayId = 25;
         $zones = [
             'Zone I',
             'Zone II',
