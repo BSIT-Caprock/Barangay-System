@@ -26,7 +26,7 @@ beforeEach(function () {
     // seed database
     seed();
     // create test user with barangay
-    $user = User::factory()->for(Barangay::find(1))->create();
+    $user = User::factory()->create();
     // login
     auth()->login($user);
 });

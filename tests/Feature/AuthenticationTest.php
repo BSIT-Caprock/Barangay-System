@@ -28,7 +28,7 @@ test('can redirect to login page', function () {
 
 test('user can log in', function () {
     // create user
-    User::factory()->for(Barangay::find(1))->create([
+    User::factory()->create([
         'email' => 'email@test.com',
         'password' => 'testpass',
     ]);

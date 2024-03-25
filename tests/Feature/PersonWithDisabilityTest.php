@@ -22,7 +22,7 @@ beforeEach(function () {
     // seed database
     seed();
     // create test user with barangay
-    $user = UserFactory::new()->for(Barangay::find(1))->create();
+    $user = UserFactory::new()->create();
     // login
     auth()->login($user);
 });
