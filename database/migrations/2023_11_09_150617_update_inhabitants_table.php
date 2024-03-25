@@ -86,10 +86,6 @@ return new class extends Migration
         Schema::table('inhabitants', function (Blueprint $table) use ($historized) {
             $historized($table);
         });
-
-        Schema::table('inhabitant_history', function (Blueprint $table) use ($historized) {
-            $historized($table);
-        });
     }
 
     /**
@@ -110,10 +106,6 @@ return new class extends Migration
         };
 
         Schema::table('inhabitants', function (Blueprint $table) use ($historized) {
-            $historized($table);
-        });
-
-        Schema::table('inhabitant_history', function (Blueprint $table) use ($historized) {
             $historized($table);
         });
 
