@@ -22,8 +22,8 @@ class FirstTimeJobSeekerResource extends Resource
     protected static ?string $model = FirstTimeJobSeeker::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
-
-    protected static ?string $navigationGroup = 'DILG';
+    
+    protected static ?string $navigationGroup = 'Others';
 
     public static function getNavigationBadge(): ?string
     {

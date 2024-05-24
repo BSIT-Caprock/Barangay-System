@@ -22,7 +22,7 @@ class PersonWithDisabilityResource extends Resource
 
     protected static ?string $navigationIcon = 'icon-wheelchair';
 
-    protected static ?string $navigationGroup = 'MSWDO';
+    protected static ?string $navigationGroup = 'Others';
 
     protected static ?string $pluralModelLabel = 'Persons with Disabilities';
 

@@ -25,6 +25,8 @@ class ResidencyCertificateResource extends Resource
 
     protected static ?string $navigationIcon = 'icon-certificate-24';
 
+    protected static ?string $navigationLabel = 'Residency';
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();

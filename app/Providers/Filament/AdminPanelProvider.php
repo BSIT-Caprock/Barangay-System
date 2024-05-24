@@ -3,8 +3,14 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
+use App\Filament\Resources\FamilyResource;
+use App\Filament\Resources\FirstTimeJobSeekerResource;
+use App\Filament\Resources\HouseholdResource;
 use App\Filament\Resources\HouseholdResource\Widgets\HouseholdCount;
+use App\Filament\Resources\InhabitantResource;
 use App\Filament\Resources\InhabitantResource\Widgets\TotalInhabitants;
+use App\Filament\Resources\PersonWithDisabilityResource;
+use App\Filament\Resources\ResidencyCertificateResource;
 use App\Filament\Widgets\InhabitantAgeGroupsChart;
 use App\Filament\Widgets\InhabitantCivilStatusRatioChart;
 use App\Filament\Widgets\MaleAndFemaleInhabitantsRatioChart;
@@ -51,28 +57,44 @@ class AdminPanelProvider extends PanelProvider
             ])
             // layout and navigation
             ->spa()
+            ->topNavigation()
+            ->maxContentWidth(\Filament\Support\Enums\MaxWidth::Full)
+            // resources
+            ->resources([
+                HouseholdResource::class,
+                FamilyResource::class,
+                InhabitantResource::class,
+                FirstTimeJobSeekerResource::class,
+                PersonWithDisabilityResource::class,
+                ResidencyCertificateResource::class,
+            ])
+            // ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
+            ->navigationGroups([
+                'RBI',
+                'Others',
+                'Certificates',
+                'Help',
+            ])
+            // pages
+            // ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->pages([
+                Dashboard::class,
+            ])
             ->navigationItems([
                 // this is for the user manual page
                 NavigationItem::make('User Manual')
                     //url will be change when the system is completed
                     ->url('https://bit.ly/40pP3f1', shouldOpenInNewTab: true)
                     ->icon('heroicon-s-information-circle')
-                    ->group('Guide')
+                    ->group('Help')
                     ->sort(2),
                 // this is for the feedback to be fill up, you can change the link
                 NavigationItem::make('Feedback')
                     //url will be change when it need to be updated
                     ->url('https://forms.gle/oofsT22pbQNM8d2x8', shouldOpenInNewTab: true)
                     ->icon('heroicon-s-link')
-                    ->group('Guide')
+                    ->group('Help')
                     ->sort(2),
-            ])
-            // resources
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            // pages
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                Dashboard::class,
             ])
             // widgets
             // ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
