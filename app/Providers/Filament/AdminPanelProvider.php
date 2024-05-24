@@ -57,8 +57,6 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-s-information-circle')
                     ->group('Guide')
                     ->sort(2),
-            ])
-            ->navigationItems([
                 // this is for the feedback to be fill up, you can change the link
                 NavigationItem::make('Feedback')
                     //url will be change when it need to be updated
