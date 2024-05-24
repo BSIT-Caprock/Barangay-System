@@ -31,23 +31,26 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            // identification
             ->default()
-            ->spa()
             ->id('admin')
-            ->brandName(env('BRGY_FULL'))
             ->path('/')
+            ->brandName(env('BRGY_FULL'))
+            // authentication
             ->login()
             ->registration()
-            ->passwordReset()
             ->emailVerification()
+            ->passwordReset()
+            // database
             ->databaseNotifications()
+            // icon and color
+            ->favicon(asset('images/barugo-logo.jpg'))
+            ->defaultAvatarProvider(SvgAvatarsProviders::class)
             ->colors([
                 'primary' => Color::Blue,
             ])
-            ->plugins([
-                SpotlightPlugin::make(),
-            ])
-            ->defaultAvatarProvider(SvgAvatarsProviders::class)
+            // layout and navigation
+            ->spa()
             ->sidebarCollapsibleOnDesktop()
             ->navigationItems([
                 // this is for the user manual page
@@ -65,12 +68,14 @@ class AdminPanelProvider extends PanelProvider
                     ->group('Guide')
                     ->sort(2),
             ])
-            ->favicon(asset('images/barugo-logo.jpg'))
+            // resources
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
+            // pages
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Dashboard::class,
             ])
+            // widgets
             // ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 MaleAndFemaleInhabitantsRatioChart::class,
@@ -79,6 +84,7 @@ class AdminPanelProvider extends PanelProvider
                 TotalInhabitants::class,
                 HouseholdCount::class,
             ])
+            // middleware
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -92,6 +98,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            // plugins
+            ->plugins([
+                SpotlightPlugin::make(),
             ]);
     }
 }
