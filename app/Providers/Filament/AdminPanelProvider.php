@@ -44,39 +44,29 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
-
             ->plugins([
                 SpotlightPlugin::make(),
             ])
-
             ->defaultAvatarProvider(SvgAvatarsProviders::class)
-
             ->sidebarCollapsibleOnDesktop()
-
             ->navigationItems([
-
                 // this is for the user manual page
                 NavigationItem::make('User Manual')
-
                     //url will be change when the system is completed
                     ->url('https://bit.ly/40pP3f1', shouldOpenInNewTab: true)
                     ->icon('heroicon-s-information-circle')
                     ->group('Guide')
                     ->sort(2),
             ])
-
             ->navigationItems([
-
                 // this is for the feedback to be fill up, you can change the link
                 NavigationItem::make('Feedback')
-
                     //url will be change when it need to be updated
                     ->url('https://forms.gle/oofsT22pbQNM8d2x8', shouldOpenInNewTab: true)
                     ->icon('heroicon-s-link')
                     ->group('Guide')
                     ->sort(2),
             ])
-
             ->favicon(asset('images/barugo-logo.jpg'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -90,7 +80,6 @@ class AdminPanelProvider extends PanelProvider
                 InhabitantAgeGroupsChart::class,
                 TotalInhabitants::class,
                 HouseholdCount::class,
-
             ])
             ->middleware([
                 EncryptCookies::class,
