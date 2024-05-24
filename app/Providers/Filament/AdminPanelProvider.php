@@ -51,7 +51,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             // layout and navigation
             ->spa()
-            ->sidebarCollapsibleOnDesktop()
             ->navigationItems([
                 // this is for the user manual page
                 NavigationItem::make('User Manual')
