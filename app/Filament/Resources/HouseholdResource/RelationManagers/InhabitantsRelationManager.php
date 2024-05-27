@@ -30,6 +30,13 @@ class InhabitantsRelationManager extends RelationManager
         return InhabitantResource::table($table)
             ->inverseRelationship('household')
             ->recordTitle(fn (Inhabitant $record) => $record->full_name)
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DissociateAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
+            ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
                 Tables\Actions\AssociateAction::make()
