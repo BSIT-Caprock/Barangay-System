@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\HouseholdResource\RelationManagers;
 
 use App\Filament\Resources\InhabitantResource;
+use App\Models\Inhabitant;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -26,26 +27,13 @@ class InhabitantsRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
-        return InhabitantResource::table($table);
-        // return $table
-        //     ->recordTitleAttribute('full_name')
-        //     ->columns([
-        //         Tables\Columns\TextColumn::make('full_name'),
-        //     ])
-        //     ->filters([
-        //         //
-        //     ])
-        //     ->headerActions([
-        //         Tables\Actions\CreateAction::make(),
-        //     ])
-        //     ->actions([
-        //         Tables\Actions\EditAction::make(),
-        //         Tables\Actions\DeleteAction::make(),
-        //     ])
-        //     ->bulkActions([
-        //         Tables\Actions\BulkActionGroup::make([
-        //             Tables\Actions\DeleteBulkAction::make(),
-        //         ]),
-        //     ]);
+        return InhabitantResource::table($table)
+            ->inverseRelationship('household')
+            ->recordTitle(fn (Inhabitant $record) => $record->full_name)
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+                Tables\Actions\AssociateAction::make()
+                    ->recordSelectSearchColumns(['last_name', 'first_name', 'middle_name']),
+            ]);
     }
 }
