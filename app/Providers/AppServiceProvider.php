@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
         \Filament\Tables\Actions\ViewAction::class => \App\Filament\Tables\Actions\ViewAction::class,
         \Filament\Tables\Actions\EditAction::class => \App\Filament\Tables\Actions\EditAction::class,
         \Filament\Tables\Actions\DeleteAction::class => \App\Filament\Tables\Actions\DeleteAction::class,
+        \Filament\Tables\Actions\DissociateAction::class => \App\Filament\Tables\Actions\DissociateAction::class
     ];
 
     /**
