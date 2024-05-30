@@ -8,6 +8,7 @@ use App\Models\Credential;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -35,7 +36,12 @@ class CredentialResource extends Resource
                     ->required()
                     ->numeric()
                     ->prefix('₱')
-                    ->formatStateUsing(fn (mixed $state, string $operation) => $operation === 'edit' ? number_format($state, 2) : $state),
+                    ->formatStateUsing(fn (mixed $state, string $operation) => $operation === 'edit' ? number_format($state, 2) : $state)
+                    ->mask(RawJs::make(
+                        <<<'JS'
+                        $money($input)
+                        JS
+                    )),
                 Forms\Components\DatePicker::make('date_issued')
                     ->required()
                     ->timezone('Asia/Manila')
