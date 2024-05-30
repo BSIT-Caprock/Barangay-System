@@ -16,4 +16,9 @@ class CredentialTemplate extends Model
         'filepath',
         'title',
     ];
+
+    public function outputs()
+    {
+        return $this->hasMany(Credential::class, 'credential_template_id');
+    }
 }
