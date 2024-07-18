@@ -78,5 +78,9 @@ class AppPanelProvider extends PanelProvider
                 ->displayFormat('F j, Y')
                 ->weekStartsOnSunday();
         });
+        \Filament\Tables\Columns\Column::configureUsing(function (\Filament\Tables\Columns\Column $column) {
+            $column
+                ->sortable();
+        });
     }
 }

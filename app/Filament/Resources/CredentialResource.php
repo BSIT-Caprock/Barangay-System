@@ -56,31 +56,23 @@ class CredentialResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('receipt_number')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('receipt_amount')
                     ->numeric()
-                    ->sortable()
                     ->money('PHP'),
                 Tables\Columns\TextColumn::make('recipient')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('date_issued')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('template.title')
-                    ->sortable(),
+                    ->date(),
+                Tables\Columns\TextColumn::make('template.title'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
