@@ -20,8 +20,8 @@ class CredentialTemplateObserver
      */
     public function updated(CredentialTemplate $credentialTemplate): void
     {
-        if ($credentialTemplate->isDirty('filepath')) {
-            Storage::disk('local')->delete($credentialTemplate->getOriginal('filepath'));
+        if ($credentialTemplate->isDirty('file_path')) {
+            Storage::disk('local')->delete($credentialTemplate->getOriginal('file_path'));
         }
     }
 

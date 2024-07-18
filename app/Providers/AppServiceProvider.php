@@ -21,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Models\CredentialTemplate::observe(Observers\CredentialTemplateObserver::class);
+        //
     }
 }
