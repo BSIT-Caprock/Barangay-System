@@ -67,6 +67,10 @@ class AppPanelProvider extends PanelProvider
      */
     public function boot(): void
     {
+        \Filament\Forms\Components\Select::configureUsing(function (\Filament\Forms\Components\Select $select): void {
+            $select
+                ->native(false);
+        });
         \Filament\Forms\Components\DatePicker::configureUsing(function (\Filament\Forms\Components\DatePicker $datePicker): void {
             $datePicker
                 ->timezone('Asia/Manila')
