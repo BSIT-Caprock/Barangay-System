@@ -26,26 +26,26 @@ class CredentialResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('receipt_number')
                     ->required(),
-                Forms\Components\TextInput::make('recipient')
-                    ->required(),
-                Forms\Components\Select::make('credential_template_id')
-                    ->relationship('template', 'title')
-                    ->searchable()
-                    ->preload(),
-                Forms\Components\TextInput::make('total_amount')
+                Forms\Components\TextInput::make('receipt_amount')
                     ->required()
                     ->numeric()
                     ->prefix('₱')
                     ->formatStateUsing(fn (mixed $state, string $operation) => $operation === 'edit' ? number_format($state, 2) : $state)
                     ->mask(RawJs::make(
                         <<<'JS'
-                        $money($input)
-                        JS
+                            $money($input)
+                            JS
                     )),
+                Forms\Components\TextInput::make('recipient')
+                    ->required(),
                 Forms\Components\DatePicker::make('date_issued')
                     ->required()
                     ->default(today()),
-                Forms\Components\KeyValue::make('data')
+                Forms\Components\Select::make('credential_template_id')
+                    ->relationship('template', 'title')
+                    ->searchable()
+                    ->preload(),
+                Forms\Components\KeyValue::make('credential_template_data')
                     ->required()
                     ->columnSpanFull(),
             ]);
@@ -58,18 +58,17 @@ class CredentialResource extends Resource
                 Tables\Columns\TextColumn::make('receipt_number')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('recipient')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('template.title')
-                    ->label('Type')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('total_amount')
+                Tables\Columns\TextColumn::make('receipt_amount')
                     ->numeric()
                     ->sortable()
                     ->money('PHP'),
+                Tables\Columns\TextColumn::make('recipient')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('date_issued')
                     ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('template.title')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -86,7 +85,6 @@ class CredentialResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('credential_template_id')
-                    ->label('Type')
                     ->relationship('template', 'title')
                     ->searchable()
                     ->preload()

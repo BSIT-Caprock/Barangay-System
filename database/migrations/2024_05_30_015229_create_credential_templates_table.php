@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('credential_templates', function (Blueprint $table) {
             $table->id();
-            $table->string('filename');
-            $table->string('filepath');
+            $table->string('file_path');
             $table->string('title');
             $table->timestamps();
             $table->softDeletes();

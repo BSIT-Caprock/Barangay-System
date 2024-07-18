@@ -7,7 +7,6 @@ use App\Filament\Resources\CredentialTemplateResource\RelationManagers;
 use App\Models\CredentialTemplate;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -21,36 +20,25 @@ class CredentialTemplateResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $recordTitleAttribute = 'title';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('filepath')
+                Forms\Components\FileUpload::make('file_path')
                     ->required()
                     ->label('File')
                     ->disk('local')
                     ->directory('templates')
-                    ->storeFileNamesIn('filename')
-                    ->afterStateUpdated(static function (TemporaryUploadedFile $state, Set $set) {
-                        $set('title', pathinfo($state->getClientOriginalName())['filename']);
+                    ->storeFileNamesIn('file_name')
+                    ->downloadable()
+                    ->afterStateUpdated(static function (TemporaryUploadedFile $state, Forms\Get $get, Forms\Set $set, string $operation) {
+                        if ($operation == 'create' && blank($get('title'))) {
+                            $set('title', pathinfo($state->getClientOriginalName(), PATHINFO_FILENAME));
+                        }
                     }),
                 Forms\Components\TextInput::make('title'),
-                Forms\Components\TextInput::make('storage_path')
-                    ->label('Filepath')
-                    ->visibleOn('edit')
-                    ->disabled()
-                    ->dehydrated(false)
-                    ->formatStateUsing(static function (?string $state, string $operation, ?CredentialTemplate $record) {
-                        return $operation === 'edit' ? $record->filepath : $state;
-                    }),
-                Forms\Components\KeyValue::make('placeholders')
-                    ->visibleOn('edit')
-                    ->disabled()
-                    ->dehydrated(false)
-                    ->formatStateUsing(fn () => [
-                        'token_a|format_1' => 'value 1',
-                        'Label B|token_a|format_2' => 'value 2',
-                    ])
             ]);
     }
 
@@ -60,10 +48,9 @@ class CredentialTemplateResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('filename')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('filepath')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('file_path')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

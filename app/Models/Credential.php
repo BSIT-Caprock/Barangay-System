@@ -15,17 +15,17 @@ class Credential extends Model
 
     protected $fillable = [
         'receipt_number',
+        'receipt_amount',
         'recipient',
-        'credential_template_id',
-        'total_amount',
         'date_issued',
-        'data',
+        'credential_template_id',
+        'credential_template_data',
     ];
 
     protected $casts = [
-        'total_amount' => MoneyCast::class,
+        'receipt_amount' => MoneyCast::class,
         'date_issued' => 'date',
-        'data' => 'array',
+        'credential_template_data' => 'array',
     ];
 
     public function template(): BelongsTo
