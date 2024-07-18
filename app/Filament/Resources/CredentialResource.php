@@ -44,10 +44,6 @@ class CredentialResource extends Resource
                     )),
                 Forms\Components\DatePicker::make('date_issued')
                     ->required()
-                    ->timezone('Asia/Manila')
-                    ->native(false)
-                    ->displayFormat('F j, Y')
-                    ->weekStartsOnSunday()
                     ->default(today()),
                 Forms\Components\KeyValue::make('data')
                     ->required()

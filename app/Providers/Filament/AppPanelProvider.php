@@ -61,4 +61,18 @@ class AppPanelProvider extends PanelProvider
                 fn () => Blade::render('<x-filament-panels::theme-switcher />'),
             );
     }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        \Filament\Forms\Components\DatePicker::configureUsing(function (\Filament\Forms\Components\DatePicker $datePicker): void {
+            $datePicker
+                ->timezone('Asia/Manila')
+                ->native(false)
+                ->displayFormat('F j, Y')
+                ->weekStartsOnSunday();
+        });
+    }
 }
