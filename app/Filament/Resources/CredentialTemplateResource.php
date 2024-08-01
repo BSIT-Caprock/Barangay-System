@@ -40,7 +40,8 @@ class CredentialTemplateResource extends Resource
                             $set('title', pathinfo($state->getClientOriginalName(), PATHINFO_FILENAME));
                         }
                     }),
-                Forms\Components\TextInput::make('title'),
+                Forms\Components\TextInput::make('title')
+                    ->required(),
             ]);
     }
 
