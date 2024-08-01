@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Forms;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -9,6 +10,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Tables;
 use Filament\View\PanelsRenderHook;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -76,18 +78,22 @@ class AppPanelProvider extends PanelProvider
      */
     public function boot(): void
     {
-        \Filament\Forms\Components\Select::configureUsing(function (\Filament\Forms\Components\Select $select): void {
+        Forms\Components\Select::configureUsing(function (Forms\Components\Select $select): void {
             $select
                 ->native(false);
         });
-        \Filament\Forms\Components\DatePicker::configureUsing(function (\Filament\Forms\Components\DatePicker $datePicker): void {
-            $datePicker
-                ->timezone('Asia/Manila')
+        Forms\Components\DateTimePicker::configureUsing(function (Forms\Components\DateTimePicker $dateTimePicker): void {
+            $dateTimePicker
                 ->native(false)
-                ->displayFormat('F j, Y')
+                ->timezone('Asia/Manila')
+                ->displayFormat('F j, Y h:i A')
                 ->weekStartsOnSunday();
         });
-        \Filament\Tables\Columns\Column::configureUsing(function (\Filament\Tables\Columns\Column $column) {
+        Forms\Components\DatePicker::configureUsing(function (Forms\Components\DatePicker $datePicker): void {
+            $datePicker
+                ->displayFormat('F j, Y');
+        });
+        Tables\Columns\Column::configureUsing(function (Tables\Columns\Column $column): void {
             $column
                 ->sortable();
         });
