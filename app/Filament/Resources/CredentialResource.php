@@ -31,11 +31,8 @@ class CredentialResource extends Resource
                     ->numeric()
                     ->prefix('₱')
                     ->formatStateUsing(fn (mixed $state, string $operation) => $operation === 'edit' ? number_format($state, 2) : $state)
-                    ->mask(RawJs::make(
-                        <<<'JS'
-                            $money($input)
-                            JS
-                    )),
+                    ->mask(RawJs::make('$money($input)'))
+                    ->stripCharacters(','),
                 Forms\Components\TextInput::make('recipient')
                     ->required(),
                 Forms\Components\DatePicker::make('date_issued')
