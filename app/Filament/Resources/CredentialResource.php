@@ -30,9 +30,11 @@ class CredentialResource extends Resource
                     ->required()
                     ->numeric()
                     ->prefix('₱')
-                    ->formatStateUsing(fn (mixed $state, string $operation) => $operation === 'edit' ? number_format($state, 2) : $state)
+                    ->formatStateUsing(fn (mixed $state) => blank($state) ?  '' : number_format($state, 2))
                     ->mask(RawJs::make('$money($input)'))
-                    ->stripCharacters(','),
+                    ->stripCharacters(',')
+                    ->afterStateUpdated(fn (Forms\Set $set, mixed $state) => blank($state) ?  '' : $set('receipt_amount', number_format($state, 2)))
+                    ->live(onBlur: true),
                 Forms\Components\TextInput::make('recipient')
                     ->required(),
                 Forms\Components\DatePicker::make('date_issued')
