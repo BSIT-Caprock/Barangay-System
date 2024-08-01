@@ -22,6 +22,15 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AppPanelProvider extends PanelProvider
 {
+    /**
+     * All of the container bindings that should be registered.
+     *
+     * @var array
+     */
+    public $bindings = [
+        \Filament\Tables\Columns\TextColumn::class => \App\Bindings\Filament\Tables\Columns\TextColumn::class,
+    ];
+
     public function panel(Panel $panel): Panel
     {
         return $panel
