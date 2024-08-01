@@ -18,6 +18,8 @@ class CredentialTemplateResource extends Resource
 {
     protected static ?string $model = CredentialTemplate::class;
 
+    protected static ?string $navigationParentItem = 'Credentials';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $recordTitleAttribute = 'title';
