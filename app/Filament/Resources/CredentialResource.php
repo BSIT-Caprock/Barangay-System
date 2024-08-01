@@ -40,7 +40,13 @@ class CredentialResource extends Resource
                     ->required(),
                 Forms\Components\DatePicker::make('date_issued')
                     ->required()
-                    ->default(today()),
+                    ->hintAction(
+                            Forms\Components\Actions\Action::make('dateIssuedToday')
+                                ->label('Today')
+                                ->action(function (Forms\Set $set) {
+                                    $set('date_issued', today());
+                                })
+                    ),
                 Forms\Components\Select::make('credential_template_id')
                     ->relationship('template', 'title')
                     ->searchable()
