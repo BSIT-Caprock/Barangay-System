@@ -59,7 +59,7 @@ class CredentialResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('receipt_amount')
                     ->numeric()
-                    ->money('PHP'),
+                    ->money(),
                 Tables\Columns\TextColumn::make('recipient')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date_issued')
