@@ -18,7 +18,7 @@ class CredentialTemplateResource extends Resource
 {
     protected static ?string $model = CredentialTemplate::class;
 
-    protected static ?string $navigationParentItem = 'Credentials';
+    protected static ?string $modelLabel = 'template';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -101,5 +101,10 @@ class CredentialTemplateResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getNavigationParentItem(): ?string
+    {
+        return CredentialResource::getNavigationLabel();
     }
 }

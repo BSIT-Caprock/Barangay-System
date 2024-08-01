@@ -18,7 +18,11 @@ class CredentialResource extends Resource
 {
     protected static ?string $model = Credential::class;
 
+    protected static ?string $modelLabel = 'certificate / permit';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $pluralModelLabel = 'certificates / permits';
 
     public static function form(Form $form): Form
     {
