@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class Template extends Model
 {
@@ -47,8 +48,10 @@ class Template extends Model
 
     protected function macros(): Attribute
     {
+
+        $processor = new TemplateProcessor(Storage::disk($this::$disk)->path($this->file_path));
         return Attribute::make(
-            get: fn () => ['test'],
+            get: fn () => $processor->getVariables(),
         );
     }
 }
