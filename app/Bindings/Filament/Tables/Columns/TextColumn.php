@@ -8,12 +8,12 @@ class TextColumn extends \Filament\Tables\Columns\TextColumn
 {
     public function date(?string $format = null, ?string $timezone = null): static
     {
-        return parent::date($format ?? 'F j, Y', $timezone);
+        return parent::date($format ?? 'F j, Y', $timezone ?? 'Asia/Manila');
     }
 
     public function dateTime(?string $format = null, ?string $timezone = null): static
     {
-        return parent::dateTime($format ?? 'F j, Y h:i A', $timezone);
+        return parent::dateTime($format ?? 'F j, Y h:i A', $timezone ?? 'Asia/Manila');
     }
 
     public function money(null|string|Closure $currency = null, int $divideBy = 0, null|string|Closure $locale = null): static
