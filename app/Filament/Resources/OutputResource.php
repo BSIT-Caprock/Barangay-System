@@ -15,7 +15,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Arr;
-use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 
 class OutputResource extends Resource
 {
@@ -74,7 +74,12 @@ class OutputResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('template.title'),
                 Tables\Columns\TextColumn::make('template_data')
-                    ->getStateUsing(fn ($record) => json_encode($record->template_data)),
+                    ->badge()
+                    ->getStateUsing(function (Output $record) {
+                        $template_data = $record->template_data;
+
+                        return array_map(fn ($k, $v) => "$k: $v", array_keys($template_data), $template_data);
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->toggleable(isToggledHiddenByDefault: true),
