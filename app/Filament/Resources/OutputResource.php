@@ -8,6 +8,7 @@ use App\Models\Generator\Template;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -34,9 +35,36 @@ class OutputResource extends Resource
                     ->required()
                     ->searchable()
                     ->preload()
-                    ->live(),
+                    ->live()
+                    ->afterStateUpdated(function (Set $set, $state) {
+                        if (empty($state)) {
+                            return;
+                        }
+                        $set('template_data', array_fill_keys(Template::find($state)->macros, null));
+                    }),
                 Forms\Components\KeyValue::make('template_data')
-                    ->required(),
+                    ->required()
+                    ->visible(fn (Get $get) => (bool) $get('template_id'))
+                    ->editableKeys(false) //! do not remove
+                    ->dehydrateStateUsing(fn ($state) => Arr::dot($state)) //! do not remove
+                    ->hintAction(
+                        Forms\Components\Actions\Action::make('download')
+                            ->icon('heroicon-c-arrow-down-tray')
+                            ->action(function (Get $get) {
+                                if (empty($get('template_id'))) {
+                                    return;
+                                }
+                                /** @var Template */
+                                $template = Template::find($get('template_id'));
+                                $processor = $template->makeProcessor();
+                                $processor->setValues($get('template_data'));
+                                $filename = \Illuminate\Support\Str::ulid().$template->file_name;
+                                $filepath = Storage::path($filename);
+                                $processor->saveAs($filepath);
+
+                                return response()->download($filepath, $filename)->deleteFileAfterSend();
+                            })
+                    ),
             ]);
     }
 
