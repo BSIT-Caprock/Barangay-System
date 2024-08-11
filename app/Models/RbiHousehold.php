@@ -18,6 +18,6 @@ class RbiHousehold extends Model
 
     public function inhabitants(): HasMany
     {
-        return $this->hasMany(RbiInhabitant::class);
+        return $this->hasMany(RbiInhabitant::class, 'rbi_household_id');
     }
 }

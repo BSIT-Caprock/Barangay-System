@@ -31,6 +31,6 @@ class RbiInhabitant extends Model
 
     public function household(): BelongsTo
     {
-        return $this->belongsTo(RbiHousehold::class);
+        return $this->belongsTo(RbiHousehold::class, 'rbi_household_id');
     }
 }
