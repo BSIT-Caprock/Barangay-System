@@ -3,9 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\OutputResource\Pages;
-use App\Filament\Resources\OutputResource\Pages\CreateOutput;
-use App\Filament\Resources\OutputResource\RelationManagers;
-use App\Helper;
 use App\Models\Generator\Output;
 use App\Models\Generator\Template;
 use Filament\Forms;
