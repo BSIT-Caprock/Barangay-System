@@ -46,12 +46,15 @@ class Template extends Model
         );
     }
 
+    public function makeProcessor(): TemplateProcessor
+    {
+        return new TemplateProcessor(Storage::disk($this::$disk)->path($this->file_path));
+    }
+
     protected function macros(): Attribute
     {
-
-        $processor = new TemplateProcessor(Storage::disk($this::$disk)->path($this->file_path));
         return Attribute::make(
-            get: fn () => $processor->getVariables(),
+            get: fn () => $this->makeProcessor()->getVariables(),
         );
     }
 }
