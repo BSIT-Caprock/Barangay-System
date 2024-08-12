@@ -66,7 +66,7 @@ class RbiHouseholdResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\InhabitantsRelationManager::class,
         ];
     }
 
