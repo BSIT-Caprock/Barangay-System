@@ -10,7 +10,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RbiInhabitantResource extends Resource
@@ -150,5 +152,21 @@ class RbiInhabitantResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    {
+        $birthdate = $record->birthdate?->format('F j, Y');
+        return "{$record->first_name} {$record->middle_name} {$record->last_name} {$record->extension_name} " . ($birthdate ? "(born {$birthdate})" : '');
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['last_name', 'first_name', 'middle_name', 'extension_name'];
+    }
+
+    public static function getGlobalSearchEloquentQuery(): Builder
+    {
+        return parent::getGlobalSearchEloquentQuery()->where('deleted_at', null);
     }
 }
