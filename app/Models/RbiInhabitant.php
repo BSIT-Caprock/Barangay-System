@@ -29,6 +29,10 @@ class RbiInhabitant extends Model
         'rbi_household_id',
     ];
 
+    protected $casts = [
+        'birthdate' => 'date',
+    ];
+
     public function household(): BelongsTo
     {
         return $this->belongsTo(RbiHousehold::class, 'rbi_household_id');
