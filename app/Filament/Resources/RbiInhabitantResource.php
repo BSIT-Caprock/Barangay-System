@@ -79,7 +79,8 @@ class RbiInhabitantResource extends Resource
                 Tables\Columns\TextColumn::make('birthplace')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('birthdate')
-                    ->searchable(),
+                    ->searchable()
+                    ->date(),
                 Tables\Columns\TextColumn::make('sex')
                     ->searchable()
                     ->formatStateUsing(fn ($state) => match ($state) {
