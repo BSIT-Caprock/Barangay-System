@@ -4,6 +4,7 @@ namespace App\Filament\Resources\RbiHouseholdResource\RelationManagers;
 
 use App\Filament\Resources\RbiInhabitantResource;
 use App\Models\RbiHousehold;
+use App\Models\RbiInhabitant;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -25,7 +26,13 @@ class InhabitantsRelationManager extends RelationManager
     {
         return RbiInhabitantResource::table($table)
             ->modelLabel(RbiInhabitantResource::getModelLabel())
-            ->recordTitle(fn ($record) => "{$record->first_name} {$record->middle_name} {$record->last_name} {$record->extension_name} (born {$record->birthdate->format('F j, Y')})")
+            ->recordTitle(function (RbiInhabitant $record) {
+                $recordTitle = "{$record->first_name} {$record->middle_name} {$record->last_name} {$record->extension_name}";
+                if ($record->birthdate) {
+                    $recordTitle .= "(born {$record->birthdate->format('F j, Y')})";
+                }
+                return $recordTitle;
+            })
             ->inverseRelationship('household')
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
