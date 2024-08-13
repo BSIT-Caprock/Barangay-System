@@ -170,4 +170,11 @@ class RbiInhabitantResource extends Resource
     {
         return parent::getGlobalSearchEloquentQuery()->where('deleted_at', null);
     }
+
+    public static function getWidgets(): array
+    {
+        return [
+            RbiInhabitantResource\Widgets\ExistingInhabitants::class,
+        ];
+    }
 }
