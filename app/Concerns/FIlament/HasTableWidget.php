@@ -16,7 +16,7 @@ trait HasTableWidget
 
     public function getTableWidgetHeading()
     {
-        throw new \Exception('Override getTableWidgetHeading() to set the table widget heading.', 1);
+        return null;
     }
 
     public function updateTableWidget($column, $value)
