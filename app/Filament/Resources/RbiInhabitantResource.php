@@ -27,21 +27,63 @@ class RbiInhabitantResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('last_name'),
-                Forms\Components\TextInput::make('first_name'),
-                Forms\Components\TextInput::make('middle_name'),
-                Forms\Components\TextInput::make('extension_name'),
+                Forms\Components\TextInput::make('last_name')
+                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
+                        if ($operation == 'create') {
+                            static::setTableWidget($livewire, 'last_name', 'like', "%{$state}%");
+                        }
+                    })
+                    ->live(),
+                Forms\Components\TextInput::make('first_name')
+                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
+                        if ($operation == 'create') {
+                            static::setTableWidget($livewire, 'first_name', 'like', "%{$state}%");
+                        }
+                    })
+                    ->live(),
+                Forms\Components\TextInput::make('middle_name')
+                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
+                        if ($operation == 'create') {
+                            static::setTableWidget($livewire, 'middle_name', 'like', "%{$state}%");
+                        }
+                    })
+                    ->live(),
+                Forms\Components\TextInput::make('extension_name')
+                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
+                        if ($operation == 'create') {
+                            static::setTableWidget($livewire, 'extension_name', 'like', "%{$state}%");
+                        }
+                    })
+                    ->live(),
                 Forms\Components\TextInput::make('house_number'),
                 Forms\Components\TextInput::make('street_name'),
                 Forms\Components\TextInput::make('zone_name'),
-                Forms\Components\TextInput::make('birthplace'),
+                Forms\Components\TextInput::make('birthplace')
+                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
+                        if ($operation == 'create') {
+                            static::setTableWidget($livewire, 'birthplace', 'like', "%{$state}%");
+                        }
+                    })
+                    ->live(),
                 Forms\Components\DatePicker::make('birthdate')
-                    ->maxDate(today()),
+                    ->maxDate(today())
+                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
+                        if ($operation == 'create') {
+                            static::setTableWidget($livewire, 'birthdate', '=', $state);
+                        }
+                    })
+                    ->live(),
                 Forms\Components\Select::make('sex')
                     ->options([
                         'M' => 'Male',
                         'F' => 'Female',
-                    ]),
+                    ])
+                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
+                        if ($operation == 'create') {
+                            static::setTableWidget($livewire, 'sex', '=', $state);
+                        }
+                    })
+                    ->live(),
                 Forms\Components\Select::make('civil_status')
                     ->options([
                         'S' => 'Single',
@@ -56,6 +98,15 @@ class RbiInhabitantResource extends Resource
                     ->searchable()
                     ->preload(),
             ]);
+    }
+
+    public static function setTableWidget($livewire, $column, $operator = null, $value = null, $boolean = 'and')
+    {
+        if (empty($value)) {
+            $livewire->removeTableWidgetWhereClause($column);
+            return;
+        }
+        $livewire->setTableWidgetWhereClause($column, $operator, $value, $boolean);
     }
 
     public static function table(Table $table): Table
