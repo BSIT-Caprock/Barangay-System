@@ -19,9 +19,21 @@ trait HasTableWidget
         return null;
     }
 
-    public function updateTableWidget($column, $value)
+    /**
+     * Add a basic where clause to the widget table.
+     *
+     * @param  \Closure|string|array|\Illuminate\Contracts\Database\Query\Expression  $column
+     * @param  mixed  $operator
+     * @param  mixed  $value
+     * @param  string  $boolean
+     */
+    public function setTableWidgetWhereClause($column, $operator = null, $value = null, $boolean = 'and')
     {
-        // dd($column, $value);
-        $this->dispatch(TableWidget::$filterDataUpdatedEventName, column: $column, value: $value);
+        $this->dispatch(TableWidget::$setWhereClauseEventName, $column, $operator, $value, $boolean);
+    }
+
+    public function removeTableWidgetWhereClause(string $column)
+    {
+        $this->dispatch(TableWidget::$removeWhereClauseEventName, $column);
     }
 }
