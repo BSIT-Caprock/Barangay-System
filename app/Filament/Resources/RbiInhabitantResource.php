@@ -4,9 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\RbiInhabitantResource\Pages;
 use App\Filament\Resources\RbiInhabitantResource\RelationManagers;
+use App\Filament\Widgets\ResourcePageTableWidget;
 use App\Models\RbiInhabitant;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -14,6 +16,7 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Livewire\Component;
 
 class RbiInhabitantResource extends Resource
 {
@@ -28,49 +31,37 @@ class RbiInhabitantResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('last_name')
-                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
-                        if ($operation == 'create') {
-                            static::setTableWidget($livewire, 'last_name', 'like', "%{$state}%");
-                        }
+                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
+                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
                     })
                     ->live(),
                 Forms\Components\TextInput::make('first_name')
-                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
-                        if ($operation == 'create') {
-                            static::setTableWidget($livewire, 'first_name', 'like', "%{$state}%");
-                        }
+                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
+                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
                     })
                     ->live(),
                 Forms\Components\TextInput::make('middle_name')
-                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
-                        if ($operation == 'create') {
-                            static::setTableWidget($livewire, 'middle_name', 'like', "%{$state}%");
-                        }
+                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
+                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
                     })
                     ->live(),
                 Forms\Components\TextInput::make('extension_name')
-                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
-                        if ($operation == 'create') {
-                            static::setTableWidget($livewire, 'extension_name', 'like', "%{$state}%");
-                        }
+                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
+                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
                     })
                     ->live(),
                 Forms\Components\TextInput::make('house_number'),
                 Forms\Components\TextInput::make('street_name'),
                 Forms\Components\TextInput::make('zone_name'),
                 Forms\Components\TextInput::make('birthplace')
-                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
-                        if ($operation == 'create') {
-                            static::setTableWidget($livewire, 'birthplace', 'like', "%{$state}%");
-                        }
+                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
+                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
                     })
                     ->live(),
                 Forms\Components\DatePicker::make('birthdate')
                     ->maxDate(today())
-                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
-                        if ($operation == 'create') {
-                            static::setTableWidget($livewire, 'birthdate', '=', $state);
-                        }
+                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
+                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
                     })
                     ->live(),
                 Forms\Components\Select::make('sex')
@@ -78,10 +69,8 @@ class RbiInhabitantResource extends Resource
                         'M' => 'Male',
                         'F' => 'Female',
                     ])
-                    ->afterStateUpdated(function ($livewire, $operation, $state): void {
-                        if ($operation == 'create') {
-                            static::setTableWidget($livewire, 'sex', '=', $state);
-                        }
+                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
+                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
                     })
                     ->live(),
                 Forms\Components\Select::make('civil_status')
@@ -220,12 +209,5 @@ class RbiInhabitantResource extends Resource
     public static function getGlobalSearchEloquentQuery(): Builder
     {
         return parent::getGlobalSearchEloquentQuery()->where('deleted_at', null);
-    }
-
-    public static function getWidgets(): array
-    {
-        return [
-            RbiInhabitantResource\Widgets\ExistingInhabitants::class,
-        ];
     }
 }
