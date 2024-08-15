@@ -4,14 +4,17 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\RbiHouseholdResource\Pages;
 use App\Filament\Resources\RbiHouseholdResource\RelationManagers;
+use App\Filament\Widgets\ResourcePageTableWidget;
 use App\Models\RbiHousehold;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Livewire\Component;
 
 class RbiHouseholdResource extends Resource
 {
@@ -28,7 +31,13 @@ class RbiHouseholdResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('number')
-                    ->required(),
+                    ->required()
+                    ->afterStateUpdated(function (Component $livewire, Get $get) {
+                        if ($livewire instanceof Pages\CreateRbiHousehold) {
+                            $livewire->dispatch(ResourcePageTableWidget::WHERE, [['number', 'like', "%{$get('number')}%"]]);
+                        }
+                    })
+                    ->live(),
             ]);
     }
 
