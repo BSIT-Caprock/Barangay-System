@@ -38,7 +38,8 @@ class ResourcePageTableWidget extends BaseWidget
             ->modelLabel($this->resource::getModelLabel())
             ->searchable($this->tableProperties['searchable'] ?? false)
             ->selectable($this->tableProperties['selectable'] ?? false)
-            ->query(fn (self $livewire): Builder => $livewire->resource::getEloquentQuery()->where($livewire->where));
+            ->query(fn (self $livewire): Builder => $livewire->resource::getEloquentQuery()->where($livewire->where))
+            ->recordUrl(fn ($record) => $this->resource::getUrl('edit', ['record' => $record]));
     }
 
     #[On(ResourcePageTableWidget::WHERE)]
