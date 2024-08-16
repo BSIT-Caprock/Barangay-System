@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources\RbiInhabitantResource\Pages;
 
-use App\Concerns\Filament\HasTableWidget;
 use App\Filament\Resources\RbiInhabitantResource;
 use App\Filament\Widgets\ResourcePageTableWidget;
-use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Forms\Get;
 use Filament\Resources\Pages\CreateRecord;
 use Livewire\Component;
