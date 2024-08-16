@@ -22,7 +22,7 @@ class CreateRbiInhabitant extends CreateRecord
 
     public static function dispatchCreatePageTableWidget(Component $livewire, Get $get)
     {
-        if (!($livewire instanceof self)) {
+        if (! ($livewire instanceof self)) {
             return;
         }
         $where = [];
@@ -35,24 +35,24 @@ class CreateRbiInhabitant extends CreateRecord
         if (filled($get('first_name'))) {
             $where[] = ['first_name', 'like', "%{$get('first_name')}%"];
         }
-        
+
         if (filled($get('middle_name'))) {
             $where[] = ['middle_name', 'like', "%{$get('last_name')}%"];
             $where[] = ['last_name', 'like', "%{$get('last_name')}%", 'or'];
         }
-        
+
         if (filled($get('extension_name'))) {
             $where[] = ['extension_name', 'like', "%{$get('extension_name')}%"];
         }
-        
+
         if (filled($get('birthplace'))) {
             $where[] = ['birthplace', 'like', "%{$get('birthplace')}%"];
         }
-        
+
         if (filled($get('birthdate'))) {
             $where[] = ['birthdate', '=', $get('birthdate')];
         }
-        
+
         if (filled($get('sex'))) {
             $where[] = ['sex', '=', $get('sex')];
         }
