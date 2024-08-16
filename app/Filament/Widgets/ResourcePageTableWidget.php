@@ -21,6 +21,8 @@ class ResourcePageTableWidget extends BaseWidget
 
     protected int | string | array $columnSpan = 'full';
 
+    protected static bool $isDiscovered = false;
+
     /** @param class-string<CreateRecord> $resource */
     public static function makeWith(string $resource, mixed $initialWhere, array $tableProperties = [])
     {
