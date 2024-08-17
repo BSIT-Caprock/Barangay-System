@@ -29,6 +29,7 @@ class RbiInhabitantResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(4)
             ->schema([
                 Forms\Components\TextInput::make('last_name')
                     ->afterStateUpdated(function (Component $livewire, Get $get): void {
