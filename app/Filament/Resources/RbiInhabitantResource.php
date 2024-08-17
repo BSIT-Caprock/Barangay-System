@@ -90,15 +90,6 @@ class RbiInhabitantResource extends Resource
             ]);
     }
 
-    public static function setTableWidget($livewire, $column, $operator = null, $value = null, $boolean = 'and')
-    {
-        if (empty($value)) {
-            $livewire->removeTableWidgetWhereClause($column);
-            return;
-        }
-        $livewire->setTableWidgetWhereClause($column, $operator, $value, $boolean);
-    }
-
     public static function table(Table $table): Table
     {
         return $table
