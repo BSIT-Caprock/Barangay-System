@@ -31,49 +31,21 @@ class RbiInhabitantResource extends Resource
         return $form
             ->columns(4)
             ->schema([
-                Forms\Components\TextInput::make('last_name')
-                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
-                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
-                    })
-                    ->live(),
-                Forms\Components\TextInput::make('first_name')
-                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
-                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
-                    })
-                    ->live(),
-                Forms\Components\TextInput::make('middle_name')
-                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
-                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
-                    })
-                    ->live(),
-                Forms\Components\TextInput::make('extension_name')
-                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
-                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
-                    })
-                    ->live(),
+                Forms\Components\TextInput::make('last_name'),
+                Forms\Components\TextInput::make('first_name'),
+                Forms\Components\TextInput::make('middle_name'),
+                Forms\Components\TextInput::make('extension_name'),
                 Forms\Components\TextInput::make('house_number'),
                 Forms\Components\TextInput::make('street_name'),
                 Forms\Components\TextInput::make('zone_name'),
-                Forms\Components\TextInput::make('birthplace')
-                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
-                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
-                    })
-                    ->live(),
+                Forms\Components\TextInput::make('birthplace'),
                 Forms\Components\DatePicker::make('birthdate')
-                    ->maxDate(today())
-                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
-                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
-                    })
-                    ->live(),
+                    ->maxDate(today()),
                 Forms\Components\Select::make('sex')
                     ->options([
                         'M' => 'Male',
                         'F' => 'Female',
-                    ])
-                    ->afterStateUpdated(function (Component $livewire, Get $get): void {
-                        Pages\CreateRbiInhabitant::dispatchCreatePageTableWidget($livewire, $get);
-                    })
-                    ->live(),
+                    ]),
                 Forms\Components\Select::make('civil_status')
                     ->options([
                         'S' => 'Single',
