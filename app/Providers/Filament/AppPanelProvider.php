@@ -93,6 +93,9 @@ class AppPanelProvider extends PanelProvider
             $datePicker
                 ->displayFormat('F j, Y');
         });
+        Tables\Table::configureUsing(function (Tables\Table $table): void {
+            $table->actionsPosition(Tables\Enums\ActionsPosition::BeforeColumns);
+        });
         Tables\Columns\Column::configureUsing(function (Tables\Columns\Column $column): void {
             $column
                 ->sortable();
