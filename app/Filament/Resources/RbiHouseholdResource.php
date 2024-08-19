@@ -26,6 +26,15 @@ class RbiHouseholdResource extends Resource
 
     protected static ?string $navigationLabel = 'RBI';
 
+    public static function getNavigationLabel(): string
+    {
+        if (request()->is('rbi-*')) {
+            return 'RBI - Households';
+        } else {
+            return 'RBI';
+        }
+    }
+
     public static function form(Form $form): Form
     {
         return $form

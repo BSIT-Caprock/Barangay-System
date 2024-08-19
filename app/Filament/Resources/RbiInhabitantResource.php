@@ -26,6 +26,15 @@ class RbiInhabitantResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getNavigationLabel(): string
+    {
+        if (request()->is('rbi-*')) {
+            return 'RBI - Inhabitants';
+        } else {
+            return 'RBI';
+        }
+    }
+
     public static function form(Form $form): Form
     {
         return $form
