@@ -62,7 +62,11 @@ class FindOrCreateRecord extends CreateRecord
         return Action::make('create')
             ->label(fn () => $this->isContinued ? 'Create': 'Continue')
             ->action(function () {
-                $this->isContinued = true;
+                if ($this->isContinued) {
+                    $this->create();
+                } else {
+                    $this->isContinued = true;
+                }
             });
     }
 
