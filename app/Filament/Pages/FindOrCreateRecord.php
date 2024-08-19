@@ -57,6 +57,25 @@ class FindOrCreateRecord extends CreateRecord
         };
     }
 
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getBackFormAction(),
+            ...parent::getFormActions(),
+        ];
+    }
+
+    protected function getBackFormAction(): Action
+    {
+        return Action::make('back')
+        ->color('gray')
+        ->icon('heroicon-m-arrow-left')
+        ->visible(fn () => $this->isContinued)
+        ->action(function () {
+            $this->isContinued = false;
+        });
+    }
+
     protected function getCreateFormAction(): Action
     {
         return Action::make('create')
@@ -68,6 +87,12 @@ class FindOrCreateRecord extends CreateRecord
                     $this->isContinued = true;
                 }
             });
+    }
+
+    protected function getCreateAnotherFormAction(): Action
+    {
+        return parent::getCreateAnotherFormAction()
+            ->visible(fn () => $this->isContinued);
     }
 
     protected function getFooterWidgets(): array
