@@ -61,10 +61,6 @@ class FindOrCreateRecord extends CreateRecord
     {
         return Action::make('create')
             ->label(fn () => $this->isContinued ? 'Create': 'Continue')
-            ->requiresConfirmation(fn (): bool => static::$resource::getEloquentQuery()
-                ->where($this->getTableWhereClauses())->count() > 0
-            )
-            ->modalDescription('Are you sure you want to continue? (There are records similar to your inputs / You have not entered any information)')
             ->action(function () {
                 $this->isContinued = true;
             });
