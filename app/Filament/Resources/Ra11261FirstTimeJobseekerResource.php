@@ -59,7 +59,9 @@ class Ra11261FirstTimeJobseekerResource extends Resource
                 Tables\Columns\TextColumn::make('middle_name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('birthdate')
-                    ->searchable(),
+                    ->searchable()
+                    ->date(),
+                Tables\Columns\TextColumn::make('age'),
                 Tables\Columns\TextColumn::make('sex')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('educational_level')
@@ -68,15 +70,12 @@ class Ra11261FirstTimeJobseekerResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
