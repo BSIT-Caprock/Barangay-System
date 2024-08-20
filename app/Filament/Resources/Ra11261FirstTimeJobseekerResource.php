@@ -24,14 +24,27 @@ class Ra11261FirstTimeJobseekerResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(4)
             ->schema([
                 Forms\Components\TextInput::make('last_name'),
                 Forms\Components\TextInput::make('first_name'),
                 Forms\Components\TextInput::make('middle_name'),
-                Forms\Components\TextInput::make('birthdate'),
-                Forms\Components\TextInput::make('sex'),
-                Forms\Components\TextInput::make('educational_level'),
-                Forms\Components\TextInput::make('course'),
+                Forms\Components\DatePicker::make('birthdate')
+                    ->maxDate(today()),
+                Forms\Components\Select::make('sex')
+                    ->options([
+                        'M' => 'Male',
+                        'F' => 'Female',
+                    ]),
+                Forms\Components\Select::make('educational_level')
+                    ->options([
+                        'Elem/HS' => 'Elementary/High School',
+                        'College' => 'College',
+                        'OSY' => 'Out of School Youth',
+                    ])
+                    ->live(),
+                Forms\Components\TextInput::make('course')
+                    ->hidden(fn (Forms\Get $get) => $get('educational_level') != 'College'),
             ]);
     }
 
