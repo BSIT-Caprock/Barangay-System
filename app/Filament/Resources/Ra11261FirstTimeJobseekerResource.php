@@ -17,6 +17,8 @@ class Ra11261FirstTimeJobseekerResource extends Resource
 {
     protected static ?string $model = Ra11261FirstTimeJobseeker::class;
 
+    protected static ?string $modelLabel = 'first time jobseeker';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
