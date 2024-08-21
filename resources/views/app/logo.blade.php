@@ -1,5 +1,5 @@
 @php
-    $barangayName = \App\Models\Setting::first()->barangay_name;
+    $barangayName = \App\Models\Setting::first()?->barangay_name ?? 'Barangay System';
 @endphp
 
 <div class="flex items-center gap-x-3">
