@@ -23,7 +23,7 @@ class Template extends Model
         'file_name',
     ];
 
-    public static $disk = 'local';
+    public static $disk = 'public';
 
     protected static function booted(): void
     {
