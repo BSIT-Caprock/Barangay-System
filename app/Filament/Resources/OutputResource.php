@@ -23,7 +23,7 @@ class OutputResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
-    protected static ?string $navigationLabel = 'Generator';
+    protected static ?string $navigationLabel = 'Document Generator';
 
     public static function form(Form $form): Form
     {
