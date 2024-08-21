@@ -20,6 +20,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\HtmlString;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AppPanelProvider extends PanelProvider
@@ -38,6 +39,8 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('app')
+            ->brandLogo(fn () => view('app.logo'))
+            ->brandLogoHeight('2.5rem')
             ->path('')
             // ->login()
             ->colors([
