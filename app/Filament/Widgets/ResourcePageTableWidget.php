@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;
@@ -41,7 +42,11 @@ class ResourcePageTableWidget extends BaseWidget
             ->searchable($this->tableProperties['searchable'] ?? false)
             ->selectable($this->tableProperties['selectable'] ?? false)
             ->query(fn (self $livewire): Builder => $livewire->resource::getEloquentQuery()->where($livewire->where))
-            ->recordUrl(fn ($record) => $this->resource::getUrl('edit', ['record' => $record]));
+            ->recordUrl(fn ($record) => $this->resource::getUrl('edit', ['record' => $record]))
+            ->actions([
+                Tables\Actions\EditAction::make()
+                    ->url(fn ($record) => $this->resource::getUrl('edit', ['record' => $record])),
+            ]);
     }
 
     #[On(ResourcePageTableWidget::WHERE)]
