@@ -56,6 +56,9 @@ class RbiHouseholdResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('number')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('inhabitants_count')
+                    ->label('Inhabitants')
+                    ->counts('inhabitants'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->toggleable(isToggledHiddenByDefault: true),
